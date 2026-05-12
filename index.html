@@ -8,9 +8,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    /* ══════════════════════════════════════════════
        RESET & ROOT
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    ══════════════════════════════════════════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
@@ -30,9 +30,9 @@
       --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
     }
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    /* ══════════════════════════════════════════════
        NAVBAR
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    ══════════════════════════════════════════════ */
     .site-header {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       max-width: 100%; margin: 0 auto;
@@ -229,9 +229,9 @@
       .nav-hamburger-btn { display: flex; }
     }
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    /* ══════════════════════════════════════════════
        HERO SECTION
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    ══════════════════════════════════════════════ */
     .hero-section {
       min-height: 100vh;
       display: flex; align-items: center; justify-content: center;
@@ -396,9 +396,9 @@
       50%      { transform: translateY(9px); opacity: 0.3; }
     }
 
-        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-       THE TRANSFORMATION â€” Cinematic Card System
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+        /* ══════════════════════════════════════════════
+       THE TRANSFORMATION — Cinematic Card System
+    ══════════════════════════════════════════════ */
     .transform-section {
       background: #0B1120;
       position: relative;
@@ -468,7 +468,7 @@
       height: 8vh;
     }
 
-    /* â”€â”€ Card wrap â€” owns the 3D movement â”€â”€ */
+    /* ── Card wrap — owns the 3D movement ── */
     .card-wrap {
       position: absolute;
       top: 50%;
@@ -505,7 +505,7 @@
     }
     .card-state.active { display: flex; }
 
-    /* â”€â”€ Text block â”€â”€ */
+    /* ── Text block ── */
     .transform-text {
       position: absolute;
       top: 50%;
@@ -556,7 +556,7 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* â”€â”€ Flip + Move Animations â”€â”€ */
+    /* ── Flip + Move Animations ── */
     @keyframes cardFlip1to2 {
       0%   { transform: translate(calc(-50% + 20vw), -50%) rotateY(-9deg) rotateX(2deg); }
       50%  { transform: translate(calc(-50% + 0vw), -35%) rotateY(90deg) rotateX(0deg); }
@@ -578,7 +578,7 @@
       100% { transform: translate(calc(-50% + 20vw), -50%) rotateY(-9deg) rotateX(2deg); }
     }
 
-    /* â”€â”€ State 1: Messy Document â”€â”€ */
+    /* ── State 1: Messy Document ── */
     .cs-messy-header {
       display: flex;
       align-items: center;
@@ -618,7 +618,7 @@
     .sk.w-85 { width: 85%; }
     .sk.w-30 { width: 30%; }
 
-    /* â”€â”€ State 2: Drop Zone â”€â”€ */
+    /* ── State 2: Drop Zone ── */
     .cs-drop-body {
       flex: 1;
       display: flex;
@@ -650,7 +650,7 @@
       text-align: center;
     }
 
-    /* â”€â”€ State 3: Extraction â”€â”€ */
+    /* ── State 3: Extraction ── */
     .cs-extract-header {
       font-size: 0.65rem;
       font-weight: 700;
@@ -691,7 +691,7 @@
     .sk-clean { background: linear-gradient(90deg, rgba(37,99,235,0.45), rgba(96,165,250,0.35)); }
     .cs-extract-arrow { color: #60A5FA; flex-shrink: 0; }
 
-    /* â”€â”€ State 4: Enrichment â”€â”€ */
+    /* ── State 4: Enrichment ── */
     .cs-enrich-header {
       font-size: 0.65rem;
       font-weight: 700;
@@ -734,7 +734,7 @@
       color: #94A3B8;
     }
 
-    /* â”€â”€ State 5: Skill File â”€â”€ */
+    /* ── State 5: Skill File ── */
     .cs-skill-header {
       display: flex;
       align-items: center;
@@ -832,9 +832,9 @@
       }
     }
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-       WHAT YOU GET â€” Output Showcase
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    /* ══════════════════════════════════════════════
+       WHAT YOU GET — Output Showcase
+    ══════════════════════════════════════════════ */
     .output-section {
       display: none;
       background: #0B1120;
@@ -1002,9 +1002,9 @@
         max-width: 90%;
       }
       .output-grid { grid-template-columns: 1fr; }
-    }/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    }/* ══════════════════════════════════════════════
        FEATURES SECTION
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    ══════════════════════════════════════════════ */
     .features-section {
       background: #0B1120; color: #F8FAFC;
       padding: 6.5rem 1.5rem 4.5rem;
@@ -1095,9 +1095,9 @@
     .feature-title { font-size: 1.02rem; font-weight: 700; color: #F8FAFC; margin-bottom: 0.5rem; letter-spacing: -0.01em; }
     .feature-desc  { font-size: 0.875rem; color: rgba(148,163,184,0.82); line-height: 1.75; }
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    /* ══════════════════════════════════════════════
        WORD-BY-WORD TEXT REVEAL
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    ══════════════════════════════════════════════ */
     .text-reveal-section {
       background: #0B1120;
       min-height: 148vh; position: relative; padding: 0;
@@ -1167,9 +1167,9 @@
       white-space: nowrap;
     }
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    /* ══════════════════════════════════════════════
        GLOBAL / TRUST SECTION
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    ══════════════════════════════════════════════ */
     .global-section {
       background: #0B1120; padding: 4.8rem 1.5rem 6.4rem; text-align: center;
     }
@@ -1313,9 +1313,9 @@
         transition-delay: 0.18s;
       }
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    /* ══════════════════════════════════════════════
        CTA SECTION
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    ══════════════════════════════════════════════ */
     .cta-section {
       background: #0B1120;
       padding: 8rem 1.5rem 3rem; text-align: center; position: relative; overflow: hidden;
@@ -1377,11 +1377,11 @@
       position: relative; z-index: 1;
     }
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    /* ══════════════════════════════════════════════
        FOOTER
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    ══════════════════════════════════════════════ */
 
-    /* â”€â”€ Cinematic Footer Wrapper â”€â”€ */
+    /* ── Cinematic Footer Wrapper ── */
     .footer-curtain {
       position: relative;
       height: 100vh;
@@ -1663,7 +1663,7 @@
     .footer-reveal-d3 { transition-delay: 0.34s; }
     .footer-reveal-d4 { transition-delay: 0.46s; }
 
-    /* Magnetic buttons â€” transform handled by JS, transition for smooth return */
+    /* Magnetic buttons — transform handled by JS, transition for smooth return */
     .footer-magnetic {
       display: inline-flex;
       transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
@@ -1673,9 +1673,9 @@
       will-change: transform;
     }
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    /* ══════════════════════════════════════════════
        FADE-IN-VIEW
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    ══════════════════════════════════════════════ */
     .fiv {
       opacity: 0; transform: translateY(20px);
       transition: opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1), transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
@@ -1685,9 +1685,9 @@
     .fiv-d2 { transition-delay: 0.14s; }
     .fiv-d3 { transition-delay: 0.22s; }
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    /* ══════════════════════════════════════════════
        RESPONSIVE
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    ══════════════════════════════════════════════ */
     @media (max-width: 600px) {
         .navbar { padding: 0 1.25rem; }
         .hero-content { padding: 3rem 1rem 5rem; }
@@ -1712,9 +1712,9 @@
     /* chevron svg inline */
     .chevron { display:inline-block; vertical-align: middle; }
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    /* ══════════════════════════════════════════════
        POLICY OVERLAY PAGES
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    ══════════════════════════════════════════════ */
     .policy-overlay {
       display: none;
       position: fixed;
@@ -1873,9 +1873,9 @@
 </head>
 <body>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+<!-- ══════════════════════════════════════════════
      NAVBAR
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+══════════════════════════════════════════════ -->
 <header class="site-header" id="siteHeader">
   <nav class="site-nav" id="siteNav">
     <a href="#" class="nav-brand" id="navBrand">
@@ -1907,9 +1907,9 @@
   </div>
 </div>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+<!-- ══════════════════════════════════════════════
      HERO
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+══════════════════════════════════════════════ -->
 <section class="hero-section">
   <div class="hero-orb hero-orb-1"></div>
   <div class="hero-orb hero-orb-2"></div>
@@ -1941,9 +1941,9 @@
   </div>
 </section>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-     THE TRANSFORMATION â€” Cinematic Card System
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- ══════════════════════════════════════════════
+     THE TRANSFORMATION — Cinematic Card System
+══════════════════════════════════════════════ -->
 <div id="how-it-works" class="transform-section">
   <div class="transform-sticky">
     <div class="transform-stage">
@@ -2081,7 +2081,7 @@
         </div>
       </div><!-- /card-wrap -->
 
-      <!-- Text block: JS repositions left â†” right -->
+      <!-- Text block: JS repositions left ↔ right -->
       <div class="transform-text" id="transformText">
 
         <div class="text-state active" id="textState1">
@@ -2127,9 +2127,9 @@
   <div class="transform-trigger" data-phase="5"></div>
 </div>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-     WHAT YOU GET â€” Output Showcase
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- ══════════════════════════════════════════════
+     WHAT YOU GET — Output Showcase
+══════════════════════════════════════════════════════ -->
 <section id="output-showcase" class="output-section" hidden style="display: none !important;">
   <div class="section-inner">
     <span class="section-label fiv">What Relatch Builds</span>
@@ -2186,8 +2186,8 @@
             <div class="fp-line">&#9500;&#9472; Calculate Net Cash Flow</div>
             <div class="fp-line fp-indent">&#9500;&#9472; If Positive: Evaluate Capital</div>
             <div class="fp-line fp-indent">&#9492;&#9472; If Negative: Audit Transfers</div>
-            <div class="fp-line">â””â”€ Evaluate Debt Sustainability</div>
-            <div class="fp-line fp-indent">â””â”€ Compare Debt to Tax Revenue</div>
+            <div class="fp-line">└─ Evaluate Debt Sustainability</div>
+            <div class="fp-line fp-indent">└─ Compare Debt to Tax Revenue</div>
           </div>
         </div>
         <p class="output-card-desc">Decision trees and conditional logic your AI can follow step-by-step.</p>
@@ -2203,14 +2203,14 @@
           <div class="rules-preview">
             <div class="rp-section">
               <div class="rp-label">Always Do</div>
-              <div class="rp-item">âœ“ Normalize to $1,000s</div>
-              <div class="rp-item">âœ“ Distinguish tax vs. grants</div>
+              <div class="rp-item">✓ Normalize to $1,000s</div>
+              <div class="rp-item">✓ Distinguish tax vs. grants</div>
             </div>
             <div class="rp-divider"></div>
             <div class="rp-section">
               <div class="rp-label rp-never">Never Do</div>
-              <div class="rp-item rp-never">âœ— Conflate restricted funds</div>
-              <div class="rp-item rp-never">âœ— Assume consistent growth</div>
+              <div class="rp-item rp-never">✗ Conflate restricted funds</div>
+              <div class="rp-item rp-never">✗ Assume consistent growth</div>
             </div>
           </div>
         </div>
@@ -2220,16 +2220,16 @@
 
     <!-- Adaptive CTA -->
     <div class="output-cta fiv fiv-d3">
-      <p class="output-cta-text">Relatch understands your data. Builds skill files that make your AI think like <em>you</em> â€” not a random text generator.</p>
+      <p class="output-cta-text">Relatch understands your data. Builds skill files that make your AI think like <em>you</em> — not a random text generator.</p>
       <a href="https://app.relatch.online/" target="_blank" rel="noopener" class="btn-primary">
         Try Relatch Free
         <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </a>
     </div>
   </div>
-</section><!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+</section><!-- ══════════════════════════════════════════════
      FEATURES
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+══════════════════════════════════════════════ -->
 <section id="features" class="features-section">
   <div class="section-inner">
     <span class="section-label fiv">What Relatch Does</span>
@@ -2241,7 +2241,7 @@
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
         </div>
         <div class="feature-title">Instant Skill Generation</div>
-        <div class="feature-desc">Drop in any document and Relatch auto-generates structured skill files â€” ready for Claude, Codex, or any AI agent.</div>
+        <div class="feature-desc">Drop in any document and Relatch auto-generates structured skill files — ready for Claude, Codex, or any AI agent.</div>
       </div>
 
       <div class="feature-card fiv fiv-d2">
@@ -2249,7 +2249,7 @@
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>
         </div>
         <div class="feature-title">Context-Aware Parsing</div>
-        <div class="feature-desc">Not just extraction â€” Relatch understands the semantic structure of your data and surfaces what actually matters.</div>
+        <div class="feature-desc">Not just extraction — Relatch understands the semantic structure of your data and surfaces what actually matters.</div>
       </div>
 
       <div class="feature-card fiv fiv-d3">
@@ -2257,7 +2257,7 @@
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
         </div>
         <div class="feature-title">Multi-Format Support</div>
-        <div class="feature-desc">PDFs, CSVs, XMLs, DOCX, Markdown, TXT â€” Relatch handles your entire knowledge stack without friction.</div>
+        <div class="feature-desc">PDFs, CSVs, XMLs, DOCX, Markdown, TXT — Relatch handles your entire knowledge stack without friction.</div>
       </div>
 
       <div class="feature-card fiv fiv-d1">
@@ -2265,7 +2265,7 @@
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9"/></svg>
         </div>
         <div class="feature-title">AI-Native Architecture</div>
-        <div class="feature-desc">Built from the ground up to integrate with Claude and OpenAI Codex â€” not bolted on as an afterthought.</div>
+        <div class="feature-desc">Built from the ground up to integrate with Claude and OpenAI Codex — not bolted on as an afterthought.</div>
       </div>
 
       <div class="feature-card fiv fiv-d2">
@@ -2281,16 +2281,16 @@
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
         </div>
         <div class="feature-title">Precision Outputs</div>
-        <div class="feature-desc">AISSCII flow diagrams, code blocks, CSV tables, comparison matrices â€” Relatch generates what your workflow demands.</div>
+        <div class="feature-desc">AISSCII flow diagrams, code blocks, CSV tables, comparison matrices — Relatch generates what your workflow demands.</div>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+<!-- ══════════════════════════════════════════════
      WORD-BY-WORD TEXT REVEAL
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+══════════════════════════════════════════════ -->
 <div class="text-reveal-section" id="textRevealSection">
   <div class="text-reveal-sticky">
     <p class="text-reveal-words" id="revealWords"></p>
@@ -2305,9 +2305,9 @@
   </div>
 </div>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+<!-- ══════════════════════════════════════════════
      GLOBAL TRUST
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+══════════════════════════════════════════════ -->
 <section id="global" class="global-section">
   <div class="global-big fiv"><span id="globalUserCount">150+</span> users worldwide<br>trust Relatch</div>
   <p class="global-sub fiv">Used across the United States, India, Vietnam, Morocco, Ireland, Romania, Australia, and France.</p>
@@ -2329,9 +2329,9 @@
   </div>
 </section>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+<!-- ══════════════════════════════════════════════
      FOOTER
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+══════════════════════════════════════════════ -->
 <div class="footer-curtain">
   <footer class="cinematic-footer">
 
@@ -2401,11 +2401,11 @@
 </div>
 
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+<!-- ══════════════════════════════════════════════
      JAVASCRIPT
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+══════════════════════════════════════════════ -->
 <script>
-/* â”€â”€â”€ helpers â”€â”€â”€ */
+/* ─── helpers ─── */
 function lerp(a, b, t) { return a + (b - a) * t; }
 function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
 function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
@@ -2415,7 +2415,7 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
   if (deprecatedShowcase) deprecatedShowcase.remove();
 })();
 
-/* â”€â”€â”€ FADE IN VIEW â”€â”€â”€ */
+/* ─── FADE IN VIEW ─── */
 (function() {
   const els = document.querySelectorAll('.fiv');
   const obs = new IntersectionObserver(
@@ -2425,7 +2425,7 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
   els.forEach(el => obs.observe(el));
 })();
 
-/* â”€â”€â”€ COUNTRIES SLIDER â”€â”€â”€ */
+/* ─── COUNTRIES SLIDER ─── */
 (function() {
   function flagSvg(name) {
     switch (name) {
@@ -2471,7 +2471,7 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
   });
 })();
 
-/* â”€â”€â”€ TRUST COUNT SCRAMBLE â”€â”€â”€ */
+/* ─── TRUST COUNT SCRAMBLE ─── */
 (function() {
   const countEl = document.getElementById('globalUserCount');
   const section = document.getElementById('global');
@@ -2519,7 +2519,7 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
   obs.observe(section);
 })();
 
-/* â”€â”€â”€ THE TRANSFORMATION â”€â”€â”€ */
+/* ─── THE TRANSFORMATION ─── */
 (function () {
   const section  = document.getElementById('how-it-works');
   const cardWrap = document.getElementById('cardWrap');
@@ -2710,7 +2710,7 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
   });
 })();
 
-/* â”€â”€â”€ WORD-BY-WORD REVEAL â”€â”€â”€ */
+/* ─── WORD-BY-WORD REVEAL ─── */
 (function() {
   const REVEAL_TEXT = "Relatch turns messy source files into operational skill files your AI can search, follow, and reason from.";
   const ACCENT_WORDS = new Set(['operational']);
@@ -2761,7 +2761,7 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
   }, { passive: true });
 })();
 
-/* â”€â”€â”€ NAVBAR (21st.dev inspired) â”€â”€â”€ */
+/* ─── NAVBAR (21st.dev inspired) ─── */
 (function() {
   const header = document.getElementById('siteHeader');
   const hamburger = document.getElementById('navHamburger');
@@ -2796,7 +2796,7 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
   });
 })();
 
-/* â”€â”€â”€ FOOTER SCROLL REVEAL â”€â”€â”€ */
+/* ─── FOOTER SCROLL REVEAL ─── */
 (function() {
   const curtain  = document.querySelector('.footer-curtain');
   const revealEls = document.querySelectorAll('.footer-reveal');
@@ -2823,7 +2823,7 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
   checkReveal(); // run once on load in case already in view
 })();
 
-/* â”€â”€â”€ FOOTER MAGNETIC BUTTONS â”€â”€â”€ */
+/* ─── FOOTER MAGNETIC BUTTONS ─── */
 (function() {
   const buttons = document.querySelectorAll('.footer-magnetic');
   buttons.forEach(btn => {
@@ -2840,7 +2840,7 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
     });
   });
 })();
-/* â”€â”€â”€ POLICY OVERLAY PAGES â”€â”€â”€ */
+/* ─── POLICY OVERLAY PAGES ─── */
 function showPage(id) {
   document.getElementById('overlay-' + id).style.display = 'flex';
   document.body.style.overflow = 'hidden';
@@ -2863,9 +2863,9 @@ document.addEventListener('keydown', function(e) {
 </script>
 
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+<!-- ══════════════════════════════════════════════
      PRIVACY POLICY OVERLAY
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+══════════════════════════════════════════════ -->
 <div id="overlay-privacy" class="policy-overlay">
   <nav class="policy-nav">
     <span class="policy-nav-logo">re<span>latch</span></span>
@@ -2878,29 +2878,33 @@ document.addEventListener('keydown', function(e) {
     <div style="margin-bottom:3rem;">
       <span class="policy-eyebrow">Legal</span>
       <h1 class="policy-h1">Privacy Policy</h1>
-      <p class="policy-updated">Last updated: June 2025</p>
+      <p class="policy-updated">Last updated: April 2026</p>
     </div>
     <hr class="policy-divider">
 
     <h2>1. Overview</h2>
-    <p>Relatch is a free, browser-based document intelligence tool. This Privacy Policy explains what data we collect, why we collect it, and how we handle it. We have built Relatch with a minimal data footprint by design. Your uploaded documents are processed to generate structured outputs and are never stored on our servers beyond the scope of a single session.</p>
-    <p>By using Relatch at <a href="https://app.relatch.online/" target="_blank" rel="noopener noreferrer">relatch-fe.vercel.app</a>, you agree to the practices described in this policy.</p>
+    <p>Relatch is a document intelligence tool. This Privacy Policy explains what data we collect, why we collect it, and how we handle it. We have built Relatch with a minimal data footprint by design. Authenticated users can upload documents which are processed to generate structured outputs intended for use as AI context. We aim to keep our data handling lightweight, reasonable, and transparent.</p>
+    <p>By using Relatch at <a href="https://app.relatch.online/" target="_blank" rel="noopener noreferrer">app.relatch.online</a>, you agree to the practices described in this policy.</p>
 
     <h2>2. What We Collect</h2>
     <h3>2.1 Analytics and Behavioural Data</h3>
     <p>Relatch uses the following third-party analytics tools to understand how users interact with the product. This data is aggregated and does not personally identify you.</p>
     <ul>
-      <li><strong>Google Analytics</strong> â€” collects page views, session duration, device type, and general geographic region.</li>
-      <li><strong>Microsoft Clarity</strong> â€” records anonymised heatmaps and session replays to help us identify usability issues. Clarity may capture mouse movements and clicks but does not capture passwords or payment information.</li>
-      <li><strong>Google Tag Manager</strong> â€” manages and deploys the analytics tags listed above. It does not independently collect data.</li>
+      <li><strong>Google Analytics</strong> — collects page views, session duration, device type, and general geographic region.</li>
+      <li><strong>Microsoft Clarity</strong> — records anonymised heatmaps and session replays to help us identify usability issues. Clarity may capture mouse movements and clicks but does not capture passwords or payment information.</li>
+      <li><strong>Google Tag Manager</strong> — manages and deploys the analytics tags listed above. It does not independently collect data.</li>
     </ul>
     <p>You can opt out of Google Analytics by installing the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google Analytics Opt-out Browser Add-on</a>. You can opt out of Microsoft Clarity by disabling cookies in your browser settings.</p>
 
-    <h3>2.2 Waitlist Email</h3>
-    <p>Relatch includes an optional email submission form powered by <strong>Formspree</strong>. If you choose to submit your email address, it is stored by Formspree and will be used solely to notify you when Relatch launches at full scale. We will not send marketing emails unrelated to Relatch. You can request removal of your email at any time by contacting us.</p>
+    <h3>2.2 Account Information</h3>
+    <p>To upload and process documents, you need an account. Authentication and session management are handled by <strong>Clerk</strong>. You can sign in using <strong>Google OAuth</strong> or <strong>GitHub OAuth</strong>. When you sign in through one of these providers, Relatch receives a basic identity profile (such as your name, email address, and provider user ID) so that we can associate your session with your account. We do not receive your OAuth password.</p>
+    <p>We use this account information solely to authenticate you, scope your uploads and outputs to your account, and provide essential account-related communication. We do not sell or rent account data.</p>
 
-    <h3>2.3 Uploaded Documents</h3>
-    <p>Documents you upload (PDF, CSV, XML, DOCX, scanned images, and similar formats) are processed client-side where possible. When server-side processing is required, your content is transmitted to third-party AI models solely for extraction and enrichment. We do not store your uploaded files on our servers after processing is complete. We do not use your documents to train any AI model.</p>
+    <h3>2.3 Waitlist and Contact Submissions</h3>
+    <p>Relatch uses <strong>Formspree</strong> for some contact and waitlist flows on the landing page. If you choose to submit your email address or a message through one of these forms, that submission is delivered via Formspree and used solely to follow up with you about Relatch. We will not send marketing emails unrelated to Relatch. You can request removal of your email at any time by contacting us.</p>
+
+    <h3>2.4 Uploaded Documents</h3>
+    <p>Documents you upload (PDF, CSV, XML, DOCX, scanned images, and similar formats) are processed client-side where possible. When server-side processing is required, your content is transmitted to third-party AI models solely for extraction and enrichment. We do not retain your uploaded files on our servers beyond what is reasonably needed to deliver the resulting output. We do not use your documents to train any AI model. You are responsible for the content you upload.</p>
 
     <h2>3. How Your Documents Are Processed</h2>
     <p>Relatch uses a multi-stage processing pipeline to extract and enrich content from your documents.</p>
@@ -2922,28 +2926,31 @@ document.addEventListener('keydown', function(e) {
     <h3>3.3 Smart Analyzer</h3>
     <p>Before any extraction or enrichment begins, Relatch's smart analyzer scans your upload for corrupted files, unsupported formats, and irrelevant document types. Files that do not pass this check are discarded immediately and never transmitted to any external service.</p>
 
-    <h2>4. Cookies</h2>
-    <p>Relatch uses cookies placed by Google Analytics and Microsoft Clarity for the analytics purposes described above. These are non-essential cookies. You can manage or disable cookies through your browser settings at any time. Disabling cookies will not affect your ability to use the core features of Relatch.</p>
+    <h2>4. Cookies and Session Storage</h2>
+    <p>Relatch uses cookies and similar browser storage for two purposes: (a) analytics, placed by Google Analytics and Microsoft Clarity as described above; and (b) authentication, where Clerk uses cookies and session storage to keep you signed in and to maintain your session securely. Authentication storage is essential to keeping accounts functional. Analytics cookies are non-essential and you can manage or disable them through your browser settings.</p>
 
     <h2>5. Third-Party Services</h2>
     <p>The following third-party services may process your data as part of using Relatch:</p>
     <ul>
+      <li>Clerk (authentication and session management)</li>
+      <li>Google OAuth (sign-in)</li>
+      <li>GitHub OAuth (sign-in)</li>
       <li>Google Analytics</li>
       <li>Google Tag Manager</li>
-      <li>Gemini AI (Google DeepMind)</li>
       <li>Microsoft Clarity</li>
+      <li>Gemini AI (Google DeepMind)</li>
       <li>Mistral OCR</li>
       <li>OCR Cloud Space</li>
-      <li>Formspree (email waitlist only)</li>
+      <li>Formspree (contact and waitlist flows)</li>
       <li>Vercel (hosting and edge delivery)</li>
     </ul>
     <p>Each of these services operates under its own privacy policy. We encourage you to review them independently.</p>
 
     <h2>6. Data Retention</h2>
-    <p>Relatch does not retain your uploaded documents after your session ends. Analytics data is retained by Google Analytics and Microsoft Clarity according to their respective data retention policies. Waitlist email addresses are retained by Formspree until you request removal.</p>
+    <p>We retain account information for as long as your account is active. Uploaded documents are not kept beyond what is reasonably needed to deliver the resulting output. Analytics data is retained by Google Analytics and Microsoft Clarity under their respective retention policies. Waitlist and contact-form submissions are retained by Formspree until you request removal.</p>
 
     <h2>7. Your Rights</h2>
-    <p>You have the right to request deletion of your email address from our waitlist at any time. To do so, contact us at <a href="mailto:relatchfe@gmail.com">relatchfe@gmail.com</a>. Because Relatch does not store uploaded documents or personal profiles, there is no additional personal data we hold that would be subject to a deletion request.</p>
+    <p>You can request deletion of your account, your waitlist email, or any contact submission at any time by emailing us at <a href="mailto:relatchh@gmail.com">relatchh@gmail.com</a>. We will action reasonable requests within a reasonable timeframe.</p>
 
     <h2>8. Children</h2>
     <p>Relatch does not target children and does not knowingly collect personal information from minors. If you believe a minor has submitted their email address via the waitlist form, contact us and we will remove it promptly.</p>
@@ -2955,7 +2962,7 @@ document.addEventListener('keydown', function(e) {
     <p>We may update this Privacy Policy as Relatch evolves. When we do, we will update the date at the top of this page. Continued use of Relatch after any changes constitutes acceptance of the updated policy.</p>
 
     <h2>11. Contact</h2>
-    <p>For any privacy-related questions, contact us at <a href="mailto:relatchfe@gmail.com">relatchfe@gmail.com</a>.</p>
+    <p>For any privacy-related questions, contact us at <a href="mailto:relatchh@gmail.com">relatchh@gmail.com</a>.</p>
 
     <hr class="policy-divider">
     <div class="policy-footer-links">
@@ -2965,9 +2972,9 @@ document.addEventListener('keydown', function(e) {
   </main>
 </div>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+<!-- ══════════════════════════════════════════════
      TERMS OF SERVICE OVERLAY
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+══════════════════════════════════════════════ -->
 <div id="overlay-terms" class="policy-overlay">
   <nav class="policy-nav">
     <span class="policy-nav-logo">re<span>latch</span></span>
@@ -2980,30 +2987,35 @@ document.addEventListener('keydown', function(e) {
     <div style="margin-bottom:3rem;">
       <span class="policy-eyebrow">Legal</span>
       <h1 class="policy-h1">Terms of Service</h1>
-      <p class="policy-updated">Last updated: June 2025</p>
+      <p class="policy-updated">Last updated: April 2026</p>
     </div>
     <hr class="policy-divider">
 
     <h2>1. Acceptance of Terms</h2>
-    <p>By accessing or using Relatch at <a href="https://app.relatch.online/" target="_blank" rel="noopener noreferrer">relatch-fe.vercel.app</a>, you agree to be bound by these Terms of Service. If you do not agree, do not use Relatch. These terms apply to all users of the service.</p>
+    <p>By accessing or using Relatch at <a href="https://app.relatch.online/" target="_blank" rel="noopener noreferrer">app.relatch.online</a>, you agree to be bound by these Terms of Service. If you do not agree, do not use Relatch. These terms apply to all users of the service.</p>
 
     <h2>2. Description of Service</h2>
-    <p>Relatch is a free, browser-based document intelligence tool. It accepts uploaded files including PDFs, CSVs, XML files, DOCX files, scanned documents, and similar formats. It extracts content from those files, enriches the content using AI models, and generates structured skill files intended for use with AI coding and reasoning agents such as Claude and OpenAI Codex.</p>
-    <p>Relatch is currently in active development. Features, availability, and processing pipelines may change without prior notice.</p>
+    <p>Relatch is a document intelligence tool. Authenticated users can upload files including PDFs, CSVs, XML files, DOCX files, scanned documents, and similar formats. Relatch may process those uploads to extract their content, enrich it using AI models, and produce structured AI context outputs (such as skill files) intended for use with AI coding and reasoning agents.</p>
+    <p>Relatch is currently in active development. Features, availability, and processing pipelines may change without prior notice. We do not guarantee uninterrupted availability of the service.</p>
+
+    <h3>2.1 Accounts and Authentication</h3>
+    <p>To upload and process documents you need a Relatch account. Authentication is provided through <strong>Clerk</strong>, and you can sign in using <strong>Google OAuth</strong> or <strong>GitHub OAuth</strong>. Your use of those third-party authentication providers is also governed by their respective terms and privacy policies. You are responsible for maintaining the confidentiality of any credentials used to access your account and for any activity that occurs under it.</p>
 
     <h2>3. Free Access</h2>
     <p>Relatch is free to use. There are no subscription fees, usage limits, or paid tiers at this time. We reserve the right to introduce pricing in the future. If we do, we will notify waitlist subscribers and provide adequate notice before any free tier is modified.</p>
 
-    <h2>4. Acceptable Use</h2>
-    <p>You agree not to use Relatch to:</p>
+    <h2>4. Acceptable Use and User Content</h2>
+    <p>You are solely responsible for any content, files, or documents you upload to Relatch. You agree not to use Relatch to:</p>
     <ul>
-      <li>Upload content that you do not have the right to process or share.</li>
-      <li>Upload documents containing malware, exploits, or malicious code.</li>
+      <li>Upload illegal content or content that violates applicable laws in your jurisdiction or in India.</li>
+      <li>Upload content that you do not have the right to process or share, including copyrighted material you do not own or have permission to use.</li>
+      <li>Upload documents containing malware, exploits, or other malicious code.</li>
+      <li>Upload content that is harmful, abusive, harassing, defamatory, hateful, or otherwise objectionable.</li>
       <li>Attempt to reverse engineer, scrape, or extract the underlying processing logic, AI prompts, or internal templates of Relatch.</li>
-      <li>Use Relatch in any way that violates applicable laws in your jurisdiction or in India.</li>
       <li>Deliberately upload corrupted, falsified, or misleading documents with the intent to produce deceptive outputs.</li>
       <li>Resell, sublicense, or commercially exploit Relatch's outputs without attribution or permission.</li>
     </ul>
+    <p>We may suspend or terminate accounts that abuse or misuse the service, violate these terms, or upload content that falls into any of the categories above. Where reasonable, we will try to give notice, but we may act immediately when needed to protect Relatch, other users, or third parties.</p>
 
     <h2>5. Document Processing and AI Models</h2>
     <p>Relatch processes uploaded documents through a multi-stage pipeline. Text extraction is performed using a PDF.js parser, Mistral OCR, or OCR Cloud Space depending on the document type. Enrichment is performed using Google's Gemini AI models. A fallback protocol using internal templates is activated if external AI services are unavailable.</p>
@@ -3021,7 +3033,7 @@ document.addEventListener('keydown', function(e) {
     <p>The Relatch name, logo, interface design, processing logic, internal templates, domain knowledge rules, and all related intellectual property remain the exclusive property of the Relatch team. Nothing in these terms grants you any rights to these assets.</p>
 
     <h2>7. Third-Party Services</h2>
-    <p>Relatch integrates with third-party services including Google Gemini, Mistral OCR, OCR Cloud Space, Formspree, Google Analytics, Microsoft Clarity, and Vercel. Your use of Relatch is subject to the terms and privacy policies of these services where applicable. Relatch is not responsible for the availability, accuracy, or conduct of any third-party service.</p>
+    <p>Relatch integrates with third-party services including Clerk (authentication), Google OAuth and GitHub OAuth (sign-in), Google Gemini, Mistral OCR, OCR Cloud Space, Formspree, Google Analytics, Google Tag Manager, Microsoft Clarity, and Vercel (hosting). Your use of Relatch is subject to the terms and privacy policies of these services where applicable. Relatch is not responsible for the availability, accuracy, or conduct of any third-party service.</p>
 
     <h2>8. Disclaimers</h2>
     <p>Relatch is provided on an "as is" and "as available" basis without warranties of any kind, express or implied. We do not warrant that Relatch will be uninterrupted, error-free, or that outputs will meet your requirements or expectations.</p>
@@ -3034,7 +3046,7 @@ document.addEventListener('keydown', function(e) {
     <p>Relatch is under active development. We may modify, suspend, or discontinue any part of the service at any time without notice. We are not liable to you or any third party for any modification, suspension, or discontinuation of the service.</p>
 
     <h2>11. Waitlist and Communications</h2>
-    <p>If you submit your email address through the Relatch waitlist form, you consent to receiving a notification when Relatch launches at full scale. You will not receive unsolicited marketing. You can request removal from the waitlist at any time by emailing <a href="mailto:relatchfe@gmail.com">relatchfe@gmail.com</a>.</p>
+    <p>If you submit your email address through the Relatch waitlist form, you consent to receiving a notification when Relatch launches at full scale. You will not receive unsolicited marketing. You can request removal from the waitlist at any time by emailing <a href="mailto:relatchh@gmail.com">relatchh@gmail.com</a>.</p>
 
     <h2>12. Governing Law and Jurisdiction</h2>
     <p>These Terms of Service are governed by the laws of India. Any disputes arising from or in connection with these terms shall be subject to the exclusive jurisdiction of the competent courts in India.</p>
@@ -3043,7 +3055,7 @@ document.addEventListener('keydown', function(e) {
     <p>We may update these Terms of Service as Relatch evolves. When we do, we will update the date at the top of this page. Your continued use of Relatch after any update constitutes acceptance of the revised terms.</p>
 
     <h2>14. Contact</h2>
-    <p>For any questions regarding these terms, contact us at <a href="mailto:relatchfe@gmail.com">relatchfe@gmail.com</a>.</p>
+    <p>For any questions regarding these terms, contact us at <a href="mailto:relatchh@gmail.com">relatchh@gmail.com</a>.</p>
 
     <hr class="policy-divider">
     <div class="policy-footer-links">
