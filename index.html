@@ -1870,6 +1870,25 @@
     };
   </script>
 
+  <!-- PostHog Analytics -->
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_nszMZqivMkCWhZRC5bq3XexX5iapQMXzj6u5YPr94B3k', {
+      api_host: 'https://us.i.posthog.com',
+      person_profiles: 'identified_only',
+      cross_subdomain_cookie: true,
+      persistence: 'localStorage+cookie',
+      autocapture: true,
+      capture_pageview: true,
+      capture_pageleave: true,
+      session_recording: {
+        maskAllInputs: false,
+        maskInputOptions: { password: true }
+      }
+    })
+  </script>
+  <!-- End PostHog Analytics -->
+
 </head>
 <body>
 
@@ -2891,10 +2910,10 @@ document.addEventListener('keydown', function(e) {
     <p>Relatch uses the following third-party analytics tools to understand how users interact with the product. This data is aggregated and does not personally identify you.</p>
     <ul>
       <li><strong>Google Analytics</strong> — collects page views, session duration, device type, and general geographic region.</li>
-      <li><strong>Microsoft Clarity</strong> — records anonymised heatmaps and session replays to help us identify usability issues. Clarity may capture mouse movements and clicks but does not capture passwords or payment information.</li>
+      <li><strong>PostHog</strong> — records anonymised heatmaps, session replays, and product analytics events to help us identify usability issues and improve the product. PostHog may capture mouse movements, clicks, and page interactions but does not capture passwords or payment information.</li>
       <li><strong>Google Tag Manager</strong> — manages and deploys the analytics tags listed above. It does not independently collect data.</li>
     </ul>
-    <p>You can opt out of Google Analytics by installing the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google Analytics Opt-out Browser Add-on</a>. You can opt out of Microsoft Clarity by disabling cookies in your browser settings.</p>
+    <p>You can opt out of Google Analytics by installing the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google Analytics Opt-out Browser Add-on</a>. You can opt out of PostHog by disabling cookies in your browser settings.</p>
 
     <h3>2.2 Account Information</h3>
     <p>To upload and process documents, you need an account. Authentication and session management are handled by <strong>Clerk</strong>. You can sign in using <strong>Google OAuth</strong> or <strong>GitHub OAuth</strong>. When you sign in through one of these providers, Relatch receives a basic identity profile (such as your name, email address, and provider user ID) so that we can associate your session with your account. We do not receive your OAuth password.</p>
@@ -2927,7 +2946,7 @@ document.addEventListener('keydown', function(e) {
     <p>Before any extraction or enrichment begins, Relatch's smart analyzer scans your upload for corrupted files, unsupported formats, and irrelevant document types. Files that do not pass this check are discarded immediately and never transmitted to any external service.</p>
 
     <h2>4. Cookies and Session Storage</h2>
-    <p>Relatch uses cookies and similar browser storage for two purposes: (a) analytics, placed by Google Analytics and Microsoft Clarity as described above; and (b) authentication, where Clerk uses cookies and session storage to keep you signed in and to maintain your session securely. Authentication storage is essential to keeping accounts functional. Analytics cookies are non-essential and you can manage or disable them through your browser settings.</p>
+    <p>Relatch uses cookies and similar browser storage for two purposes: (a) analytics, placed by Google Analytics and PostHog as described above; and (b) authentication, where Clerk uses cookies and session storage to keep you signed in and to maintain your session securely. Authentication storage is essential to keeping accounts functional. Analytics cookies are non-essential and you can manage or disable them through your browser settings.</p>
 
     <h2>5. Third-Party Services</h2>
     <p>The following third-party services may process your data as part of using Relatch:</p>
@@ -2937,7 +2956,7 @@ document.addEventListener('keydown', function(e) {
       <li>GitHub OAuth (sign-in)</li>
       <li>Google Analytics</li>
       <li>Google Tag Manager</li>
-      <li>Microsoft Clarity</li>
+      <li>PostHog</li>
       <li>Gemini AI (Google DeepMind)</li>
       <li>Mistral OCR</li>
       <li>OCR Cloud Space</li>
@@ -2947,7 +2966,7 @@ document.addEventListener('keydown', function(e) {
     <p>Each of these services operates under its own privacy policy. We encourage you to review them independently.</p>
 
     <h2>6. Data Retention</h2>
-    <p>We retain account information for as long as your account is active. Uploaded documents are not kept beyond what is reasonably needed to deliver the resulting output. Analytics data is retained by Google Analytics and Microsoft Clarity under their respective retention policies. Waitlist and contact-form submissions are retained by Formspree until you request removal.</p>
+    <p>We retain account information for as long as your account is active. Uploaded documents are not kept beyond what is reasonably needed to deliver the resulting output. Analytics data is retained by Google Analytics and PostHog under their respective retention policies. Waitlist and contact-form submissions are retained by Formspree until you request removal.</p>
 
     <h2>7. Your Rights</h2>
     <p>You can request deletion of your account, your waitlist email, or any contact submission at any time by emailing us at <a href="mailto:relatchh@gmail.com">relatchh@gmail.com</a>. We will action reasonable requests within a reasonable timeframe.</p>
@@ -3033,7 +3052,7 @@ document.addEventListener('keydown', function(e) {
     <p>The Relatch name, logo, interface design, processing logic, internal templates, domain knowledge rules, and all related intellectual property remain the exclusive property of the Relatch team. Nothing in these terms grants you any rights to these assets.</p>
 
     <h2>7. Third-Party Services</h2>
-    <p>Relatch integrates with third-party services including Clerk (authentication), Google OAuth and GitHub OAuth (sign-in), Google Gemini, Mistral OCR, OCR Cloud Space, Formspree, Google Analytics, Google Tag Manager, Microsoft Clarity, and Vercel (hosting). Your use of Relatch is subject to the terms and privacy policies of these services where applicable. Relatch is not responsible for the availability, accuracy, or conduct of any third-party service.</p>
+    <p>Relatch integrates with third-party services including Clerk (authentication), Google OAuth and GitHub OAuth (sign-in), Google Gemini, Mistral OCR, OCR Cloud Space, Formspree, Google Analytics, Google Tag Manager, PostHog, and Vercel (hosting). Your use of Relatch is subject to the terms and privacy policies of these services where applicable. Relatch is not responsible for the availability, accuracy, or conduct of any third-party service.</p>
 
     <h2>8. Disclaimers</h2>
     <p>Relatch is provided on an "as is" and "as available" basis without warranties of any kind, express or implied. We do not warrant that Relatch will be uninterrupted, error-free, or that outputs will meet your requirements or expectations.</p>
