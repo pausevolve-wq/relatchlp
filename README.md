@@ -7,6 +7,6 @@
 - vercel.json
 
 ## Production URLs
-- Landing Page: https://relatchlp.vercel.app/
-- Frontend App: https://relatch-fe.vercel.app/
+- Landing Page: https://relatch.online/
+- Frontend App: https://app.relatch.online/
 - Backend Proxy: https://claudly-proxy.vercel.app/
