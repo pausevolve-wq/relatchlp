@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
-  <title>Relatch - Stop Searching. Start Knowing.</title>
+  <title>Relatch — Turn Your Documents into AI Skill Files</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -265,6 +265,8 @@
     .hero-orb {
       position: absolute; border-radius: 50%;
       pointer-events: none;
+      will-change: transform;
+      transform: translateZ(0);
     }
     .hero-orb-1 {
       width: 1000px; height: 580px;
@@ -301,32 +303,29 @@
       from { opacity: 0; transform: translateY(36px); clip-path: inset(100% 0 0 0); }
       to   { opacity: 1; transform: translateY(0);    clip-path: inset(0% 0 0 0); }
     }
+    /* Legacy reveal classes — keep for footer use */
     .reveal        { animation: revealUp 0.82s cubic-bezier(0.22,1,0.36,1) both; }
-    .reveal-d1     { animation-delay: 0.08s; }
-    .reveal-d2     { animation-delay: 0.22s; }
-    .reveal-d3     { animation-delay: 0.40s; }
-    .reveal-d4     { animation-delay: 0.57s; }
 
-    .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: 0.75rem;
-      background: none; border: none;
-      color: rgba(96,165,250,0.75); font-size: 0.72rem; font-weight: 500;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      padding: 0; border-radius: 0;
-      margin-bottom: 2.2rem;
+    /* Phase 1: Focus Reveal — Blur, Scale, Opacity */
+    @keyframes heroHeadlineReveal {
+      from {
+        opacity: 0;
+        transform: scale(1.18) translateZ(0);
+        filter: blur(12px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateZ(0);
+        filter: blur(0px);
+      }
     }
-    .hero-eyebrow::before,
-    .hero-eyebrow::after {
-      content: '';
-      display: inline-block;
-      width: 22px; height: 1px;
-      background: rgba(96,165,250,0.45);
-      flex-shrink: 0;
-    }
+
     .hero-h1 {
-      font-size: clamp(3.1rem, 9vw, 6.8rem);
+      font-size: clamp(3.1rem, 8vw, 5.2rem);
       font-weight: 800; line-height: 1.03; letter-spacing: -0.04em;
       color: #F8FAFC; margin-bottom: 1.8rem;
+      animation: heroHeadlineReveal 1.8s cubic-bezier(0.22,1,0.36,1) both;
+      will-change: transform, filter, opacity;
     }
     .cursive-keyword {
       font-family: 'Playfair Display', Georgia, serif;
@@ -342,21 +341,52 @@
       position: absolute; bottom: -5px; left: 0; width: 100%; height: 3px;
       background: linear-gradient(90deg, #60A5FA, #2563EB);
       border-radius: 2px;
-      animation: underlineGrow 1s cubic-bezier(0.22,1,0.36,1) 1s both;
+      animation: underlineGrow 1s cubic-bezier(0.22,1,0.36,1) 2.4s both;
       transform-origin: left;
     }
     @keyframes underlineGrow {
       from { transform: scaleX(0); }
       to   { transform: scaleX(1); }
     }
-    .hero-sub {
+    /* Phase 4: Supporting Content Fade-Up */
+    @keyframes heroSubFadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+.hero-sub {
       font-size: clamp(1rem, 2.2vw, 1.15rem);
       color: rgba(148,163,184,0.85); line-height: 1.8; max-width: 580px;
       margin: 0 auto 3rem;
+      animation: heroSubFadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 2.8s both;
+      text-align: center;
+    }
+    #typeTarget {
+      color: #60A5FA;
+    }
+    .type-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.2em;
+      background: #60A5FA;
+      margin-left: 4px;
+      vertical-align: middle;
+      animation: blinkCursor 0.7s infinite;
+    }
+    @keyframes blinkCursor {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
     }
     .hero-cta-group {
       display: flex; align-items: center; justify-content: center;
       gap: 1rem; flex-wrap: wrap;
+      animation: heroSubFadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 2.95s both;
     }
     .btn-primary {
       background: #2563EB; color: #fff;
@@ -383,25 +413,12 @@
     .btn-ghost:hover { color: #F8FAFC; border-color: rgba(255,255,255,0.32); }
     .btn-ghost:active { transform: scale(0.97); transition-duration: 80ms; }
 
-    .scroll-hint {
-      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-      color: rgba(255,255,255,0.28); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
-    }
-    .scroll-dot {
-      width: 6px; height: 6px; background: #2563EB; border-radius: 50%;
-      animation: scrollBounce 1.9s ease-in-out infinite;
-    }
-    @keyframes scrollBounce {
-      0%,100% { transform: translateY(0); opacity: 1; }
-      50%      { transform: translateY(9px); opacity: 0.3; }
-    }
 
         /* ══════════════════════════════════════════════
        THE TRANSFORMATION — Cinematic Card System
     ══════════════════════════════════════════════ */
     .transform-section {
-      background: #0B1120;
+      background: var(--tx-bg, #0B1120);
       position: relative;
       padding: 0;
       margin: 0;
@@ -414,6 +431,19 @@
       overflow: hidden;
       perspective: 1400px;
       z-index: 50;
+      background: var(--tx-bg, #0B1120);
+    }
+    .transform-sticky::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image: radial-gradient(circle, rgba(96,165,250,0.29) 1.5px, transparent 1.5px);
+      background-size: 28px 28px;
+      background-position: var(--tx-dot-offset, 0px 0px);
+      opacity: var(--tx-dots, 0);
+      transition: opacity 0.4s ease;
     }
     .transform-stage {
       position: relative;
@@ -435,11 +465,8 @@
       border-radius: 999px;
       opacity: 0.82;
       filter: blur(46px);
-      transition: left 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-                  top 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-                  opacity 0.4s ease;
-      will-change: left, top, transform, opacity;
+      transition: opacity 0.4s ease;
+      will-change: transform;
     }
     .transform-atmo-bridge {
       width: min(46vw, 680px);
@@ -462,7 +489,7 @@
     .transform-trigger {
       height: 82vh;
       position: relative;
-      background: #0B1120;
+      background: var(--tx-bg, #0B1120);
       pointer-events: none;
     }
     .transform-trigger:last-child {
@@ -529,7 +556,7 @@
     .transform-headline {
       font-size: clamp(2rem, 3.6vw, 3.1rem);
       font-weight: 700;
-      color: #F8FAFC;
+      color: var(--tx-heading, #F8FAFC);
       line-height: 1.12;
       letter-spacing: -0.03em;
       margin-bottom: 1.1rem;
@@ -542,7 +569,7 @@
     }
     .transform-desc {
       font-size: 1rem;
-      color: #94A3B8;
+      color: var(--tx-desc, #94A3B8);
       line-height: 1.7;
     }
 
@@ -815,21 +842,23 @@
 
     @media (max-width: 768px) {
       .card-wrap {
-        width: 88vw;
-        height: 248px;
-        transform: translate(-50%, calc(-50% + 15vh)) rotateY(0deg) rotateX(0deg) !important;
+        width: 90vw;
+        height: 238px;   /* fixed — vw-relative was only ~203px on narrow phones, clipping card state 5 */
       }
       .transform-text {
-        top: 12%;
-        left: 6%;
-        width: 88%;
+        top: 13%;
+        left: 5%;
+        width: 90%;
         transform: none;
       }
+      .transform-headline { font-size: 1.65rem; }
+      .transform-desc     { font-size: 0.875rem; line-height: 1.6; }
+      .transform-label    { margin-bottom: 0.55rem; }
       .transform-trigger {
-        height: 96vh;
+        height: 80vh;
       }
       .transform-trigger:last-child {
-        height: 18vh;
+        height: 14vh;
       }
     }
 
@@ -1008,7 +1037,15 @@
     ══════════════════════════════════════════════ */
     .features-section {
       background: #0B1120; color: #F8FAFC;
-      padding: 6.5rem 1.5rem 4.5rem;
+      padding: 7rem 1.5rem 5rem;
+      position: relative;
+    }
+    .features-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: min(600px, 80%); height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(37,99,235,0.35), transparent);
     }
     .section-inner { max-width: 1100px; margin: 0 auto; }
     .section-label {
@@ -1020,159 +1057,120 @@
       font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800;
       letter-spacing: -0.03em; line-height: 1.1; color: #F8FAFC;
     }
-    .features-grid {
+    .features-bento {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      margin-top: 4rem;
-      border: 1px solid rgba(255,255,255,0.07);
+      gap: 1px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.06);
       border-radius: 20px;
       overflow: hidden;
+      margin-top: 3.5rem;
     }
-    .feature-card {
-      background: rgba(255,255,255,0.02);
-      border: none;
-      border-right: 1px solid rgba(255,255,255,0.07);
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-      border-radius: 0;
-      padding: 2.5rem;
-      transition: background 0.2s cubic-bezier(0.23, 1, 0.32, 1);
-      position: relative;
+    @media (max-width: 900px) { .features-bento { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 540px) { .features-bento { grid-template-columns: 1fr; } }
+    .feat-card {
+      background: #0B1120;
+      padding: 2rem;
+      transition: background 0.25s;
     }
-    .feature-card:hover {
-      background: rgba(255,255,255,0.05);
-    }
-    /* Alternating wide-narrow bento spans */
-    .feature-card:nth-child(1) {
-      grid-column: span 2;
-      display: grid;
-      grid-template-columns: 44px 1fr;
-      grid-template-rows: auto auto;
-      column-gap: 1.25rem;
-      align-items: start;
-    }
-    .feature-card:nth-child(1) .feature-icon-wrap { grid-row: 1 / 3; margin-bottom: 0; align-self: start; }
-    .feature-card:nth-child(1) .feature-title { align-self: end; margin-bottom: 0.4rem; }
-    .feature-card:nth-child(2) { border-right: none; }
-    .feature-card:nth-child(4) {
-      grid-column: span 2;
-      display: grid;
-      grid-template-columns: 44px 1fr;
-      grid-template-rows: auto auto;
-      column-gap: 1.25rem;
-      align-items: start;
-      border-right: none;
-    }
-    .feature-card:nth-child(4) .feature-icon-wrap { grid-row: 1 / 3; margin-bottom: 0; align-self: start; }
-    .feature-card:nth-child(4) .feature-title { align-self: end; margin-bottom: 0.4rem; }
-    .feature-card:nth-child(5) { border-bottom: none; }
-    .feature-card:nth-child(6) {
-      grid-column: span 2;
-      display: grid;
-      grid-template-columns: 44px 1fr;
-      grid-template-rows: auto auto;
-      column-gap: 1.25rem;
-      align-items: start;
-      border-right: none;
-      border-bottom: none;
-    }
-    .feature-card:nth-child(6) .feature-icon-wrap { grid-row: 1 / 3; margin-bottom: 0; align-self: start; }
-    .feature-card:nth-child(6) .feature-title { align-self: end; margin-bottom: 0.4rem; }
-    /* First card subtle accent */
-    .feature-card:nth-child(1) {
-      background: linear-gradient(135deg, rgba(37,99,235,0.06) 0%, rgba(255,255,255,0.02) 100%);
-    }
-    .feature-card:nth-child(1):hover {
-      background: linear-gradient(135deg, rgba(37,99,235,0.09) 0%, rgba(255,255,255,0.04) 100%);
-    }
-    .feature-icon-wrap {
-      width: 44px; height: 44px; border-radius: 10px;
-      background: rgba(37,99,235,0.08);
-      border: 1px solid rgba(37,99,235,0.18);
+    .feat-card:hover { background: rgba(37,99,235,0.03); }
+    .feat-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(37,99,235,0.1); border: 1px solid rgba(37,99,235,0.18);
       display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.1rem;
     }
-    .feature-title { font-size: 1.02rem; font-weight: 700; color: #F8FAFC; margin-bottom: 0.5rem; letter-spacing: -0.01em; }
-    .feature-desc  { font-size: 0.875rem; color: rgba(148,163,184,0.82); line-height: 1.75; }
+    .feat-icon svg { width: 20px; height: 20px; }
+    .feat-title { font-size: 0.95rem; font-weight: 700; color: #F8FAFC; margin-bottom: 0.5rem; letter-spacing: -0.01em; }
+    .feat-desc { font-size: 0.8rem; color: #64748B; line-height: 1.7; }
+    .feat-desc code { font-family: 'DM Mono', 'Fira Mono', monospace; font-size: 0.75rem; background: rgba(96,165,250,0.08); color: #93c5fd; padding: 0.1em 0.35em; border-radius: 4px; border: 1px solid rgba(96,165,250,0.15); }
 
     /* ══════════════════════════════════════════════
        WORD-BY-WORD TEXT REVEAL
     ══════════════════════════════════════════════ */
-    .text-reveal-section {
-      background: #0B1120;
-      min-height: 148vh; position: relative; padding: 0;
+    .section-sub { font-size: 1.05rem; color: #64748B; line-height: 1.75; max-width: 560px; margin-bottom: 0; }
+    .built-for-section {
+      background: linear-gradient(180deg, #0B1120 0%, #0d1428 100%);
+      padding: 7rem 1.5rem;
+      position: relative;
     }
-    .text-reveal-sticky {
-      position: sticky; top: 0; height: 100vh;
-      display: flex; align-items: center; justify-content: center;
-      padding: 1.5rem 2rem 1rem; flex-direction: column; gap: 2.2rem;
+    .built-for-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 4rem;
     }
-    .text-reveal-words {
-      font-size: clamp(2rem, 5vw, 4rem); font-weight: 700;
-      letter-spacing: -0.032em; line-height: 1.32; text-align: center;
-      max-width: 1120px;
-      display: flex; flex-wrap: wrap; justify-content: center;
-      gap: 0.04em 0.28em;
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    @media (max-width: 768px) { .built-for-grid { grid-template-columns: 1fr; } }
+    .bf-card {
+      position: relative;
+      border-radius: 20px;
+      padding: 2.5rem;
+      overflow: hidden;
+      background: linear-gradient(145deg, rgba(96,165,250,0.06) 0%, rgba(15,21,37,0.97) 100%);
+      border: 1px solid rgba(96,165,250,0.12);
+      transition: border-color 0.45s ease, background 0.45s ease, transform 0.3s ease, box-shadow 0.45s ease;
     }
-    .text-reveal-words.intro-visible {
-      opacity: 1;
-      transform: translateY(0);
+    .bf-card.claude-card:hover {
+      background: linear-gradient(145deg, rgba(225,123,90,0.13) 0%, rgba(237,130,94,0.07) 55%, rgba(15,21,37,0.97) 100%);
+      border-color: rgba(225,123,90,0.28);
+      box-shadow: 0 12px 48px rgba(225,123,90,0.08), inset 0 0 60px rgba(225,123,90,0.03);
+      transform: translateY(-5px);
     }
-    .word-wrap { position: relative; display: inline-block; }
-    .word-dim  { color: rgba(248,250,252,0.13); }
-    .word-lit  { position: absolute; inset: 0; color: #F8FAFC; opacity: 0; transition: opacity 0.06s; }
-    .word-wrap.word-accent {
-      padding-bottom: 0.16em;
+    .bf-card.codex-card:hover {
+      background: linear-gradient(145deg, rgba(140,152,255,0.13) 0%, rgba(87,106,255,0.07) 55%, rgba(15,21,37,0.97) 100%);
+      border-color: rgba(140,152,255,0.28);
+      box-shadow: 0 12px 48px rgba(87,106,255,0.08), inset 0 0 60px rgba(87,106,255,0.03);
+      transform: translateY(-5px);
     }
-    .word-wrap.word-accent::after {
-      content: '';
+    .bf-card-glow {
+      position: absolute; inset: 0; pointer-events: none;
+      opacity: 0; transition: opacity 0.45s ease;
+    }
+    .bf-card:hover .bf-card-glow { opacity: 1; }
+    .claude-card .bf-card-glow { background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(225,123,90,0.1) 0%, transparent 70%); }
+    .codex-card .bf-card-glow { background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(140,152,255,0.1) 0%, transparent 70%); }
+    .bf-logo-watermark {
       position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 3px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #60A5FA, #2563EB);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .text-reveal-words.intro-visible .word-wrap.word-accent::after {
-      transform: scaleX(1);
-    }
-    .word-wrap.word-accent .word-dim,
-    .word-wrap.word-accent .word-lit {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-style: italic;
-      font-weight: 700;
-      color: #60A5FA;
-    }
-    .adapt-tags {
-      display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center;
-      max-width: 980px;
+      bottom: 0; right: 0;
+      width: 220px; height: 220px;
+      object-fit: contain;
+      mix-blend-mode: screen;
       opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
+      transform: translate(30%, 35%) rotate(20deg);
+      transform-origin: center center;
+      transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
     }
-    .adapt-tag {
-      background: linear-gradient(180deg, rgba(19, 34, 65, 0.78), rgba(11, 17, 32, 0.92));
-      border: 1px solid rgba(96,165,250,0.2);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 14px 30px rgba(4, 10, 24, 0.28);
-      color: #D6E6FF; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.035em;
-      padding: 0.68rem 1.12rem; border-radius: 999px;
-      white-space: nowrap;
+    .bf-card:hover .bf-logo-watermark {
+      opacity: 0.6;
+      transform: translate(30%, 35%) rotate(20deg) scale(1.04);
     }
+    .bf-title { font-size: 1.9rem; font-weight: 700; color: #F8FAFC; margin-bottom: 0.6rem; letter-spacing: -0.03em; line-height: 1.15; }
+    .bf-desc { font-size: 0.9rem; color: #64748B; line-height: 1.75; margin-bottom: 1.75rem; }
+    .bf-features { display: flex; flex-direction: column; gap: 0.6rem; }
+    .bf-feat { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.82rem; color: #94A3B8; line-height: 1.5; }
+    .bf-feat-dot { width: 5px; height: 5px; border-radius: 50%; background: #60A5FA; flex-shrink: 0; margin-top: 0.45em; transition: background 0.45s; }
+    .claude-card:hover .bf-feat-dot { background: #e17b5a; }
+    .codex-card:hover .bf-feat-dot { background: #8c98ff; }
+    .bf-tag {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      margin-top: 1.75rem;
+      font-size: 0.72rem; font-weight: 600; color: #F8FAFC;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      padding: 0.4rem 0.9rem; border-radius: 7px;
+      text-decoration: none; cursor: pointer;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .claude-card:hover .bf-tag { background: rgba(225,123,90,0.1); border-color: rgba(225,123,90,0.25); }
+    .codex-card:hover .bf-tag { background: rgba(140,152,255,0.1); border-color: rgba(140,152,255,0.25); }
 
     /* ══════════════════════════════════════════════
        GLOBAL / TRUST SECTION
     ══════════════════════════════════════════════ */
     .global-section {
-      background: #0B1120; padding: 4.8rem 1.5rem 6.4rem; text-align: center;
+      background: #0B1120; padding: 4.8rem 1.5rem 4rem; text-align: center;
     }
     .global-big {
       font-size: clamp(2.2rem, 5.9vw, 4.55rem); font-weight: 700;
@@ -1209,7 +1207,7 @@
     .slider-track {
       display: flex; gap: 1rem;
       animation: slideLeft 40s linear infinite;
-      width: max-content; padding: 0.5rem 1.5rem;
+      width: max-content; padding: 0.5rem 0;
     }
     .slider-track:hover { animation-play-state: paused; }
     @keyframes slideLeft {
@@ -1241,78 +1239,103 @@
     }
     .country-name { font-size: 0.88rem; font-weight: 600; color: #CBD5E1; }
 
-    /* supports */
-    .supports-row {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 1.55rem;
-        margin-top: 5rem;
-      }
-    .supports-label {
-        font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em;
-        text-transform: uppercase; color: #94A3B8;
-        opacity: 0;
-        transform: translateY(12px);
-        transition: opacity 0.6s ease, transform 0.6s ease;
-      }
-    .supports-strip {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 2.4rem;
-        flex-wrap: wrap;
-        width: 100%;
-        max-width: 920px;
-        opacity: 0;
-        transform: translateY(18px);
-        transition: opacity 0.72s ease, transform 0.72s cubic-bezier(0.22, 1, 0.36, 1);
-      }
-    .supports-brand {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        line-height: 0;
-        width: 220px;
-        height: 80px;
-        overflow: visible;
-      }
-    .supports-brand img {
-        width: 168px;
-        height: 60px;
-        object-fit: contain;
-        display: block;
-        filter: drop-shadow(0 14px 24px rgba(7, 12, 24, 0.22));
-        transform-origin: center center;
-        opacity: 0;
-        transition: opacity 0.72s ease, transform 0.82s cubic-bezier(0.22, 1, 0.36, 1);
-      }
-      .supports-brand .supports-claude {
-        transform: scale(1);
-      }
-      .supports-brand .supports-codex {
-        transform: scale(1);
-      }
-      .supports-row.visible .supports-label {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      .supports-row.visible .supports-strip {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      .supports-row.visible .supports-brand img {
-        opacity: 1;
-      }
-      .supports-row.visible .supports-brand .supports-claude {
-        transform: scale(2.9) translateY(0);
-        transition-delay: 0.1s;
-      }
-      .supports-row.visible .supports-brand .supports-codex {
-        transform: scale(2.58) translateY(0);
-        transition-delay: 0.18s;
-      }
+    /* FAQ Section */
+    .faq-section {
+      background: #0B1120;
+      padding: 3.5rem 1.5rem 8rem;
+      text-align: center;
+    }
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 3.5rem;
+      text-align: left;
+    }
+    @media (max-width: 768px) {
+      .faq-grid { grid-template-columns: 1fr; }
+    }
+    .faq-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      position: relative;
+      transition: border-color 0.3s ease, border-radius 0.3s ease;
+    }
+    .faq-item.open {
+      border-color: rgba(96,165,250,0.22);
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    .faq-question {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.35rem 1.4rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      gap: 1rem;
+    }
+    .faq-q-text {
+      font-size: 0.935rem;
+      font-weight: 600;
+      color: #F1F5F9;
+      letter-spacing: -0.01em;
+      line-height: 1.45;
+    }
+    .faq-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 7px;
+      background: rgba(96,165,250,0.08);
+      border: 1px solid rgba(96,165,250,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: #60A5FA;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1;
+      transition: background 0.25s, transform 0.35s cubic-bezier(0.22,1,0.36,1);
+      user-select: none;
+    }
+    .faq-item.open .faq-icon {
+      background: rgba(96,165,250,0.15);
+      transform: rotate(45deg);
+    }
+    .faq-answer {
+      position: absolute;
+      top: 100%;
+      left: -1px;
+      right: -1px;
+      z-index: 50;
+      background: #0E1829;
+      border: 1px solid rgba(96,165,250,0.22);
+      border-top: none;
+      border-radius: 0 0 14px 14px;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.65s cubic-bezier(0.22,1,0.36,1), opacity 0.25s ease;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 400px;
+      opacity: 1;
+    }
+    .faq-answer-inner {
+      padding: 1rem 1.4rem 1.4rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .faq-answer-inner p {
+      font-size: 0.875rem;
+      color: #64748B;
+      line-height: 1.78;
+      margin: 0;
+    }
 
     /* ══════════════════════════════════════════════
        CTA SECTION
@@ -1693,20 +1716,9 @@
         .navbar { padding: 0 1.25rem; }
         .hero-content { padding: 3rem 1rem 5rem; }
         .features-section { padding: 4rem 1rem; }
-        .text-reveal-section { min-height: 142vh; }
-      .text-reveal-sticky { padding: 1.5rem 1rem 0.85rem; gap: 1.55rem; }
-      .text-reveal-words { font-size: clamp(1.8rem, 9vw, 2.85rem); max-width: 100%; line-height: 1.26; }
-        .adapt-tags { gap: 0.55rem; }
-        .adapt-tag { font-size: 0.82rem; padding: 0.62rem 0.98rem; }
+        .built-for-section { padding: 4rem 1rem; }
         .global-section { padding: 4rem 1rem; }
-        .supports-row { gap: 1.2rem; }
-        .supports-strip { gap: 1rem; max-width: 100%; }
-        .supports-brand { width: min(100%, 300px); height: 104px; }
-        .supports-brand img { width: 140px; height: 52px; }
-        .supports-brand .supports-claude { transform: scale(2.2) translateY(8px); }
-        .supports-brand .supports-codex { transform: scale(1.98) translateY(3px); }
-        .supports-row.visible .supports-brand .supports-claude { transform: scale(2.42) translateY(0); }
-        .supports-row.visible .supports-brand .supports-codex { transform: scale(2.18) translateY(0); }
+        .faq-section { padding: 5rem 1rem 6rem; }
         .cta-section { padding: 5rem 1rem 2rem; }
       }
 
@@ -1810,9 +1822,6 @@
     /* ── Hero content z-index fix for new layers ── */
     .hero-content { position: relative; z-index: 2; }
 
-    /* ── Features section padding refinement ── */
-    .features-section { padding: 7rem 1.5rem 5rem; }
-
     /* ── Footer CTA button active state ── */
     .footer-cta-primary:active { transform: scale(0.97) !important; }
 
@@ -1820,9 +1829,6 @@
     .nav-d-ghost { transition: color 0.18s var(--ease-out), border-color 0.18s var(--ease-out), background 0.18s var(--ease-out), transform 120ms ease-out; }
     .nav-d-ghost:hover { transform: none; color: #F8FAFC; border-color: rgba(255,255,255,0.32); background: rgba(255,255,255,0.04); }
     .nav-d-ghost:active { transform: scale(0.96); }
-
-    /* ── Adapt tags: slightly more editorial ── */
-    .adapt-tag { border-radius: 8px; }
 
     /* ── CTA section top border line ── */
     .cta-section::before {
@@ -1835,24 +1841,10 @@
       pointer-events: none;
     }
 
-    /* ── Features bento: mobile collapse ── */
-    @media (max-width: 768px) {
-      .features-grid {
-        grid-template-columns: 1fr;
-        border-radius: 14px;
-      }
-      .feature-card:nth-child(1),
-      .feature-card:nth-child(4),
-      .feature-card:nth-child(6) {
-        grid-column: span 1;
-        display: block;
-      }
-      .feature-card:nth-child(1) .feature-icon-wrap,
-      .feature-card:nth-child(4) .feature-icon-wrap,
-      .feature-card:nth-child(6) .feature-icon-wrap { margin-bottom: 1.25rem; }
-      .feature-card { border-right: none; }
-      .feature-card:nth-child(5) { border-bottom: 1px solid rgba(255,255,255,0.07); }
-      .feature-card:last-child { border-bottom: none; }
+    /* ── Features bento: mobile padding ── */
+    @media (max-width: 540px) {
+      .features-bento { border-radius: 14px; }
+      .feat-card { padding: 1.5rem; }
     }
 
     /* ── Reduced motion ── */
@@ -1860,6 +1852,439 @@
       .reveal { animation-duration: 0.01ms; }
       .fiv { transition-duration: 0.01ms; }
       .hero-section::before { display: none; }
+    }
+
+    /* ════════════════════════════════════════════
+       ADAPTIVE TEMPLATES — v2
+    ════════════════════════════════════════════ */
+    .at-section {
+      background: #0B1120;
+      padding: 96px 0 88px;
+      overflow: visible;
+      position: relative;
+    }
+    /* full-section dot grid */
+    .at-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(96,165,250,0.17) 1px, transparent 1px);
+      background-size: 30px 30px;
+      background-position: center;
+      -webkit-mask-image: radial-gradient(ellipse 85% 72% at 50% 52%, black 5%, transparent 65%);
+      mask-image: radial-gradient(ellipse 85% 72% at 50% 52%, black 5%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .at-inner {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .at-title {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 700;
+      color: #F8FAFC;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin: 0 0 18px;
+      text-align: center;
+    }
+    .at-sub {
+      max-width: 600px;
+      font-size: 1.0625rem;
+      line-height: 1.72;
+      color: #94A3B8;
+      margin: 0 0 24px;
+      text-align: center;
+    }
+    .at-sub strong { color: #CBD5E1; font-weight: 600; }
+    .at-mode-toggle {
+      display: inline-flex;
+      background: rgba(11,17,32,0.9);
+      border: 1px solid rgba(96,165,250,0.14);
+      border-radius: 9px;
+      padding: 4px;
+      gap: 2px;
+      margin-bottom: 52px;
+    }
+    .at-mode-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 22px;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      background: transparent;
+      color: #475569;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.22s, color 0.22s, border-color 0.22s;
+      font-family: inherit;
+      letter-spacing: 0.01em;
+    }
+    .at-mode-btn.at-active {
+      background: rgba(37,99,235,0.16);
+      color: #93C5FD;
+      border-color: rgba(37,99,235,0.28);
+    }
+    .at-mode-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .at-dot-claude { background: #60A5FA; }
+    .at-dot-codex  { background: #60A5FA; }
+    .at-diagram-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    .at-orbit-container {
+      position: relative;
+      width: 680px;
+      height: 680px;
+      flex-shrink: 0;
+    }
+    .at-bg-ring {
+      position: absolute;
+      top: 50%; left: 50%;
+      border-radius: 50%;
+      border: 1px solid;
+      pointer-events: none;
+      z-index: 1;
+      transform-origin: center center;
+    }
+    .at-bg-ring-1 {
+      width: 186px; height: 186px;
+      margin-top: -93px; margin-left: -93px;
+      border-color: rgba(96,165,250,0.14);
+      border-style: dashed;
+      animation: atRingSpin 28s linear infinite;
+    }
+    .at-bg-ring-2 {
+      width: 262px; height: 262px;
+      margin-top: -131px; margin-left: -131px;
+      border-color: rgba(96,165,250,0.09);
+      animation: atRingSpin 50s linear infinite reverse;
+    }
+    .at-bg-ring-3 {
+      width: 340px; height: 340px;
+      margin-top: -170px; margin-left: -170px;
+      border-color: rgba(96,165,250,0.055);
+      border-style: dotted;
+      animation: atRingSpin 90s linear infinite;
+    }
+    .at-hub {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 130px; height: 130px;
+      z-index: 4;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .at-hub-glow {
+      position: absolute;
+      inset: -32px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(37,99,235,0.2) 0%, transparent 62%);
+      animation: atHubPulse 3.4s ease-in-out infinite;
+    }
+    .at-hub-inner {
+      position: relative;
+      width: 130px; height: 130px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(96,165,250,0.3) 0%, rgba(37,99,235,0.16) 32%, rgba(11,17,32,0.88) 72%),
+        #0B1120;
+      border: 1.5px solid rgba(96,165,250,0.34);
+      box-shadow:
+        0 0 0 1px rgba(96,165,250,0.08),
+        0 0 38px rgba(37,99,235,0.28),
+        inset 0 0 22px rgba(96,165,250,0.13);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+    .at-hub-lbl {
+      font-size: 0.56rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(148,163,184,0.7);
+      margin-bottom: 5px;
+    }
+    .at-hub-ttl {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #F8FAFC;
+      letter-spacing: -0.01em;
+    }
+    .at-hub-ttl em {
+      font-family: Georgia, 'Palatino Linotype', serif;
+      font-style: italic;
+      color: #60A5FA;
+      font-weight: 700;
+    }
+    .at-arm {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 240px;
+      height: 0;
+      transform-origin: left center;
+      animation: atArmOrbit 60s linear infinite;
+      animation-delay: var(--delay, 0s);
+      pointer-events: none;
+      will-change: transform;
+      z-index: 2;
+    }
+    .at-hidden { display: none !important; }
+    .at-arm-line {
+      position: absolute;
+      left: 70px;
+      width: 90px;
+      height: 1.5px;
+      top: -0.75px;
+      background: linear-gradient(to right,
+        rgba(96,165,250,0.1),
+        rgba(96,165,250,0.32) 45%,
+        rgba(96,165,250,0.28) 70%,
+        rgba(96,165,250,0.07));
+    }
+    .at-line-codex {
+      background: linear-gradient(to right,
+        rgba(96,165,250,0.1),
+        rgba(96,165,250,0.32) 45%,
+        rgba(96,165,250,0.28) 70%,
+        rgba(96,165,250,0.07));
+    }
+    .at-arm-dot {
+      position: absolute;
+      top: -1.5px;
+      left: 70px;
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: #60A5FA;
+      box-shadow: 0 0 6px 2px rgba(96,165,250,0.6);
+      animation: atDotTravel 2.8s ease-in-out infinite;
+      animation-delay: var(--dot-d, 0s);
+    }
+    .at-dot-codex-clr {
+      background: #60A5FA;
+      box-shadow: 0 0 6px 2px rgba(96,165,250,0.6);
+    }
+    .at-card {
+      position: absolute;
+      left: 240px;
+      top: 0;
+      transform: translateX(-50%) translateY(-50%) rotate(0deg);
+      animation: atPillCounter 60s linear infinite;
+      animation-delay: var(--delay, 0s);
+      pointer-events: auto;
+      cursor: default;
+      width: 148px;
+      padding: 11px 12px;
+      background: rgba(15,23,42,0.82);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+      z-index: 5;
+      will-change: transform;
+    }
+    .at-card:hover, .at-card:focus-visible {
+      border-color: rgba(96,165,250,0.38);
+      background: rgba(30,46,80,0.9);
+      box-shadow: 0 0 0 1px rgba(96,165,250,0.12), 0 8px 24px rgba(37,99,235,0.18);
+      outline: none;
+    }
+    .at-card-codex:hover, .at-card-codex:focus-visible {
+      border-color: rgba(96,165,250,0.38);
+      box-shadow: 0 0 0 1px rgba(96,165,250,0.12), 0 8px 24px rgba(37,99,235,0.18);
+    }
+    .at-card-hd {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .at-card-ic {
+      width: 26px; height: 26px;
+      border-radius: 7px;
+      background: rgba(37,99,235,0.15);
+      border: 1px solid rgba(96,165,250,0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #93C5FD;
+      flex-shrink: 0;
+    }
+    .at-card-ic-cx {
+      background: rgba(37,99,235,0.15);
+      border-color: rgba(96,165,250,0.22);
+      color: #93C5FD;
+    }
+    .at-card-name {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #F8FAFC;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .at-card-sub {
+      font-size: 0.62rem;
+      color: #475569;
+      padding-left: 0;
+    }
+    .at-orbit-paused .at-arm,
+    .at-orbit-paused .at-card,
+    .at-orbit-paused .at-arm-dot {
+      animation-play-state: paused;
+    }
+    .at-tooltip {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%) translateY(5px);
+      width: 218px;
+      background: rgba(10,18,35,0.97);
+      border: 1px solid rgba(96,165,250,0.18);
+      border-radius: 10px;
+      padding: 12px 13px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.14s ease, transform 0.14s ease;
+      z-index: 100;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.03);
+      text-align: left;
+      white-space: normal;
+      word-wrap: break-word;
+    }
+    .at-card-codex .at-tooltip {
+      border-color: rgba(96,165,250,0.18);
+    }
+    .at-card:hover .at-tooltip,
+    .at-card:focus-visible .at-tooltip {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    .at-tt-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 7px;
+    }
+    .at-tt-letter {
+      width: 22px; height: 22px;
+      border-radius: 5px;
+      background: rgba(37,99,235,0.14);
+      border: 1px solid rgba(37,99,235,0.24);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #60A5FA;
+      flex-shrink: 0;
+    }
+    .at-tt-cx-ic {
+      background: rgba(37,99,235,0.14);
+      border-color: rgba(37,99,235,0.24);
+      color: #60A5FA;
+    }
+    .at-tt-title {
+      font-size: 0.79rem;
+      font-weight: 600;
+      color: #F1F5F9;
+    }
+    .at-tt-body {
+      font-size: 0.71rem;
+      line-height: 1.64;
+      color: #94A3B8;
+      margin: 0 0 6px;
+      white-space: normal;
+    }
+    .at-tt-tag {
+      font-size: 0.62rem;
+      color: #475569;
+      font-style: italic;
+      white-space: normal;
+    }
+    @keyframes atArmOrbit {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    @keyframes atPillCounter {
+      from { transform: translateX(-50%) translateY(-50%) rotate(0deg); }
+      to   { transform: translateX(-50%) translateY(-50%) rotate(-360deg); }
+    }
+    @keyframes atDotTravel {
+      0%   { left: 70px; opacity: 0; }
+      12%  { opacity: 1; }
+      84%  { opacity: 0.5; }
+      100% { left: 160px; opacity: 0; }
+    }
+    @keyframes atHubPulse {
+      0%, 100% { opacity: 0.6; }
+      50%       { opacity: 1; }
+    }
+    @keyframes atRingSpin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    /* ── reveal on scroll-into-view ── */
+    .at-orbit-container:not(.at-revealed) .at-hub-inner { opacity: 0; transform: scale(0.55); }
+    .at-orbit-container:not(.at-revealed) .at-hub-glow  { opacity: 0; }
+    .at-orbit-container:not(.at-revealed) .at-bg-ring   { opacity: 0; }
+    .at-orbit-container:not(.at-revealed) .at-arm       { opacity: 0; }
+    .at-orbit-container.at-revealed .at-hub-glow {
+      opacity: 0.6;
+      transition: opacity 0.55s 0.1s ease-out;
+    }
+    .at-orbit-container.at-revealed .at-hub-inner {
+      opacity: 1; transform: scale(1);
+      transition: opacity 0.6s 0.18s ease-out,
+                  transform 0.75s 0.12s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .at-orbit-container.at-revealed .at-bg-ring-1 { opacity: 1; transition: opacity 0.5s 0.28s ease-out; }
+    .at-orbit-container.at-revealed .at-bg-ring-2 { opacity: 1; transition: opacity 0.5s 0.38s ease-out; }
+    .at-orbit-container.at-revealed .at-bg-ring-3 { opacity: 1; transition: opacity 0.5s 0.48s ease-out; }
+    .at-orbit-container.at-revealed .at-arm {
+      opacity: 1;
+      transition: opacity 0.45s var(--reveal-d, 0.58s) ease-out;
+    }
+    /* parallax host */
+    .at-diagram-wrap { will-change: transform; }
+    @media (max-width: 660px) {
+      .at-orbit-container {
+        transform: scale(0.54);
+        transform-origin: center top;
+        margin-bottom: -312px;
+      }
+      .at-section { padding: 72px 0 56px; }
+    }
+    @media (max-width: 400px) {
+      .at-orbit-container {
+        transform: scale(0.43);
+        transform-origin: center top;
+        margin-bottom: -388px;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .at-arm, .at-card, .at-arm-dot, .at-hub-glow, .at-bg-ring { animation: none !important; }
     }
   </style>
 
@@ -1905,7 +2330,6 @@
     <div class="nav-desktop" id="navDesktop">
       <a href="#how-it-works" class="nav-d-link">Features</a>
       <a href="#how-it-works" class="nav-d-link">How It Works</a>
-      <a href="https://app.relatch.online/" target="_blank" rel="noopener" class="nav-d-ghost">Try Relatch</a>
       <a href="https://app.relatch.online/" target="_blank" rel="noopener" class="nav-d-primary">Get Started</a>
     </div>
     <button class="nav-hamburger-btn" id="navHamburger" aria-label="Open menu">
@@ -1922,7 +2346,6 @@
     <a href="#how-it-works" class="nav-m-link" onclick="closeMobileMenu()">How It Works</a>
   </div>
   <div class="nav-mobile-ctas">
-    <a href="https://app.relatch.online/" target="_blank" rel="noopener" class="nav-m-ghost" onclick="closeMobileMenu()">Try Relatch</a>
     <a href="https://app.relatch.online/" target="_blank" rel="noopener" class="nav-m-primary" onclick="closeMobileMenu()">Get Started</a>
   </div>
 </div>
@@ -1936,17 +2359,14 @@
   <div class="hero-orb hero-orb-3"></div>
 
   <div class="hero-content">
-    <div class="hero-eyebrow reveal reveal-d1">
-      AI Skill File Generator
-    </div>
-    <h1 class="hero-h1 reveal reveal-d2">
-      Turn your files<br>
-      into <span class="cursive-keyword">knowledge.</span>
+    <h1 class="hero-h1">
+      Your AI doesn't know<br>
+      what <span class="cursive-keyword">you know.</span>
     </h1>
-    <p class="hero-sub reveal reveal-d3">
-      Relatch turns PDFs, CSVs, XML, code, and notes into structured skill files your AI can search, follow, and use.
+    <p class="hero-sub">
+      Relatch reads your <span id="typeTarget">Markdown docs</span><span class="type-cursor"></span> and builds structured skill files that Claude and OpenAI Codex can actually reason from. Not raw pasted text. Persistent, typed intelligence.
     </p>
-    <div class="hero-cta-group reveal reveal-d4">
+    <div class="hero-cta-group">
       <a href="https://app.relatch.online/" target="_blank" rel="noopener" class="btn-primary">
         Start for Free
         <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
@@ -1955,10 +2375,6 @@
     </div>
   </div>
 
-  <div class="scroll-hint">
-    <span>Scroll</span>
-    <div class="scroll-dot"></div>
-  </div>
 </section>
 
 <!-- ══════════════════════════════════════════════
@@ -2082,8 +2498,8 @@
             <div class="cs-skill-body">
               <div class="cs-skill-yaml">
                 <span class="yml-line"><span class="yml-key">name:</span> <span class="yml-val">"usfinance"</span></span>
-                <span class="yml-line"><span class="yml-key">domain:</span> <span class="yml-val">"General"</span></span>
-                <span class="yml-line"><span class="yml-key">content_type:</span> <span class="yml-val">"behavioral_skill"</span></span>
+                <span class="yml-line"><span class="yml-key">domain:</span> <span class="yml-val">"financial datasets"</span></span>
+                <span class="yml-line"><span class="yml-key">content_type:</span> <span class="yml-val">"Model datasets financial knoweldge skill"</span></span>
               </div>
               <div class="cs-skill-divider"></div>
               <div class="cs-skill-flow">
@@ -2106,32 +2522,32 @@
 
         <div class="text-state active" id="textState1">
           <span class="transform-label">The Problem</span>
-          <h3 class="transform-headline">Your documents<br>are <span class="cursive">dead weight.</span></h3>
-          <p class="transform-desc">Raw files sit unused. Your AI cannot reason from scattered, unstructured inputs.</p>
+          <h3 class="transform-headline">Your knowledge<br>is <span class="cursive">locked away.</span></h3>
+          <p class="transform-desc">You've spent years building expertise in documents, notes, and files. Every AI session starts from zero. Your AI can't reason from raw files — it needs structured skill layers.</p>
         </div>
 
         <div class="text-state" id="textState2">
-          <span class="transform-label">The Drop</span>
-          <h3 class="transform-headline">Drop anything.<br>Relatch <span class="cursive">handles it.</span></h3>
-          <p class="transform-desc">PDF, CSV, XML, DOCX, Markdown. One pipeline that prepares every file for structured output.</p>
+          <span class="transform-label">Step 1 — Upload</span>
+          <h3 class="transform-headline">Drop anything.<br>Every <span class="cursive">format handled.</span></h3>
+          <p class="transform-desc">PDF, DOCX, CSV, XML, Markdown, code. Relatch accepts your full knowledge stack and routes each file to the right processing path — automatically.</p>
         </div>
 
         <div class="text-state" id="textState3">
-          <span class="transform-label">Extraction</span>
-          <h3 class="transform-headline">Structure pulled<br>from <span class="cursive">noise.</span></h3>
-          <p class="transform-desc">OCR plus smart parsing turns messy files into clean fields, labeled data, and usable structure.</p>
+          <span class="transform-label">Step 2 — Extract</span>
+          <h3 class="transform-headline">Every signal,<br><span class="cursive">captured precisely.</span></h3>
+          <p class="transform-desc">Smart OCR + structural parsing pulls meaning from messy files — tables, lists, domain language, code patterns. Scan-based PDFs auto-escalate to Mistral OCR. Nothing important is lost.</p>
         </div>
 
         <div class="text-state" id="textState4">
-          <span class="transform-label">Enrichment</span>
-          <h3 class="transform-headline">AI builds<br><span class="cursive">reasoning layers.</span></h3>
-          <p class="transform-desc">Tables, logic, rules, and context are assembled around your data so the AI can follow them.</p>
+          <span class="transform-label">Step 3 — Enrich</span>
+          <h3 class="transform-headline">AI detects the<br><span class="cursive">knowledge type.</span></h3>
+          <p class="transform-desc">Relatch identifies whether your document holds persona patterns, codebase logic, process workflows, or domain knowledge — then applies the matching enrichment template. Output is scored before delivery.</p>
         </div>
 
         <div class="text-state" id="textState5">
-          <span class="transform-label">The Output</span>
-          <h3 class="transform-headline">Your AI gets<br>a <span class="cursive">skill file.</span></h3>
-          <p class="transform-desc">A structured skill file your AI can search, follow, and use. Not random text pasted into a prompt.</p>
+          <span class="transform-label">Step 4 — Export</span>
+          <h3 class="transform-headline">Your AI gets<br>a <span class="cursive">real skill file.</span></h3>
+          <p class="transform-desc">Download a structured <code>.md</code> for Claude or a <code>.zip</code> for OpenAI Codex CLI. Install once — your AI now has persistent, structured access to everything in those documents.</p>
         </div>
 
       </div><!-- /transform-text -->
@@ -2150,6 +2566,203 @@
 <!-- ══════════════════════════════════════════════
      WHAT YOU GET — Output Showcase
 ══════════════════════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════════
+     ADAPTIVE TEMPLATES
+═══════════════════════════════════════════ -->
+<section id="adaptive-templates" class="at-section">
+  <div class="at-inner">
+    <span class="section-label fiv" style="margin-bottom:18px">Adaptive Intelligence</span>
+    <h2 class="at-title fiv fiv-d1">One upload. <em class="accent-italic">The right template.</em></h2>
+    <p class="at-sub fiv fiv-d2">Relatch detects what your document actually contains and automatically builds the correct skill structure. <strong>No guessing. No manual selection.</strong></p>
+    <div class="at-mode-toggle" role="group" aria-label="Select AI mode">
+      <button class="at-mode-btn at-active" data-mode="claude" aria-pressed="true">
+        <span class="at-mode-dot at-dot-claude"></span>Claude
+      </button>
+      <button class="at-mode-btn" data-mode="codex" aria-pressed="false">
+        <span class="at-mode-dot at-dot-codex"></span>Codex
+      </button>
+    </div>
+
+    <div class="at-diagram-wrap">
+      <div class="at-orbit-container" id="atOrbitContainer">
+
+        <div class="at-bg-ring at-bg-ring-1"></div>
+        <div class="at-bg-ring at-bg-ring-2"></div>
+        <div class="at-bg-ring at-bg-ring-3"></div>
+
+        <div class="at-hub">
+          <div class="at-hub-glow"></div>
+          <div class="at-hub-inner">
+            <span class="at-hub-lbl">Relatch</span>
+            <span class="at-hub-ttl">AI <em>Engine</em></span>
+          </div>
+        </div>
+
+        <div class="at-arm at-claude" style="--delay:-45s; --reveal-d:0.58s">
+          <div class="at-arm-line"></div>
+          <div class="at-arm-dot" style="--dot-d:0s"></div>
+          <div class="at-card" tabindex="0">
+            <div class="at-card-hd">
+              <div class="at-card-ic"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+              <span class="at-card-name">Persona &amp; Voice</span>
+            </div>
+            <span class="at-card-sub">Voice + Style</span>
+            <div class="at-tooltip" role="tooltip">
+              <div class="at-tt-head">
+                <span class="at-tt-letter"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+                <span class="at-tt-title">Persona &amp; Voice</span>
+              </div>
+              <p class="at-tt-body">Extracts behavioral patterns, tone, and writing style. Turns any writing sample into a reusable personality engine for your AI.</p>
+              <div class="at-tt-tag">Essays &middot; Emails &middot; Blog posts &middot; Research</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="at-arm at-claude" style="--delay:-57s; --reveal-d:0.68s">
+          <div class="at-arm-line"></div>
+          <div class="at-arm-dot" style="--dot-d:-0.9s"></div>
+          <div class="at-card" tabindex="0">
+            <div class="at-card-hd">
+              <div class="at-card-ic"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+              <span class="at-card-name">Codebase Intel</span>
+            </div>
+            <span class="at-card-sub">Architecture</span>
+            <div class="at-tooltip" role="tooltip">
+              <div class="at-tt-head">
+                <span class="at-tt-letter"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>
+                <span class="at-tt-title">Codebase Intelligence</span>
+              </div>
+              <p class="at-tt-body">Maps architectural patterns, naming conventions, and structural decisions so your AI codes exactly the way your codebase expects.</p>
+              <div class="at-tt-tag">Source code &middot; Tech specs &middot; READMEs</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="at-arm at-claude" style="--delay:-9s; --reveal-d:0.78s">
+          <div class="at-arm-line"></div>
+          <div class="at-arm-dot" style="--dot-d:-1.8s"></div>
+          <div class="at-card" tabindex="0">
+            <div class="at-card-hd">
+              <div class="at-card-ic"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg></div>
+              <span class="at-card-name">Process &amp; Workflow</span>
+            </div>
+            <span class="at-card-sub">Workflow Logic</span>
+            <div class="at-tooltip" role="tooltip">
+              <div class="at-tt-head">
+                <span class="at-tt-letter"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg></span>
+                <span class="at-tt-title">Process &amp; Workflow</span>
+              </div>
+              <p class="at-tt-body">Extracts decision trees, step-by-step flows, and operational rules. Your AI follows your exact process logic, not a generic approximation.</p>
+              <div class="at-tt-tag">SOPs &middot; Playbooks &middot; Procedure docs</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="at-arm at-claude" style="--delay:-21s; --reveal-d:0.88s">
+          <div class="at-arm-line"></div>
+          <div class="at-arm-dot" style="--dot-d:-2.4s"></div>
+          <div class="at-card" tabindex="0">
+            <div class="at-card-hd">
+              <div class="at-card-ic"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+              <span class="at-card-name">Prof. Domain</span>
+            </div>
+            <span class="at-card-sub" style="padding-left: 39px;">Domain Expertise</span>
+            <div class="at-tooltip" role="tooltip">
+              <div class="at-tt-head">
+                <span class="at-tt-letter"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
+                <span class="at-tt-title">Professional Domain</span>
+              </div>
+              <p class="at-tt-body">Captures domain expertise, decision frameworks, and professional standards. The AI learns the mental models of your field, not just surface content.</p>
+              <div class="at-tt-tag">Domain reports &middot; Legal &middot; Medical docs</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="at-arm at-claude" style="--delay:-33s; --reveal-d:0.98s">
+          <div class="at-arm-line"></div>
+          <div class="at-arm-dot" style="--dot-d:-1.4s"></div>
+          <div class="at-card" tabindex="0">
+            <div class="at-card-hd">
+              <div class="at-card-ic"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+              <span class="at-card-name">Financial Data</span>
+            </div>
+            <span class="at-card-sub">Data + Schema</span>
+            <div class="at-tooltip" role="tooltip">
+              <div class="at-tt-head">
+                <span class="at-tt-letter"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>
+                <span class="at-tt-title">Financial Data</span>
+              </div>
+              <p class="at-tt-body">Built for CSVs and spreadsheets. Extracts schema, metrics, and analytical logic into structured, queryable output for your AI.</p>
+              <div class="at-tt-tag">Financial reports &middot; Spreadsheet exports</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="at-arm at-codex at-hidden" style="--delay:-45s; --reveal-d:0.58s">
+          <div class="at-arm-line at-line-codex"></div>
+          <div class="at-arm-dot at-dot-codex-clr" style="--dot-d:0s"></div>
+          <div class="at-card at-card-codex" tabindex="0">
+            <div class="at-card-hd">
+              <div class="at-card-ic at-card-ic-cx"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+              <span class="at-card-name">Execute</span>
+            </div>
+            <span class="at-card-sub">Direct Action</span>
+            <div class="at-tooltip" role="tooltip">
+              <div class="at-tt-head">
+                <span class="at-tt-letter at-tt-cx-ic"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+                <span class="at-tt-title">Execute</span>
+              </div>
+              <p class="at-tt-body">Converts your source into a direct action playbook. Codex reads and starts working immediately with concrete files, commands, and checks.</p>
+              <div class="at-tt-tag">Task automation &middot; Codebase setup &middot; Structured workflows</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="at-arm at-codex at-hidden" style="--delay:-5s; --reveal-d:0.68s">
+          <div class="at-arm-line at-line-codex"></div>
+          <div class="at-arm-dot at-dot-codex-clr" style="--dot-d:-1.2s"></div>
+          <div class="at-card at-card-codex" tabindex="0">
+            <div class="at-card-hd">
+              <div class="at-card-ic at-card-ic-cx"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+              <span class="at-card-name">Expertise</span>
+            </div>
+            <span class="at-card-sub">Human-in-Loop</span>
+            <div class="at-tooltip" role="tooltip">
+              <div class="at-tt-head">
+                <span class="at-tt-letter at-tt-cx-ic"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
+                <span class="at-tt-title">Expertise</span>
+              </div>
+              <p class="at-tt-body">Human-in-loop creative judgment. Codex performs review or editing work and pauses at key decision points for your approval before continuing.</p>
+              <div class="at-tt-tag">Code review &middot; Editing &middot; Quality-sensitive work</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="at-arm at-codex at-hidden" style="--delay:-25s; --reveal-d:0.78s">
+          <div class="at-arm-line at-line-codex"></div>
+          <div class="at-arm-dot at-dot-codex-clr" style="--dot-d:-2.5s"></div>
+          <div class="at-card at-card-codex" tabindex="0">
+            <div class="at-card-hd">
+              <div class="at-card-ic at-card-ic-cx"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+              <span class="at-card-name">Specialist</span>
+            </div>
+            <span class="at-card-sub">Scoped Role</span>
+            <div class="at-tooltip" role="tooltip">
+              <div class="at-tt-head">
+                <span class="at-tt-letter at-tt-cx-ic"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+                <span class="at-tt-title">Specialist</span>
+              </div>
+              <p class="at-tt-body">Constrained domain role. Codex operates within a defined scope and automatically refuses out-of-scope requests for focused, reliable automation.</p>
+              <div class="at-tt-tag">Domain-locked agents &middot; Scoped automation</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="output-showcase" class="output-section" hidden style="display: none !important;">
   <div class="section-inner">
     <span class="section-label fiv">What Relatch Builds</span>
@@ -2252,56 +2865,57 @@
 ══════════════════════════════════════════════ -->
 <section id="features" class="features-section">
   <div class="section-inner">
-    <span class="section-label fiv">What Relatch Does</span>
-    <h2 class="section-title fiv fiv-d1">Built for how knowledge <em class="accent-italic">actually works</em></h2>
-    <div class="features-grid">
+    <span class="section-label fiv">Under the Hood</span>
+    <h2 class="section-title fiv fiv-d1">Engineered for how AI <em class="accent-italic">actually reasons</em></h2>
 
-      <div class="feature-card fiv fiv-d1">
-        <div class="feature-icon-wrap">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+    <div class="features-bento">
+
+      <div class="feat-card fiv">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
         </div>
-        <div class="feature-title">Instant Skill Generation</div>
-        <div class="feature-desc">Drop in any document and Relatch auto-generates structured skill files — ready for Claude, Codex, or any AI agent.</div>
+        <div class="feat-title">Smart OCR routing for scanned docs</div>
+        <div class="feat-desc">pdfjs extracts first. If the PDF is scan-based or diagram-heavy, Relatch auto-escalates to Mistral OCR with OCR.space as fallback. Scanned documents just work.</div>
       </div>
 
-      <div class="feature-card fiv fiv-d2">
-        <div class="feature-icon-wrap">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>
+      <div class="feat-card fiv fiv-d1">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
         </div>
-        <div class="feature-title">Context-Aware Parsing</div>
-        <div class="feature-desc">Not just extraction — Relatch understands the semantic structure of your data and surfaces what actually matters.</div>
+        <div class="feat-title">Adaptive templates + domain knowledge</div>
+        <div class="feat-desc">Relatch detects document type and applies the matching enrichment template. Output structure reflects what the document actually is, not just what it says.</div>
       </div>
 
-      <div class="feature-card fiv fiv-d3">
-        <div class="feature-icon-wrap">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      <div class="feat-card fiv fiv-d2">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
         </div>
-        <div class="feature-title">Multi-Format Support</div>
-        <div class="feature-desc">PDFs, CSVs, XMLs, DOCX, Markdown, TXT — Relatch handles your entire knowledge stack without friction.</div>
+        <div class="feat-title">Auto-categorization with relevancy levels</div>
+        <div class="feat-desc">Label uploads as personality, knowledge, instructions, examples, context, or preferences. Each category sends a different focus directive to Gemini.</div>
       </div>
 
-      <div class="feature-card fiv fiv-d1">
-        <div class="feature-icon-wrap">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9"/></svg>
+      <div class="feat-card fiv">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9"/></svg>
         </div>
-        <div class="feature-title">AI-Native Architecture</div>
-        <div class="feature-desc">Built from the ground up to integrate with Claude and OpenAI Codex — not bolted on as an afterthought.</div>
+        <div class="feat-title">Easily injectable in Claude and Codex</div>
+        <div class="feat-desc">Export a <code>.md</code> for Claude or a <code>.zip</code> for Codex CLI. One-click install. Your AI has persistent access to your entire knowledge base from that session forward.</div>
       </div>
 
-      <div class="feature-card fiv fiv-d2">
-        <div class="feature-icon-wrap">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <div class="feat-card fiv fiv-d1">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>
         </div>
-        <div class="feature-title">Private by Design</div>
-        <div class="feature-desc">Your documents never leave your control. Relatch processes locally and never trains on your data.</div>
+        <div class="feat-title">100% quality-gated skill files</div>
+        <div class="feat-desc">Output is scored before delivery. Gemini Flash Lite generates first — if it doesn't meet quality threshold, Relatch escalates to Gemini 2.5 Flash. You get the best result, not the fastest.</div>
       </div>
 
-      <div class="feature-card fiv fiv-d3">
-        <div class="feature-icon-wrap">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+      <div class="feat-card fiv fiv-d2">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
-        <div class="feature-title">Precision Outputs</div>
-        <div class="feature-desc">AISSCII flow diagrams, code blocks, CSV tables, comparison matrices — Relatch generates what your workflow demands.</div>
+        <div class="feat-title">Private by design</div>
+        <div class="feat-desc">Documents are processed through Relatch's own proxy and immediately discarded. Nothing stored. Nothing used for training. Clerk auth is enforced on every API call — your IP stays yours.</div>
       </div>
 
     </div>
@@ -2311,40 +2925,168 @@
 <!-- ══════════════════════════════════════════════
      WORD-BY-WORD TEXT REVEAL
 ══════════════════════════════════════════════ -->
-<div class="text-reveal-section" id="textRevealSection">
-  <div class="text-reveal-sticky">
-    <p class="text-reveal-words" id="revealWords"></p>
-    <div class="adapt-tags" id="adaptTags">
-      <span class="adapt-tag">Search-ready context</span>
-      <span class="adapt-tag">Decision logic</span>
-      <span class="adapt-tag">Structured references</span>
-      <span class="adapt-tag">Reusable examples</span>
-      <span class="adapt-tag">Clean data blocks</span>
-      <span class="adapt-tag">Workflow-ready outputs</span>
+<section class="built-for-section" id="built-for">
+  <div class="section-inner">
+    <span class="section-label fiv">Platform Support</span>
+    <h2 class="section-title fiv fiv-d1">Built for <em class="accent-italic">Claude.</em><br>Built for <em class="accent-italic">Codex.</em></h2>
+    <p class="section-sub fiv fiv-d2">Two different AI systems, two different skill file formats. Relatch handles both — natively.</p>
+
+    <div class="built-for-grid">
+
+      <div class="bf-card claude-card fiv fiv-d1">
+        <div class="bf-card-glow"></div>
+        <img class="bf-logo-watermark" src="assets/Claude%20white.svg" alt="" aria-hidden="true" onerror="this.style.display='none'">
+        <div class="bf-title">Claude by Anthropic</div>
+        <div class="bf-desc">Relatch exports a single structured <code style="color:#60A5FA;font-size:0.85em">.md</code> file that installs directly into Claude Projects as a skill. Your AI now has persistent, domain-specific context on every conversation.</div>
+        <div class="bf-features">
+          <div class="bf-feat"><div class="bf-feat-dot"></div>Exports as SKILL.md — drop into Claude Projects</div>
+          <div class="bf-feat"><div class="bf-feat-dot"></div>5 adaptive templates auto-selected per document type</div>
+          <div class="bf-feat"><div class="bf-feat-dot"></div>YAML frontmatter + decision logic + guardrail rules</div>
+          <div class="bf-feat"><div class="bf-feat-dot"></div>Quality-scored before delivery via Gemini cascade</div>
+        </div>
+        <a href="https://app.relatch.online/goal" target="_blank" rel="noopener" class="bf-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          Try with Claude
+        </a>
+      </div>
+
+      <div class="bf-card codex-card fiv fiv-d2">
+        <div class="bf-card-glow"></div>
+        <img class="bf-logo-watermark" src="assets/Codex%20white.svg" alt="" aria-hidden="true" onerror="this.style.display='none'">
+        <div class="bf-title">OpenAI Codex CLI</div>
+        <div class="bf-desc">Relatch exports a <code style="color:#60A5FA;font-size:0.85em">.zip</code> containing <code style="color:#60A5FA;font-size:0.85em">SKILL.md</code> + <code style="color:#60A5FA;font-size:0.85em">agents/openai.yaml</code> — the exact format Codex CLI expects. Install once, reason forever.</div>
+        <div class="bf-features">
+          <div class="bf-feat"><div class="bf-feat-dot"></div>Exports as .zip with SKILL.md + agents/openai.yaml</div>
+          <div class="bf-feat"><div class="bf-feat-dot"></div>3 Codex shapes: EXECUTE, EXPLORE, DEBUG</div>
+          <div class="bf-feat"><div class="bf-feat-dot"></div>Structured for Codex CLI's skill-loading protocol</div>
+          <div class="bf-feat"><div class="bf-feat-dot"></div>Code-specific extraction preserving function signatures</div>
+        </div>
+        <a href="https://app.relatch.online/goal" target="_blank" rel="noopener" class="bf-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          Try with Codex
+        </a>
+      </div>
+
     </div>
   </div>
-</div>
+</section>
 
 <!-- ══════════════════════════════════════════════
      GLOBAL TRUST
 ══════════════════════════════════════════════ -->
 <section id="global" class="global-section">
-  <div class="global-big fiv"><span id="globalUserCount">150+</span> users worldwide<br>trust Relatch</div>
-  <p class="global-sub fiv">Used across the United States, India, Vietnam, Morocco, Ireland, Romania, Australia, and France.</p>
+  <div class="global-big fiv"><span id="globalUserCount">150+</span> AI practitioners<br>building with Relatch</div>
+  <p class="global-sub fiv">Developers and knowledge workers turning their documents into AI-ready skills — across the United States, India, Vietnam, Morocco, Ireland, Romania, Australia, and France.</p>
 
   <div class="slider-mask fiv">
     <div class="slider-track" id="sliderTrack"></div>
   </div>
 
-  <div class="supports-row fiv">
-    <span class="supports-label">Currently supports</span>
-    <div class="supports-strip">
-      <span class="supports-brand">
-        <img class="supports-claude" src="assets/Claude.svg" alt="Claude">
-      </span>
-      <span class="supports-brand">
-        <img class="supports-codex" src="assets/Codex.svg" alt="OpenAI Codex">
-      </span>
+</section>
+
+<section class="faq-section" id="faq">
+  <div class="section-inner">
+    <span class="section-label fiv">Common Questions</span>
+    <h2 class="section-title fiv fiv-d1">You Ask? We <em class="accent-italic">answer.</em></h2>
+
+    <div class="faq-grid">
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-q-text">What is Relatch?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">
+            <p>Relatch is a smart adaptive engine that reads your document, understands what kind of knowledge it contains, and turns it into a structured skill file. It removes the friction of figuring out format, structure, and export logic from scratch.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-q-text">Why do I need Relatch if Claude and Codex can already build skill files?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">
+            <p>Because the hard part is not writing the file. The hard part is shaping messy real world information into the right structure in the first place. Relatch does that thinking for you, so you start with a clean, agent ready output instead of a blank page.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-q-text">What kinds of documents does Relatch support and can it choose the right output automatically?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">
+            <p>Relatch works with PDFs, docs, notes, markdown, code files, spreadsheets, and mixed knowledge files. It analyzes the content, identifies the type of knowledge it contains, and automatically selects the right template, structure, and export format for the output.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-q-text">Do I need any coding experience to use Relatch?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">
+            <p>Not at all. Relatch is designed for non technical users, researchers, writers, analysts, and developers alike. Upload your files, choose your goal, and Relatch handles the heavy lifting. The generated outputs are ready to use with minimal setup.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-q-text">What happens to my files after upload?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">
+            <p>Your file is used to generate the structured output you need. The experience is designed to feel simple. Upload the source, Relatch extracts the useful structure, and you receive a skill ready result without manually rebuilding everything yourself.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-q-text">Do I need Claude &amp; Codex Pro or a special setup to use Relatch?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">
+            <p>No. Relatch is designed to remove setup friction, not add it. You do not need Claude and Codex Pro or any complicated configuration to use the product and generate a structured result.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-q-text">Is my data safe when I upload a file to Relatch?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">
+            <p>Yes. Relatch is designed with file safety as a core principle. It does not store your uploaded files in a backend database, and your session is protected through Clerk so your IP and session access remain protected throughout the process.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-q-text">Is Relatch free to use?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">
+            <p>Yes. Relatch is currently free during the product validation phase. To keep the service sustainable, each user has daily and weekly usage limits that automatically refresh over time.</p>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -2392,7 +3134,7 @@
 
     <!-- Center content -->
     <div class="footer-center">
-      <h2 class="footer-headline footer-reveal footer-reveal-d1">Your knowledge,<br>finally <em class="footer-headline-em">organized.</em></h2>
+      <h2 class="footer-headline footer-reveal footer-reveal-d1">Your knowledge,<br>ready for <em class="footer-headline-em">your AI.</em></h2>
 
       <a href="https://app.relatch.online/" target="_blank" rel="noopener" class="footer-cta-primary footer-magnetic footer-reveal footer-reveal-d2">
         Try Relatch Free
@@ -2440,7 +3182,7 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
   const els = document.querySelectorAll('.fiv');
   const obs = new IntersectionObserver(
     (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-    { threshold: 0.14 }
+    { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
   );
   els.forEach(el => obs.observe(el));
 })();
@@ -2482,8 +3224,8 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
   ];
   const track = document.getElementById('sliderTrack');
   if (!track) return;
-  // duplicate for seamless loop
-  [...countries, ...countries].forEach(c => {
+  // quadruple for seamless infinite loop — -50% lands on identical content
+  [...countries, ...countries, ...countries, ...countries].forEach(c => {
     const chip = document.createElement('div');
     chip.className = 'country-chip';
     chip.innerHTML = `<span class="country-flag">${flagSvg(c.name)}</span><span class="country-name">${c.name}</span>`;
@@ -2534,7 +3276,7 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
       scrambleCount();
       obs.disconnect();
     });
-  }, { threshold: 0.45 });
+  }, { threshold: 0.05, rootMargin: '0px 0px -60px 0px' });
 
   obs.observe(section);
 })();
@@ -2551,8 +3293,8 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
 
   /* Phase anchors: diagonal path + subtle direction tilt */
   const PHASES = [
-    { side:  1, cardY: -6, textY: -6, tiltY: -8, restTiltY: -4.4, restTiltX: 1.9, n: 1 },
-    { side: -1, cardY:  2, textY:  2, tiltY:  8, restTiltY:  4.4, restTiltX: 1.8, n: 2 },
+    { side:  1, cardY: -6, textY: -6, tiltY: -8, restTiltY: -4.4, restTiltX: 1.9,  n: 1 },
+    { side: -1, cardY:  2, textY:  2, tiltY:  8, restTiltY:  4.4, restTiltX: 1.8,  n: 2 },
     { side:  1, cardY: -1, textY: -1, tiltY: -8, restTiltY: -4.2, restTiltX: 1.85, n: 3 },
     { side: -1, cardY:  1, textY:  1, tiltY:  8, restTiltY:  4.2, restTiltX: 1.75, n: 4 },
     { side:  1, cardY: -3, textY: -3, tiltY: -8, restTiltY: -4.3, restTiltX: 1.85, n: 5 },
@@ -2562,6 +3304,7 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
 
   const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
   const lerp = (a, b, t) => a + (b - a) * t;
+  const easeOut = (t) => 1 - Math.pow(1 - t, 3);
 
   let targetProgress = 0;
   let smoothProgress = 0;
@@ -2569,6 +3312,8 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
   let activeCardPhase = 1;
   let activeTextPhase = 1;
   let ticking = false;
+  let txRaw = 0;
+  let txSmooth = 0;
 
   function setCardPhase(n) {
     if (n === activeCardPhase) return;
@@ -2587,9 +3332,7 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
   }
 
   function renderFromProgress(progress) {
-    const easedProgress = progress * progress * (3 - 2 * progress);
-
-    const raw = easedProgress * (PHASES.length - 1);
+    const raw = progress * (PHASES.length - 1);
     const fromIdx = Math.min(PHASES.length - 2, Math.floor(raw));
     const seg = clamp(raw - fromIdx, 0, 1);
     const toIdx = fromIdx + 1;
@@ -2597,114 +3340,163 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
     const to = PHASES[toIdx];
 
     const direction = progress >= prevProgress ? 1 : -1;
-    const side = lerp(from.side, to.side, seg);
-    const cardY = lerp(from.cardY, to.cardY, seg);
-    const textY = lerp(from.textY, to.textY, seg);
-    const baseTilt = lerp(from.tiltY, to.tiltY, seg);
-    const restTiltY = lerp(from.restTiltY, to.restTiltY, seg);
-    const restTiltX = lerp(from.restTiltX, to.restTiltX, seg);
-    const flipCurve = Math.sin(seg * Math.PI);
-    const flipY = flipCurve * 92 * direction;
-    const travelTiltX = 2 - (flipCurve * 1.4);
-    const settledMix = 1 - flipCurve;
-    const finalTiltY = baseTilt + (restTiltY * settledMix) + flipY;
-    const finalTiltX = travelTiltX + (restTiltX * settledMix);
-    const scale = 1 - (flipCurve * 0.035);
-    const zBump = (flipCurve * 22) + (settledMix * 6);
+
+    // Segment budget: dwell (0–18%) → lift+travel (18–76%) → late flip (76–100%)
+    const DWELL_END  = 0.18;
+    const FLIP_START = 0.68;
+
+    // Position: eases 0→1 during travel, then hard-locked at destination before flip starts
+    const posSeg    = clamp((seg - DWELL_END) / (1 - DWELL_END), 0, 1);
+    const posAtFlip = (FLIP_START - DWELL_END) / (1 - DWELL_END);
+    const posEase   = easeOut(Math.min(posSeg, posAtFlip) / posAtFlip);
+
+    // Lift: rises and settles strictly inside the travel window (DWELL_END → FLIP_START)
+    const travelSpan = FLIP_START - DWELL_END;
+    const travelSeg  = clamp((seg - DWELL_END) / travelSpan, 0, 1);
+    const liftCurve  = Math.sin(travelSeg * Math.PI);
+    const liftScale  = 1 + (liftCurve * 0.04);
+    const liftZ      = liftCurve * 50;
+
+    // Barely-perceptible arc weight during transit
+    const sagY = liftCurve * 1;
+
+    // Late flip: last 24%; second half eased-out so the card decelerates cleanly into landing
+    const flipMix    = clamp((seg - FLIP_START) / (1 - FLIP_START), 0, 1);
+    const easeIn = (t) => t * t * t;
+    const flipEased  = flipMix < 0.5
+      ? easeIn(flipMix * 2) * 0.5
+      : 0.5 + easeOut((flipMix - 0.5) / 0.5) * 0.5;
+    const flipRot  = Math.sin(flipEased * Math.PI) * 90 * direction;
+    const restMix  = 1 - Math.sin(flipEased * Math.PI);
+
+    const baseTilt  = lerp(from.tiltY, to.tiltY, seg) * restMix;
+    const restTiltY = lerp(from.restTiltY, to.restTiltY, seg) * restMix;
+    const restTiltX = lerp(from.restTiltX, to.restTiltX, seg) * restMix;
+
+    const finalTiltY = baseTilt + restTiltY + flipRot;
+    const finalTiltX = 2 + restTiltX;
+    const scale      = liftScale;
+    const settledMix = restMix;
+
+    const cardY = lerp(from.cardY, to.cardY, posEase) + sagY;
+    const textY = lerp(from.textY, to.textY, posEase);
+
+    // Scroll-driven dark→light: driven by viewport approach (txSmooth), not section-internal progress
+    const txE = txSmooth * txSmooth * (3 - 2 * txSmooth);
 
     const isMobile = window.innerWidth <= 768;
-    const frameWidth = Math.min(window.innerWidth * 0.92, 1240);
-    const frameLeft = (window.innerWidth - frameWidth) * 0.5;
-    const frameRight = frameLeft + frameWidth;
-    const outerMargin = Math.max(42, frameWidth * 0.045);
-    let columnGap = Math.max(170, frameWidth * 0.17);
-    const cardHalf = cardWrap.offsetWidth * 0.5;
+
+    /* ── Unified pair layout: card + text share one centered stage ── */
+    const cardHalf  = cardWrap.offsetWidth * 0.5;
     const cardWidth = cardWrap.offsetWidth;
-    const maxTextWidth = 500;
-    const availableWidth = frameWidth - (outerMargin * 2);
-    let textWidth = Math.min(maxTextWidth, Math.max(360, (availableWidth - columnGap - cardWidth) * 0.5));
-    const usedWidth = textWidth + cardWidth + columnGap;
-    if (usedWidth > availableWidth) {
-      columnGap = Math.max(140, availableWidth - textWidth - cardWidth);
-      textWidth = Math.min(textWidth, availableWidth - columnGap - cardWidth);
-    }
-    const leftTextLeft = frameLeft + outerMargin;
-    const rightTextLeft = frameRight - outerMargin - textWidth;
-    const rightCardCenter = frameRight - outerMargin - cardHalf;
-    const leftCardCenter = frameLeft + outerMargin + cardHalf;
-    const cardCenterX = lerp(leftCardCenter, rightCardCenter, (side + 1) * 0.5);
-    const cardOffsetPx = cardCenterX - (window.innerWidth * 0.5);
+    const PAIR_GAP  = 64;   // fixed gap (px) between card edge and text edge
+    const textWidth = Math.min(520, Math.max(280, window.innerWidth * 0.34));
+    const pairW     = cardWidth + PAIR_GAP + textWidth;
+    const vpCenter  = window.innerWidth * 0.5;
+
+    // Nudge the pair toward the card's side — heavier visual element gets runway
+    const nudge    = lerp(from.side, to.side, posEase) * 14;
+    const pairLeft = vpCenter - pairW * 0.5 + nudge;
+
+    // Card center: side=1 → card on right of pair; side=-1 → card on left
+    const fromCx   = from.side === 1
+      ? pairLeft + textWidth + PAIR_GAP + cardHalf
+      : pairLeft + cardHalf;
+    const toCx     = to.side === 1
+      ? pairLeft + textWidth + PAIR_GAP + cardHalf
+      : pairLeft + cardHalf;
+    const cardCenterX  = lerp(fromCx, toCx, posEase);
+    const cardOffsetPx = cardCenterX - vpCenter;
 
     cardWrap.style.transform = isMobile
-      ? `translate3d(-50%, calc(-50% + 15vh), ${zBump * 0.35}px) rotateY(${finalTiltY * 0.38}deg) rotateX(${finalTiltX * 0.42}deg) scale(${scale})`
-      : `translate3d(calc(-50% + ${cardOffsetPx}px), calc(-50% + ${cardY}vh), ${zBump}px) rotateY(${finalTiltY}deg) rotateX(${finalTiltX}deg) scale(${scale})`;
+      ? `translate3d(-50%, calc(-50% + 20vh), ${liftZ * 0.5}px) rotateY(${finalTiltY * 0.55}deg) rotateX(${finalTiltX * 0.42}deg) scale(${scale})`
+      : `translate3d(calc(-50% + ${cardOffsetPx}px), calc(-50% + ${cardY}vh), ${liftZ}px) rotateY(${finalTiltY}deg) rotateX(${finalTiltX}deg) scale(${scale})`;
 
-    const swapPhase = seg >= 0.5 ? to.n : from.n;
+    const swapPhase = flipMix >= 0.5 ? to.n : from.n;
     setCardPhase(swapPhase);
 
-    const landThreshold = 0.78;
-    const textPhase = seg >= landThreshold ? to.n : from.n;
-    const phaseSide = seg >= landThreshold ? to.side : from.side;
-    const landedTextY = seg >= landThreshold ? to.textY : from.textY;
-    const landed = seg >= landThreshold || seg <= (1 - landThreshold);
+    // Text visible during dwell (card at rest) and briefly at near-landing; primary dwell is seg ≤ DWELL_END
+    const LAND_START  = 0.95;
+    const textPhase   = seg >= LAND_START ? to.n    : from.n;
+    const phaseSide   = seg >= LAND_START ? to.side : from.side;
+    const landedTextY = seg >= LAND_START ? to.textY : from.textY;
+    const landed      = seg <= DWELL_END || seg >= LAND_START;
+
+    // Text left derived from same pair anchor — card and text move as one unit
+    const textLeft = phaseSide === 1
+      ? pairLeft                          // card on right → text on left
+      : pairLeft + cardWidth + PAIR_GAP;  // card on left  → text on right
+
     if (isMobile) {
-      textEl.style.width = '88%';
-      textEl.style.left = '6%';
-      textEl.style.top = '12%';
+      textEl.style.width     = '90%';
+      textEl.style.left      = '5%';
+      textEl.style.top       = '13%';
       textEl.style.transform = 'none';
     } else {
-      textEl.style.width = `${textWidth}px`;
-      textEl.style.left = phaseSide === 1
-        ? `${leftTextLeft}px`
-        : `${rightTextLeft}px`;
-      textEl.style.top = `calc(50% + ${landedTextY}vh)`;
+      textEl.style.width     = `${textWidth}px`;
+      textEl.style.left      = `${textLeft}px`;
+      textEl.style.top       = `calc(50% + ${landedTextY}vh)`;
       textEl.style.transform = 'translateY(-50%)';
     }
-    textEl.style.opacity = landed ? '1' : '0.12';
+    textEl.style.opacity = landed ? '1' : '0';
     setTextPhase(textPhase);
 
-    const cardRect = cardWrap.getBoundingClientRect();
-    const textRect = textEl.getBoundingClientRect();
-    const cardCx = cardRect.left + (cardRect.width * 0.5);
-    const cardCy = cardRect.top + (cardRect.height * 0.5);
-    const textCx = textRect.left + (textRect.width * 0.5);
-    const textCy = textRect.top + (textRect.height * 0.5);
-    const bridgeCx = ((cardCx + textCx) * 0.5) - (window.innerWidth * 0.5);
-    const bridgeCy = ((cardCy + textCy) * 0.5) - (window.innerHeight * 0.5);
+    // Compute glow centres from already-known positions — avoids forced reflow
+    const cardCxPx  = vpCenter + cardOffsetPx;
+    const cardCyPx  = window.innerHeight * 0.5 + (cardY / 100) * window.innerHeight;
+    const textCxPx  = textLeft + textWidth * 0.5;
+    const textCyPx  = window.innerHeight * 0.5 + (landedTextY / 100) * window.innerHeight;
+    const bridgeDX  = ((cardCxPx + textCxPx) * 0.5) - vpCenter;
+    const bridgeDY  = ((cardCyPx + textCyPx) * 0.5) - (window.innerHeight * 0.5);
 
-    atmoCard.style.left = `${cardCx}px`;
-    atmoCard.style.top = `${cardCy}px`;
+    atmoCard.style.left = `${cardCxPx}px`;
+    atmoCard.style.top = `${cardCyPx}px`;
     atmoCard.style.transform = `translate(-50%, -50%) scale(${1 + (settledMix * 0.045)})`;
-    atmoCard.style.opacity = `${0.68 + (settledMix * 0.12)}`;
+    atmoCard.style.opacity = `${(0.68 + (settledMix * 0.12)) * (1 - txE * 0.7)}`;
 
-    atmoText.style.left = `${textCx}px`;
-    atmoText.style.top = `${textCy}px`;
+    atmoText.style.left = `${textCxPx}px`;
+    atmoText.style.top = `${textCyPx}px`;
     atmoText.style.transform = `translate(-50%, -50%) scale(${1 + (settledMix * 0.03)})`;
-    atmoText.style.opacity = `${0.54 + (settledMix * 0.09)}`;
+    atmoText.style.opacity = `${(0.54 + (settledMix * 0.09)) * (1 - txE * 0.95)}`;
 
     atmoBridge.style.left = '50%';
     atmoBridge.style.top = '50%';
-    atmoBridge.style.transform = `translate(calc(-50% + ${bridgeCx * 0.28}px), calc(-50% + ${bridgeCy * 0.26}px)) scale(${1 + (settledMix * 0.02)})`;
-    atmoBridge.style.opacity = `${0.42 + (settledMix * 0.06)}`;
+    atmoBridge.style.transform = `translate(calc(-50% + ${bridgeDX * 0.28}px), calc(-50% + ${bridgeDY * 0.26}px)) scale(${1 + (settledMix * 0.02)})`;
+    atmoBridge.style.opacity = `${(0.42 + (settledMix * 0.06)) * (1 - txE * 0.5)}`;
 
-    prevProgress = easedProgress;
+    // Background: #0B1120 → #F8FAFC
+    section.style.setProperty('--tx-bg',
+      `rgb(${Math.round(lerp(11,248,txE))},${Math.round(lerp(17,250,txE))},${Math.round(lerp(32,252,txE))})`);
+    // Heading: #F8FAFC → #0B1120
+    section.style.setProperty('--tx-heading',
+      `rgb(${Math.round(lerp(248,11,txE))},${Math.round(lerp(250,17,txE))},${Math.round(lerp(252,32,txE))})`);
+    // Desc: #94A3B8 → #475569
+    section.style.setProperty('--tx-desc',
+      `rgb(${Math.round(lerp(148,71,txE))},${Math.round(lerp(163,85,txE))},${Math.round(lerp(184,105,txE))})`);
+    section.style.setProperty('--tx-dots', (txE * txE * 0.9).toFixed(3));
+    section.style.setProperty('--tx-dot-offset', `${(progress * 32).toFixed(1)}px ${(progress * 72).toFixed(1)}px`);
+
+    prevProgress = progress;
   }
 
   function updateTargetProgress() {
     const rect = section.getBoundingClientRect();
     const total = Math.max(1, section.offsetHeight - window.innerHeight);
     targetProgress = clamp(-rect.top / total, 0, 1);
+    const vp = window.innerHeight;
+    txRaw = clamp((vp * 0.4 - rect.top) / (vp * 0.4), 0, 1);
   }
 
   let lastTs = 0;
   function animate(ts) {
     const dt = lastTs ? Math.min(32, ts - lastTs) : 16;
     lastTs = ts;
-    const blend = 1 - Math.pow(0.88, dt / 16);
+    const blend = 1 - Math.pow(0.75, dt / 16);
     smoothProgress += (targetProgress - smoothProgress) * blend;
-    if (Math.abs(targetProgress - smoothProgress) < 0.0006) {
+    if (Math.abs(targetProgress - smoothProgress) < 0.003) {
       smoothProgress = targetProgress;
     }
+    txSmooth += (txRaw - txSmooth) * blend;
     renderFromProgress(smoothProgress);
     requestAnimationFrame(animate);
   }
@@ -2718,7 +3510,7 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
     });
   }
 
-  textEl.style.transition = 'left 0.55s cubic-bezier(0.22, 1, 0.36, 1), top 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease';
+  textEl.style.transition = 'opacity 0.28s ease';
   setCardPhase(1);
   setTextPhase(1);
   updateTargetProgress();
@@ -2730,56 +3522,6 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
   });
 })();
 
-/* ─── WORD-BY-WORD REVEAL ─── */
-(function() {
-  const REVEAL_TEXT = "Relatch turns messy source files into operational skill files your AI can search, follow, and reason from.";
-  const ACCENT_WORDS = new Set(['operational']);
-  const section   = document.getElementById('textRevealSection');
-  const container = document.getElementById('revealWords');
-  const adaptTags = document.getElementById('adaptTags');
-
-  const words = REVEAL_TEXT.split(' ');
-  words.forEach(w => {
-    const wrap = document.createElement('span');
-    wrap.className = 'word-wrap';
-    const normalized = w.replace(/[^a-z0-9-]/gi, '').toLowerCase();
-    if (ACCENT_WORDS.has(normalized)) wrap.classList.add('word-accent');
-    const dim = document.createElement('span');
-    dim.className = 'word-dim';
-    dim.textContent = w;
-    const lit = document.createElement('span');
-    lit.className = 'word-lit';
-    lit.textContent = w;
-    wrap.appendChild(dim);
-    wrap.appendChild(lit);
-    container.appendChild(wrap);
-  });
-
-  const litEls = container.querySelectorAll('.word-lit');
-
-  window.addEventListener('scroll', () => {
-    const rect  = section.getBoundingClientRect();
-    const total = section.offsetHeight - window.innerHeight;
-    const p     = clamp(-rect.top / total, 0, 1);
-    const intro = clamp(p / 0.16, 0, 1);
-
-    container.classList.toggle('intro-visible', intro > 0.08);
-    container.style.opacity = intro;
-    container.style.transform = `translateY(${(1 - intro) * 24}px)`;
-
-    litEls.forEach((el, i) => {
-      const start = i / words.length;
-      const end   = start + 1.5 / words.length;
-      const t     = clamp((p - start) / (end - start), 0, 1);
-      el.style.opacity = t;
-    });
-
-    // show adapt tags after 60%
-    const tagOp = p > 0.6 ? clamp((p - 0.6) / 0.3, 0, 1) : 0;
-    adaptTags.style.opacity = tagOp;
-    adaptTags.style.transform = `translateY(${(1 - tagOp) * 16}px)`;
-  }, { passive: true });
-})();
 
 /* ─── NAVBAR (21st.dev inspired) ─── */
 (function() {
@@ -2814,6 +3556,52 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && menuOpen) closeMobileMenu();
   });
+})();
+
+/* ── TYPEWRITER ── */
+(function() {
+  const el = document.getElementById('typeTarget');
+  if (!el) return;
+  const words = ['PDFs', 'DOCX files', 'Notion pages', 'CSV exports', 'code repos', 'Markdown docs'];
+  let wordIdx = 0, charIdx = words[0].length, deleting = false, pauseTicks = 0;
+  const PAUSE_AFTER_TYPE = 22, PAUSE_AFTER_DEL = 6;
+  const TYPE_SPEED = 14, DEL_SPEED = 35;
+
+  function tick() {
+    const word = words[wordIdx];
+    if (deleting) {
+      pauseTicks--;
+      if (pauseTicks <= 0) {
+        charIdx--;
+        el.textContent = word.substring(0, charIdx);
+        if (charIdx === 0) {
+          deleting = false;
+          wordIdx = (wordIdx + 1) % words.length;
+          pauseTicks = 0;
+        }
+      }
+    } else {
+      pauseTicks++;
+      if (pauseTicks > PAUSE_AFTER_TYPE) {
+        if (charIdx < word.length) {
+          charIdx++;
+          el.textContent = word.substring(0, charIdx);
+          pauseTicks = 0;
+        } else {
+          deleting = true;
+          pauseTicks = PAUSE_AFTER_DEL;
+        }
+      }
+    }
+    const speed = deleting ? DEL_SPEED : TYPE_SPEED;
+    setTimeout(tick, speed);
+  }
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    el.textContent = words[0];
+    return;
+  }
+  setTimeout(tick, 1800);
 })();
 
 /* ─── FOOTER SCROLL REVEAL ─── */
@@ -2880,6 +3668,92 @@ document.addEventListener('keydown', function(e) {
     document.body.style.overflow = '';
   }
 });
+
+// ── Adaptive Templates reveal + parallax ────────
+(function() {
+  var container    = document.getElementById('atOrbitContainer');
+  var section      = document.getElementById('adaptive-templates');
+  if (!container || !section) return;
+  var diagramWrap  = section.querySelector('.at-diagram-wrap');
+
+  // Reveal: add .at-revealed when diagram enters viewport
+  var revealObs = new IntersectionObserver(function(entries) {
+    if (entries[0].isIntersecting) {
+      container.classList.add('at-revealed');
+      revealObs.disconnect();
+    }
+  }, { threshold: 0.18 });
+  revealObs.observe(container);
+
+  // Parallax: subtle translateY on diagram-wrap as section scrolls
+  var ticking = false;
+  function updateParallax() {
+    var rect = section.getBoundingClientRect();
+    var viewH = window.innerHeight;
+    var progress = -rect.top / viewH; // 0 = section top at viewport top
+    // only when section is within view range
+    if (progress > -0.3 && progress < 1.6) {
+      var y = (progress - 0.3) * 28; // max ~36px total movement
+      diagramWrap.style.transform = 'translateY(' + y.toFixed(2) + 'px)';
+    }
+    ticking = false;
+  }
+  window.addEventListener('scroll', function() {
+    if (!ticking) { requestAnimationFrame(updateParallax); ticking = true; }
+  }, { passive: true });
+})();
+
+// ── Adaptive Templates ──────────────────────────
+(function() {
+  var container = document.getElementById('atOrbitContainer');
+  if (!container) return;
+  var btns = document.querySelectorAll('.at-mode-btn');
+  var claudeArms = container.querySelectorAll('.at-claude');
+  var codexArms  = container.querySelectorAll('.at-codex');
+
+  // Pause orbit while any card is hovered/focused
+  container.querySelectorAll('.at-card').forEach(function(card) {
+    card.addEventListener('mouseenter', function() { container.classList.add('at-orbit-paused'); });
+    card.addEventListener('mouseleave', function() { container.classList.remove('at-orbit-paused'); });
+    card.addEventListener('focus',      function() { container.classList.add('at-orbit-paused'); });
+    card.addEventListener('blur',       function() { container.classList.remove('at-orbit-paused'); });
+  });
+
+  btns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      btns.forEach(function(b) {
+        b.classList.toggle('at-active', b === btn);
+        b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+      });
+      container.classList.remove('at-orbit-paused');
+      if (btn.dataset.mode === 'claude') {
+        claudeArms.forEach(function(a) { a.classList.remove('at-hidden'); });
+        codexArms.forEach(function(a)  { a.classList.add('at-hidden'); });
+      } else {
+        claudeArms.forEach(function(a) { a.classList.add('at-hidden'); });
+        codexArms.forEach(function(a)  { a.classList.remove('at-hidden'); });
+      }
+    });
+  });
+})();
+
+/* FAQ accordion */
+(function() {
+  document.querySelectorAll('.faq-question').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.closest('.faq-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(i) {
+        i.classList.remove('open');
+        i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+})();
 </script>
 
 
