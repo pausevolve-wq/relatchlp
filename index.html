@@ -153,18 +153,16 @@
     .nav-hamburger-btn:hover { background: rgba(255,255,255,0.06); }
     .nav-ham-icon {
       width: 24px; height: 24px;
-      transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
     }
-    .nav-ham-path1 {
-      stroke-dasharray: 12 63;
-      transition: stroke-dasharray 0.5s cubic-bezier(0.22,1,0.36,1),
-                  stroke-dashoffset 0.5s cubic-bezier(0.22,1,0.36,1);
+    .ham-l1, .ham-l2, .ham-l3 {
+      transform-box: fill-box;
+      transform-origin: center;
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1),
+                  opacity 0.25s ease;
     }
-    .nav-ham-icon.open { transform: rotate(-45deg); }
-    .nav-ham-icon.open .nav-ham-path1 {
-      stroke-dasharray: 20 300;
-      stroke-dashoffset: -32.42px;
-    }
+    .nav-ham-icon.open .ham-l1 { transform: translateY(6px)  rotate(45deg);  }
+    .nav-ham-icon.open .ham-l2 { opacity: 0; }
+    .nav-ham-icon.open .ham-l3 { transform: translateY(-6px) rotate(-45deg); }
 
     /* Mobile overlay */
     .nav-mobile-overlay {
@@ -572,6 +570,15 @@
       color: var(--tx-desc, #94A3B8);
       line-height: 1.7;
     }
+    .transform-desc code {
+      font-family: 'DM Mono', 'Fira Mono', monospace;
+      font-size: 0.82rem;
+      color: #2563EB;
+      background: rgba(37,99,235,0.1);
+      border: 1px solid rgba(37,99,235,0.25);
+      padding: 0.12em 0.45em;
+      border-radius: 4px;
+    }
 
     /* Text states */
     .text-state { display: none; }
@@ -843,13 +850,14 @@
     @media (max-width: 768px) {
       .card-wrap {
         width: 90vw;
-        height: 238px;   /* fixed — vw-relative was only ~203px on narrow phones, clipping card state 5 */
+        height: 248px;
       }
       .transform-text {
-        top: 13%;
+        top: 16%;
         left: 5%;
         width: 90%;
         transform: none;
+        transition: opacity 0.32s ease;
       }
       .transform-headline { font-size: 1.65rem; }
       .transform-desc     { font-size: 0.875rem; line-height: 1.6; }
@@ -859,6 +867,34 @@
       }
       .transform-trigger:last-child {
         height: 14vh;
+      }
+    }
+
+    /* Mobile progress dots — hidden on desktop */
+    .tx-mob-dots {
+      display: none;
+    }
+    @media (max-width: 768px) {
+      .tx-mob-dots {
+        display: flex;
+        position: absolute;
+        bottom: 3.5vh;
+        left: 50%;
+        transform: translateX(-50%);
+        gap: 7px;
+        z-index: 20;
+        pointer-events: none;
+      }
+      .tx-mob-dot {
+        width: 6px; height: 6px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.18);
+        transition: background 0.3s ease, transform 0.3s ease;
+        flex-shrink: 0;
+      }
+      .tx-mob-dot.active {
+        background: #60A5FA;
+        transform: scale(1.45);
       }
     }
 
@@ -1939,7 +1975,10 @@
       width: 6px; height: 6px;
       border-radius: 50%;
       flex-shrink: 0;
+      opacity: 0;
+      transition: opacity 0.22s ease;
     }
+    .at-mode-btn.at-active .at-mode-dot { opacity: 1; }
     .at-dot-claude { background: #60A5FA; }
     .at-dot-codex  { background: #60A5FA; }
     .at-diagram-wrap {
@@ -2266,6 +2305,11 @@
       opacity: 1;
       transition: opacity 0.45s var(--reveal-d, 0.58s) ease-out;
     }
+    /* Hard-reset incoming arms to opacity-0 before re-reveal fires */
+    .at-orbit-container.at-re-enter .at-arm {
+      opacity: 0 !important;
+      transition: none !important;
+    }
     /* parallax host */
     .at-diagram-wrap { will-change: transform; }
     @media (max-width: 660px) {
@@ -2328,21 +2372,22 @@
       <span class="nav-logo-text">re<span>latch</span></span>
     </a>
     <div class="nav-desktop" id="navDesktop">
-      <a href="#how-it-works" class="nav-d-link">Features</a>
+      <a href="#features" class="nav-d-link">Features</a>
       <a href="#how-it-works" class="nav-d-link">How It Works</a>
       <a href="https://app.relatch.online/" target="_blank" rel="noopener" class="nav-d-primary">Get Started</a>
     </div>
     <button class="nav-hamburger-btn" id="navHamburger" aria-label="Open menu">
-      <svg class="nav-ham-icon" id="hamIcon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <path class="nav-ham-path1" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"/>
-        <path d="M7 16 27 16"/>
+      <svg class="nav-ham-icon" id="hamIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line class="ham-l1" x1="3" y1="6"  x2="21" y2="6" />
+        <line class="ham-l2" x1="3" y1="12" x2="21" y2="12"/>
+        <line class="ham-l3" x1="3" y1="18" x2="21" y2="18"/>
       </svg>
     </button>
   </nav>
 </header>
 <div class="nav-mobile-overlay" id="navMobileOverlay">
   <div class="nav-mobile-links">
-    <a href="#how-it-works" class="nav-m-link" onclick="closeMobileMenu()">Features</a>
+    <a href="#features" class="nav-m-link" onclick="closeMobileMenu()">Features</a>
     <a href="#how-it-works" class="nav-m-link" onclick="closeMobileMenu()">How It Works</a>
   </div>
   <div class="nav-mobile-ctas">
@@ -2488,7 +2533,11 @@
           <!-- State 5: Skill file output -->
           <div class="card-state" id="cardState5">
             <div class="cs-skill-header">
-              <div class="cs-skill-badge">SKILL.md</div>
+              <div style="display:flex;align-items:center;gap:0.4rem;flex-wrap:wrap;">
+                <div class="cs-skill-badge">SKILL.md</div>
+                <span style="font-size:0.6rem;color:#64748B;font-weight:500;">or</span>
+                <div class="cs-skill-badge">agent.yaml + skill.md</div>
+              </div>
               <div class="cs-skill-dots">
                 <span class="cs-skill-dot"></span>
                 <span class="cs-skill-dot"></span>
@@ -2523,36 +2572,45 @@
         <div class="text-state active" id="textState1">
           <span class="transform-label">The Problem</span>
           <h3 class="transform-headline">Your knowledge<br>is <span class="cursive">locked away.</span></h3>
-          <p class="transform-desc">You've spent years building expertise in documents, notes, and files. Every AI session starts from zero. Your AI can't reason from raw files — it needs structured skill layers.</p>
+          <p class="transform-desc">You've spent years building expertise in documents, notes, and files. Every AI session starts from zero. Your AI can't reason from raw files; it needs structured skill layers.</p>
         </div>
 
         <div class="text-state" id="textState2">
           <span class="transform-label">Step 1 — Upload</span>
           <h3 class="transform-headline">Drop anything.<br>Every <span class="cursive">format handled.</span></h3>
-          <p class="transform-desc">PDF, DOCX, CSV, XML, Markdown, code. Relatch accepts your full knowledge stack and routes each file to the right processing path — automatically.</p>
+          <p class="transform-desc">PDF, DOCX, CSV, XML, Markdown, code. Relatch accepts your full knowledge stack and routes each file to the right processing path, automatically.</p>
         </div>
 
         <div class="text-state" id="textState3">
           <span class="transform-label">Step 2 — Extract</span>
           <h3 class="transform-headline">Every signal,<br><span class="cursive">captured precisely.</span></h3>
-          <p class="transform-desc">Smart OCR + structural parsing pulls meaning from messy files — tables, lists, domain language, code patterns. Scan-based PDFs auto-escalate to Mistral OCR. Nothing important is lost.</p>
+          <p class="transform-desc">Smart OCR + structural parsing pulls meaning from messy files, including tables, lists, domain language, and code patterns. Scan-based PDFs auto-escalate to Mistral OCR. Nothing important is lost.</p>
         </div>
 
         <div class="text-state" id="textState4">
           <span class="transform-label">Step 3 — Enrich</span>
           <h3 class="transform-headline">AI detects the<br><span class="cursive">knowledge type.</span></h3>
-          <p class="transform-desc">Relatch identifies whether your document holds persona patterns, codebase logic, process workflows, or domain knowledge — then applies the matching enrichment template. Output is scored before delivery.</p>
+          <p class="transform-desc">Relatch identifies whether your document holds persona patterns, codebase logic, process workflows, or domain knowledge, then applies the matching enrichment template. Output is scored before delivery.</p>
         </div>
 
         <div class="text-state" id="textState5">
           <span class="transform-label">Step 4 — Export</span>
           <h3 class="transform-headline">Your AI gets<br>a <span class="cursive">real skill file.</span></h3>
-          <p class="transform-desc">Download a structured <code>.md</code> for Claude or a <code>.zip</code> for OpenAI Codex CLI. Install once — your AI now has persistent, structured access to everything in those documents.</p>
+          <p class="transform-desc">Download a structured <code>.md</code> for Claude or a <code>.zip</code> for OpenAI Codex CLI. Install once; your AI now has persistent, structured access to everything in those documents.</p>
         </div>
 
       </div><!-- /transform-text -->
 
     </div><!-- /transform-stage -->
+
+    <!-- Mobile-only phase progress dots -->
+    <div class="tx-mob-dots" id="txMobDots" aria-hidden="true">
+      <span class="tx-mob-dot active"></span>
+      <span class="tx-mob-dot"></span>
+      <span class="tx-mob-dot"></span>
+      <span class="tx-mob-dot"></span>
+      <span class="tx-mob-dot"></span>
+    </div>
   </div><!-- /transform-sticky -->
 
   <!-- Scroll triggers for each phase -->
@@ -3070,7 +3128,7 @@
         </button>
         <div class="faq-answer" role="region">
           <div class="faq-answer-inner">
-            <p>Yes. Relatch is designed with file safety as a core principle. It does not store your uploaded files in a backend database, and your session is protected through Clerk so your IP and session access remain protected throughout the process.</p>
+            <p>Yes. Relatch is designed with file safety as a core principle. It does not have a backend for storing user files — the moment you refresh your browser your session restarts again. Your session is protected through Clerk so your IP and session access remain protected throughout the process.</p>
           </div>
         </div>
       </div>
@@ -3409,7 +3467,7 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
     const cardOffsetPx = cardCenterX - vpCenter;
 
     cardWrap.style.transform = isMobile
-      ? `translate3d(-50%, calc(-50% + 20vh), ${liftZ * 0.5}px) rotateY(${finalTiltY * 0.55}deg) rotateX(${finalTiltX * 0.42}deg) scale(${scale})`
+      ? `translate3d(-50%, calc(-50% + 16vh), 0px) scale(1)`
       : `translate3d(calc(-50% + ${cardOffsetPx}px), calc(-50% + ${cardY}vh), ${liftZ}px) rotateY(${finalTiltY}deg) rotateX(${finalTiltX}deg) scale(${scale})`;
 
     const swapPhase = flipMix >= 0.5 ? to.n : from.n;
@@ -3430,16 +3488,22 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
     if (isMobile) {
       textEl.style.width     = '90%';
       textEl.style.left      = '5%';
-      textEl.style.top       = '13%';
+      textEl.style.top       = '16%';
       textEl.style.transform = 'none';
+      // On mobile: text is always visible and synced to the same phase as the card
+      textEl.style.opacity = '1';
+      setTextPhase(swapPhase);
+      // Update progress dots
+      const mobDots = document.querySelectorAll('.tx-mob-dot');
+      mobDots.forEach((d, i) => d.classList.toggle('active', i + 1 === swapPhase));
     } else {
       textEl.style.width     = `${textWidth}px`;
       textEl.style.left      = `${textLeft}px`;
       textEl.style.top       = `calc(50% + ${landedTextY}vh)`;
       textEl.style.transform = 'translateY(-50%)';
+      textEl.style.opacity = landed ? '1' : '0';
+      setTextPhase(textPhase);
     }
-    textEl.style.opacity = landed ? '1' : '0';
-    setTextPhase(textPhase);
 
     // Compute glow centres from already-known positions — avoids forced reflow
     const cardCxPx  = vpCenter + cardOffsetPx;
@@ -3726,13 +3790,22 @@ document.addEventListener('keydown', function(e) {
         b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
       });
       container.classList.remove('at-orbit-paused');
-      if (btn.dataset.mode === 'claude') {
-        claudeArms.forEach(function(a) { a.classList.remove('at-hidden'); });
-        codexArms.forEach(function(a)  { a.classList.add('at-hidden'); });
-      } else {
-        claudeArms.forEach(function(a) { a.classList.add('at-hidden'); });
-        codexArms.forEach(function(a)  { a.classList.remove('at-hidden'); });
-      }
+
+      var enterArms = btn.dataset.mode === 'claude' ? claudeArms : codexArms;
+      var exitArms  = btn.dataset.mode === 'claude' ? codexArms  : claudeArms;
+
+      // Hide outgoing arms instantly
+      exitArms.forEach(function(a) { a.classList.add('at-hidden'); });
+
+      // Freeze incoming arms at opacity-0, unhide them, then trigger the staggered reveal
+      container.classList.add('at-re-enter');
+      enterArms.forEach(function(a) { a.classList.remove('at-hidden'); });
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          container.classList.remove('at-re-enter');
+          // .at-revealed .at-arm transition now fires with each arm's --reveal-d delay
+        });
+      });
     });
   });
 })();
