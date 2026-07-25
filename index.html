@@ -1764,97 +1764,9 @@
     /* ══════════════════════════════════════════════
        POLICY OVERLAY PAGES
     ══════════════════════════════════════════════ */
-    .policy-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 9000;
-      background: #0B1120;
-      flex-direction: column;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    .policy-nav {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      height: 64px;
-      padding: 0 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(11,17,32,0.88);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-      flex-shrink: 0;
-    }
-    .policy-nav-logo {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 700;
-      font-size: 1.35rem;
-      letter-spacing: -0.04em;
-      color: #F8FAFC;
-      text-decoration: none;
-    }
-    .policy-nav-logo span { color: #60A5FA; }
-    .policy-nav-back {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.85rem;
-      color: #94A3B8;
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: color 0.2s;
-      padding: 0;
-    }
-    .policy-nav-back:hover { color: #F8FAFC; }
-    .policy-main {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 4rem 1.5rem 6rem;
-      font-family: 'DM Sans', sans-serif;
-    }
-    .policy-eyebrow {
-      font-size: 0.72rem;
-      font-weight: 800;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #2563EB;
-      display: block;
-      margin-bottom: 0.75rem;
-    }
-    .policy-h1 {
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      color: #F8FAFC;
-      line-height: 1.15;
-      margin-bottom: 1rem;
-    }
-    .policy-updated { color: #94A3B8; font-size: 0.9rem; }
-    .policy-divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 2rem 0; }
-    .policy-main h2 {
-      color: #F8FAFC; font-size: 1.2rem; font-weight: 700;
-      margin-top: 2.5rem; margin-bottom: 0.75rem; letter-spacing: -0.015em;
-    }
-    .policy-main h3 {
-      color: #60A5FA; font-size: 1rem; font-weight: 700;
-      margin-top: 1.5rem; margin-bottom: 0.5rem;
-    }
-    .policy-main p { color: #94A3B8; font-size: 0.9375rem; line-height: 1.8; margin-bottom: 1rem; }
-    .policy-main ul { color: #94A3B8; font-size: 0.9375rem; line-height: 1.8; margin-bottom: 1rem; padding-left: 1.5rem; list-style: disc; }
-    .policy-main ul li { margin-bottom: 0.35rem; }
-    .policy-main a { color: #60A5FA; text-decoration: none; }
-    .policy-main a:hover { text-decoration: underline; }
-    .policy-main strong { color: #F8FAFC; }
-    .policy-footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 2rem; }
-    .policy-footer-links a { font-size: 0.875rem; text-decoration: none; cursor: pointer; }
-    .pfl-primary { color: #60A5FA; }
-    .pfl-secondary { color: #94A3B8; }
+    /* Policy page styling (.policy-overlay, .policy-nav, .policy-main, etc.)
+       moved to the standalone privacy.html / terms.html / legal.html pages —
+       no longer needed here since those pages aren't rendered inside index.html. */
     /* ── Hero content z-index fix for new layers ── */
     .hero-content { position: relative; z-index: 2; }
 
@@ -3202,8 +3114,9 @@
       </a>
 
       <div class="footer-secondary-links footer-reveal footer-reveal-d3">
-        <a href="#" class="footer-ghost-link footer-magnetic" onclick="showPage('privacy');return false;">Privacy Policy</a>
-        <a href="#" class="footer-ghost-link footer-magnetic" onclick="showPage('terms');return false;">Terms of Service</a>
+        <a href="/privacy" class="footer-ghost-link footer-magnetic">Privacy Policy</a>
+        <a href="/terms" class="footer-ghost-link footer-magnetic">Terms of Service</a>
+        <a href="/legal" class="footer-ghost-link footer-magnetic">Legal</a>
       </div>
     </div>
 
@@ -3712,26 +3625,6 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
     });
   });
 })();
-/* ─── POLICY OVERLAY PAGES ─── */
-function showPage(id) {
-  document.getElementById('overlay-' + id).style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-  window.scrollTo(0, 0);
-}
-function closePage(id) {
-  document.getElementById('overlay-' + id).style.display = 'none';
-  document.body.style.overflow = '';
-}
-// Close on Escape key
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
-    ['privacy','terms'].forEach(id => {
-      const el = document.getElementById('overlay-' + id);
-      if (el) el.style.display = 'none';
-    });
-    document.body.style.overflow = '';
-  }
-});
 
 // ── Adaptive Templates reveal + parallax ────────
 (function() {
@@ -3833,204 +3726,12 @@ document.addEventListener('keydown', function(e) {
 <!-- ══════════════════════════════════════════════
      PRIVACY POLICY OVERLAY
 ══════════════════════════════════════════════ -->
-<div id="overlay-privacy" class="policy-overlay">
-  <nav class="policy-nav">
-    <span class="policy-nav-logo">re<span>latch</span></span>
-    <button class="policy-nav-back" onclick="closePage('privacy')">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-      Back to Relatch
-    </button>
-  </nav>
-  <main class="policy-main">
-    <div style="margin-bottom:3rem;">
-      <span class="policy-eyebrow">Legal</span>
-      <h1 class="policy-h1">Privacy Policy</h1>
-      <p class="policy-updated">Last updated: April 2026</p>
-    </div>
-    <hr class="policy-divider">
-
-    <h2>1. Overview</h2>
-    <p>Relatch is a document intelligence tool. This Privacy Policy explains what data we collect, why we collect it, and how we handle it. We have built Relatch with a minimal data footprint by design. Authenticated users can upload documents which are processed to generate structured outputs intended for use as AI context. We aim to keep our data handling lightweight, reasonable, and transparent.</p>
-    <p>By using Relatch at <a href="https://app.relatch.online/" target="_blank" rel="noopener noreferrer">app.relatch.online</a>, you agree to the practices described in this policy.</p>
-
-    <h2>2. What We Collect</h2>
-    <h3>2.1 Analytics and Behavioural Data</h3>
-    <p>Relatch uses the following third-party analytics tools to understand how users interact with the product. This data is aggregated and does not personally identify you.</p>
-    <ul>
-      <li><strong>Google Analytics</strong> — collects page views, session duration, device type, and general geographic region.</li>
-      <li><strong>PostHog</strong> — records anonymised heatmaps, session replays, and product analytics events to help us identify usability issues and improve the product. PostHog may capture mouse movements, clicks, and page interactions but does not capture passwords or payment information.</li>
-      <li><strong>Google Tag Manager</strong> — manages and deploys the analytics tags listed above. It does not independently collect data.</li>
-    </ul>
-    <p>You can opt out of Google Analytics by installing the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google Analytics Opt-out Browser Add-on</a>. You can opt out of PostHog by disabling cookies in your browser settings.</p>
-
-    <h3>2.2 Account Information</h3>
-    <p>To upload and process documents, you need an account. Authentication and session management are handled by <strong>Clerk</strong>. You can sign in using <strong>Google OAuth</strong> or <strong>GitHub OAuth</strong>. When you sign in through one of these providers, Relatch receives a basic identity profile (such as your name, email address, and provider user ID) so that we can associate your session with your account. We do not receive your OAuth password.</p>
-    <p>We use this account information solely to authenticate you, scope your uploads and outputs to your account, and provide essential account-related communication. We do not sell or rent account data.</p>
-
-    <h3>2.3 Waitlist and Contact Submissions</h3>
-    <p>Relatch uses <strong>Formspree</strong> for some contact and waitlist flows on the landing page. If you choose to submit your email address or a message through one of these forms, that submission is delivered via Formspree and used solely to follow up with you about Relatch. We will not send marketing emails unrelated to Relatch. You can request removal of your email at any time by contacting us.</p>
-
-    <h3>2.4 Uploaded Documents</h3>
-    <p>Documents you upload (PDF, CSV, XML, DOCX, scanned images, and similar formats) are processed client-side where possible. When server-side processing is required, your content is transmitted to third-party AI models solely for extraction and enrichment. We do not retain your uploaded files on our servers beyond what is reasonably needed to deliver the resulting output. We do not use your documents to train any AI model. You are responsible for the content you upload.</p>
-
-    <h2>3. How Your Documents Are Processed</h2>
-    <p>Relatch uses a multi-stage processing pipeline to extract and enrich content from your documents.</p>
-    <h3>3.1 Text Extraction</h3>
-    <ul>
-      <li>For standard digital PDFs and documents, Relatch uses a built-in PDF.js parser with Engine 3 capability to extract text directly in the browser.</li>
-      <li>For scanned or image-based content that requires optical character recognition, Relatch calls <strong>Mistral OCR</strong> for intelligent character recognition extraction. If Mistral OCR is unavailable, Relatch falls back to <strong>OCR Cloud Space</strong>, which first applies an OCR layer to your content and then performs extraction.</li>
-    </ul>
-
-    <h3>3.2 AI Enrichment</h3>
-    <p>After extraction, the text is sent to an AI model for enrichment and skill file generation:</p>
-    <ul>
-      <li>For most documents, Relatch uses <strong>Gemini 2.0 Flash Lite</strong> (approximately 80% of requests). If this model fails or does not meet the internal quality threshold score, Relatch escalates to <strong>Gemini 2.5 Flash</strong> for heavier enrichment.</li>
-      <li>Relatch includes a document profiler. If your uploaded document is detected as complex or data-heavy, the profiler automatically selects Gemini 2.5 Flash from the start, skipping the lighter model to save time.</li>
-      <li>If both AI models are unavailable, Relatch activates a fallback protocol that uses strict internal templates and domain knowledge rules to produce a best-effort output without any external AI call.</li>
-    </ul>
-    <p>Your document content is transmitted to Google's AI services for enrichment. Please review <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's Privacy Policy</a> for details.</p>
-
-    <h3>3.3 Smart Analyzer</h3>
-    <p>Before any extraction or enrichment begins, Relatch's smart analyzer scans your upload for corrupted files, unsupported formats, and irrelevant document types. Files that do not pass this check are discarded immediately and never transmitted to any external service.</p>
-
-    <h2>4. Cookies and Session Storage</h2>
-    <p>Relatch uses cookies and similar browser storage for two purposes: (a) analytics, placed by Google Analytics and PostHog as described above; and (b) authentication, where Clerk uses cookies and session storage to keep you signed in and to maintain your session securely. Authentication storage is essential to keeping accounts functional. Analytics cookies are non-essential and you can manage or disable them through your browser settings.</p>
-
-    <h2>5. Third-Party Services</h2>
-    <p>The following third-party services may process your data as part of using Relatch:</p>
-    <ul>
-      <li>Clerk (authentication and session management)</li>
-      <li>Google OAuth (sign-in)</li>
-      <li>GitHub OAuth (sign-in)</li>
-      <li>Google Analytics</li>
-      <li>Google Tag Manager</li>
-      <li>PostHog</li>
-      <li>Gemini AI (Google DeepMind)</li>
-      <li>Mistral OCR</li>
-      <li>OCR Cloud Space</li>
-      <li>Formspree (contact and waitlist flows)</li>
-      <li>Vercel (hosting and edge delivery)</li>
-    </ul>
-    <p>Each of these services operates under its own privacy policy. We encourage you to review them independently.</p>
-
-    <h2>6. Data Retention</h2>
-    <p>We retain account information for as long as your account is active. Uploaded documents are not kept beyond what is reasonably needed to deliver the resulting output. Analytics data is retained by Google Analytics and PostHog under their respective retention policies. Waitlist and contact-form submissions are retained by Formspree until you request removal.</p>
-
-    <h2>7. Your Rights</h2>
-    <p>You can request deletion of your account, your waitlist email, or any contact submission at any time by emailing us at <a href="mailto:relatchh@gmail.com">relatchh@gmail.com</a>. We will action reasonable requests within a reasonable timeframe.</p>
-
-    <h2>8. Children</h2>
-    <p>Relatch does not target children and does not knowingly collect personal information from minors. If you believe a minor has submitted their email address via the waitlist form, contact us and we will remove it promptly.</p>
-
-    <h2>9. Governing Law</h2>
-    <p>This Privacy Policy is governed by the laws of India. Any disputes arising in connection with this policy shall be subject to the jurisdiction of the competent courts in India.</p>
-
-    <h2>10. Changes to This Policy</h2>
-    <p>We may update this Privacy Policy as Relatch evolves. When we do, we will update the date at the top of this page. Continued use of Relatch after any changes constitutes acceptance of the updated policy.</p>
-
-    <h2>11. Contact</h2>
-    <p>For any privacy-related questions, contact us at <a href="mailto:relatchh@gmail.com">relatchh@gmail.com</a>.</p>
-
-    <hr class="policy-divider">
-    <div class="policy-footer-links">
-      <a class="pfl-primary" onclick="closePage('privacy');showPage('terms');return false;" href="#">Terms of Service</a>
-      <a class="pfl-secondary" onclick="closePage('privacy');return false;" href="#">Back to Relatch</a>
-    </div>
-  </main>
-</div>
+<!-- Privacy Policy content relocated to /privacy.html as a standalone page -->
 
 <!-- ══════════════════════════════════════════════
      TERMS OF SERVICE OVERLAY
 ══════════════════════════════════════════════ -->
-<div id="overlay-terms" class="policy-overlay">
-  <nav class="policy-nav">
-    <span class="policy-nav-logo">re<span>latch</span></span>
-    <button class="policy-nav-back" onclick="closePage('terms')">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-      Back to Relatch
-    </button>
-  </nav>
-  <main class="policy-main">
-    <div style="margin-bottom:3rem;">
-      <span class="policy-eyebrow">Legal</span>
-      <h1 class="policy-h1">Terms of Service</h1>
-      <p class="policy-updated">Last updated: April 2026</p>
-    </div>
-    <hr class="policy-divider">
-
-    <h2>1. Acceptance of Terms</h2>
-    <p>By accessing or using Relatch at <a href="https://app.relatch.online/" target="_blank" rel="noopener noreferrer">app.relatch.online</a>, you agree to be bound by these Terms of Service. If you do not agree, do not use Relatch. These terms apply to all users of the service.</p>
-
-    <h2>2. Description of Service</h2>
-    <p>Relatch is a document intelligence tool. Authenticated users can upload files including PDFs, CSVs, XML files, DOCX files, scanned documents, and similar formats. Relatch may process those uploads to extract their content, enrich it using AI models, and produce structured AI context outputs (such as skill files) intended for use with AI coding and reasoning agents.</p>
-    <p>Relatch is currently in active development. Features, availability, and processing pipelines may change without prior notice. We do not guarantee uninterrupted availability of the service.</p>
-
-    <h3>2.1 Accounts and Authentication</h3>
-    <p>To upload and process documents you need a Relatch account. Authentication is provided through <strong>Clerk</strong>, and you can sign in using <strong>Google OAuth</strong> or <strong>GitHub OAuth</strong>. Your use of those third-party authentication providers is also governed by their respective terms and privacy policies. You are responsible for maintaining the confidentiality of any credentials used to access your account and for any activity that occurs under it.</p>
-
-    <h2>3. Free Access</h2>
-    <p>Relatch is free to use. There are no subscription fees, usage limits, or paid tiers at this time. We reserve the right to introduce pricing in the future. If we do, we will notify waitlist subscribers and provide adequate notice before any free tier is modified.</p>
-
-    <h2>4. Acceptable Use and User Content</h2>
-    <p>You are solely responsible for any content, files, or documents you upload to Relatch. You agree not to use Relatch to:</p>
-    <ul>
-      <li>Upload illegal content or content that violates applicable laws in your jurisdiction or in India.</li>
-      <li>Upload content that you do not have the right to process or share, including copyrighted material you do not own or have permission to use.</li>
-      <li>Upload documents containing malware, exploits, or other malicious code.</li>
-      <li>Upload content that is harmful, abusive, harassing, defamatory, hateful, or otherwise objectionable.</li>
-      <li>Attempt to reverse engineer, scrape, or extract the underlying processing logic, AI prompts, or internal templates of Relatch.</li>
-      <li>Deliberately upload corrupted, falsified, or misleading documents with the intent to produce deceptive outputs.</li>
-      <li>Resell, sublicense, or commercially exploit Relatch's outputs without attribution or permission.</li>
-    </ul>
-    <p>We may suspend or terminate accounts that abuse or misuse the service, violate these terms, or upload content that falls into any of the categories above. Where reasonable, we will try to give notice, but we may act immediately when needed to protect Relatch, other users, or third parties.</p>
-
-    <h2>5. Document Processing and AI Models</h2>
-    <p>Relatch processes uploaded documents through a multi-stage pipeline. Text extraction is performed using a PDF.js parser, Mistral OCR, or OCR Cloud Space depending on the document type. Enrichment is performed using Google's Gemini AI models. A fallback protocol using internal templates is activated if external AI services are unavailable.</p>
-    <p>Relatch includes a smart analyzer that screens uploads before processing begins. Corrupted files, unsupported formats, and documents that do not pass the analyzer's checks are discarded automatically and never transmitted to any external service.</p>
-    <p>Relatch makes no guarantee that outputs generated by the AI enrichment pipeline are accurate, complete, or suitable for any particular purpose. You are responsible for reviewing all outputs before use.</p>
-
-    <h2>6. Intellectual Property</h2>
-    <h3>6.1 Your Content</h3>
-    <p>You retain full ownership of any documents you upload to Relatch. By uploading a document, you grant Relatch a limited, temporary licence to process that document solely for the purpose of generating your requested output. This licence ends when your session ends.</p>
-
-    <h3>6.2 Generated Outputs</h3>
-    <p>The structured skill files and outputs generated by Relatch from your documents are yours to use. Relatch does not claim ownership over outputs derived from your content.</p>
-
-    <h3>6.3 Relatch's Property</h3>
-    <p>The Relatch name, logo, interface design, processing logic, internal templates, domain knowledge rules, and all related intellectual property remain the exclusive property of the Relatch team. Nothing in these terms grants you any rights to these assets.</p>
-
-    <h2>7. Third-Party Services</h2>
-    <p>Relatch integrates with third-party services including Clerk (authentication), Google OAuth and GitHub OAuth (sign-in), Google Gemini, Mistral OCR, OCR Cloud Space, Formspree, Google Analytics, Google Tag Manager, PostHog, and Vercel (hosting). Your use of Relatch is subject to the terms and privacy policies of these services where applicable. Relatch is not responsible for the availability, accuracy, or conduct of any third-party service.</p>
-
-    <h2>8. Disclaimers</h2>
-    <p>Relatch is provided on an "as is" and "as available" basis without warranties of any kind, express or implied. We do not warrant that Relatch will be uninterrupted, error-free, or that outputs will meet your requirements or expectations.</p>
-    <p>AI-generated outputs can be incomplete, incorrect, or contextually inappropriate. You bear full responsibility for how you use any output produced by Relatch.</p>
-
-    <h2>9. Limitation of Liability</h2>
-    <p>To the fullest extent permitted by applicable law, Relatch and its developers shall not be liable for any direct, indirect, incidental, consequential, or special damages arising from your use of the service, including but not limited to loss of data, loss of business, or damages resulting from reliance on AI-generated outputs.</p>
-
-    <h2>10. Availability and Changes</h2>
-    <p>Relatch is under active development. We may modify, suspend, or discontinue any part of the service at any time without notice. We are not liable to you or any third party for any modification, suspension, or discontinuation of the service.</p>
-
-    <h2>11. Waitlist and Communications</h2>
-    <p>If you submit your email address through the Relatch waitlist form, you consent to receiving a notification when Relatch launches at full scale. You will not receive unsolicited marketing. You can request removal from the waitlist at any time by emailing <a href="mailto:relatchh@gmail.com">relatchh@gmail.com</a>.</p>
-
-    <h2>12. Governing Law and Jurisdiction</h2>
-    <p>These Terms of Service are governed by the laws of India. Any disputes arising from or in connection with these terms shall be subject to the exclusive jurisdiction of the competent courts in India.</p>
-
-    <h2>13. Changes to These Terms</h2>
-    <p>We may update these Terms of Service as Relatch evolves. When we do, we will update the date at the top of this page. Your continued use of Relatch after any update constitutes acceptance of the revised terms.</p>
-
-    <h2>14. Contact</h2>
-    <p>For any questions regarding these terms, contact us at <a href="mailto:relatchh@gmail.com">relatchh@gmail.com</a>.</p>
-
-    <hr class="policy-divider">
-    <div class="policy-footer-links">
-      <a class="pfl-primary" onclick="closePage('terms');showPage('privacy');return false;" href="#">Privacy Policy</a>
-      <a class="pfl-secondary" onclick="closePage('terms');return false;" href="#">Back to Relatch</a>
-    </div>
-  </main>
-</div>
+<!-- Terms of Service content relocated to /terms.html as a standalone page -->
 
 </body>
 </html>
