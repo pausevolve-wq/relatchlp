@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <title>Terms of Service — Relatch</title>
+  <meta name="description" content="The terms that govern your use of Relatch." />
+  <link rel="canonical" href="https://relatch.online/terms" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #0B1120;
+      color: #F8FAFC;
+      font-family: 'DM Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    :root {
+      --navy:   #0B1120;
+      --blue:   #2563EB;
+      --accent: #60A5FA;
+      --white:  #F8FAFC;
+      --muted:  #94A3B8;
+    }
+
+    /* ══════════════════════════════════════════════
+       POLICY PAGE
+    ══════════════════════════════════════════════ */
+    .policy-nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      height: 64px;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(11,17,32,0.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .policy-nav-logo {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 1.35rem;
+      letter-spacing: -0.04em;
+      color: #F8FAFC;
+      text-decoration: none;
+    }
+    .policy-nav-logo span { color: #60A5FA; }
+    .policy-nav-back {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      color: #94A3B8;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s;
+      padding: 0;
+      text-decoration: none;
+    }
+    .policy-nav-back:hover { color: #F8FAFC; }
+    .policy-main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 6rem;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .policy-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #2563EB;
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+    .policy-h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #F8FAFC;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .policy-updated { color: #94A3B8; font-size: 0.9rem; }
+    .policy-divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 2rem 0; }
+    .policy-main h2 {
+      color: #F8FAFC; font-size: 1.2rem; font-weight: 700;
+      margin-top: 2.5rem; margin-bottom: 0.75rem; letter-spacing: -0.015em;
+    }
+    .policy-main h3 {
+      color: #60A5FA; font-size: 1rem; font-weight: 700;
+      margin-top: 1.5rem; margin-bottom: 0.5rem;
+    }
+    .policy-main p { color: #94A3B8; font-size: 0.9375rem; line-height: 1.8; margin-bottom: 1rem; }
+    .policy-main ul { color: #94A3B8; font-size: 0.9375rem; line-height: 1.8; margin-bottom: 1rem; padding-left: 1.5rem; list-style: disc; }
+    .policy-main ul li { margin-bottom: 0.35rem; }
+    .policy-main a { color: #60A5FA; text-decoration: none; }
+    .policy-main a:hover { text-decoration: underline; }
+    .policy-main strong { color: #F8FAFC; }
+    .policy-footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 2rem; }
+    .policy-footer-links a { font-size: 0.875rem; text-decoration: none; cursor: pointer; }
+    .pfl-primary { color: #60A5FA; }
+    .pfl-secondary { color: #94A3B8; }
+
+    /* Heading reveal (on page load) */
+    @keyframes policyHeadingReveal {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .policy-eyebrow, .policy-h1, .policy-updated {
+      animation: policyHeadingReveal 0.6s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    .policy-h1      { animation-delay: 0.06s; }
+    .policy-updated { animation-delay: 0.14s; }
+
+    /* Scroll reveal for body content */
+    .reveal-block {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1),
+                  transform 0.6s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal-block.reveal-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .policy-eyebrow, .policy-h1, .policy-updated { animation: none; }
+      .reveal-block { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="policy-nav">
+    <a href="/" class="policy-nav-logo">re<span>latch</span></a>
+    <a href="/" class="policy-nav-back">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Back to Relatch
+    </a>
+  </nav>
+  <main class="policy-main">
+    <div style="margin-bottom:3rem;">
+      <span class="policy-eyebrow">Legal</span>
+      <h1 class="policy-h1">Terms of Service</h1>
+      <p class="policy-updated">Last updated: April 2026</p>
+    </div>
+    <hr class="policy-divider">
+
+    <h2 class="reveal-block">1. Acceptance of Terms</h2>
+    <p class="reveal-block">By accessing or using Relatch at <a href="https://app.relatch.online/" target="_blank" rel="noopener noreferrer">app.relatch.online</a>, you agree to be bound by these Terms of Service. If you do not agree, do not use Relatch. These terms apply to all users of the service.</p>
+
+    <h2 class="reveal-block">2. Description of Service</h2>
+    <p class="reveal-block">Relatch is a document intelligence tool. Authenticated users can upload files including PDFs, CSVs, XML files, DOCX files, scanned documents, and similar formats. Relatch may process those uploads to extract their content, enrich it using AI models, and produce structured AI context outputs (such as skill files) intended for use with AI coding and reasoning agents.</p>
+    <p class="reveal-block">Relatch is currently in active development. Features, availability, and processing pipelines may change without prior notice. We do not guarantee uninterrupted availability of the service.</p>
+
+    <h3 class="reveal-block">2.1 Accounts and Authentication</h3>
+    <p class="reveal-block">To upload and process documents you need a Relatch account. Authentication is provided through <strong>Clerk</strong>, and you can sign in using <strong>Google OAuth</strong> or <strong>GitHub OAuth</strong>. Your use of those third-party authentication providers is also governed by their respective terms and privacy policies. You are responsible for maintaining the confidentiality of any credentials used to access your account and for any activity that occurs under it.</p>
+
+    <h2 class="reveal-block">3. Free Access</h2>
+    <p class="reveal-block">Relatch is free to use. There are no subscription fees, usage limits, or paid tiers at this time. We reserve the right to introduce pricing in the future. If we do, we will notify waitlist subscribers and provide adequate notice before any free tier is modified.</p>
+
+    <h2 class="reveal-block">4. Acceptable Use and User Content</h2>
+    <p class="reveal-block">You are solely responsible for any content, files, or documents you upload to Relatch. You agree not to use Relatch to:</p>
+    <ul class="reveal-block">
+      <li>Upload illegal content or content that violates applicable laws in your jurisdiction or in India.</li>
+      <li>Upload content that you do not have the right to process or share, including copyrighted material you do not own or have permission to use.</li>
+      <li>Upload documents containing malware, exploits, or other malicious code.</li>
+      <li>Upload content that is harmful, abusive, harassing, defamatory, hateful, or otherwise objectionable.</li>
+      <li>Attempt to reverse engineer, scrape, or extract the underlying processing logic, AI prompts, or internal templates of Relatch.</li>
+      <li>Deliberately upload corrupted, falsified, or misleading documents with the intent to produce deceptive outputs.</li>
+      <li>Resell, sublicense, or commercially exploit Relatch's outputs without attribution or permission.</li>
+    </ul>
+    <p class="reveal-block">We may suspend or terminate accounts that abuse or misuse the service, violate these terms, or upload content that falls into any of the categories above. Where reasonable, we will try to give notice, but we may act immediately when needed to protect Relatch, other users, or third parties.</p>
+
+    <h2 class="reveal-block">5. Document Processing and AI Models</h2>
+    <p class="reveal-block">Relatch processes uploaded documents through a multi-stage pipeline. Text extraction is performed using a PDF.js parser, Mistral OCR, or OCR Cloud Space depending on the document type. Enrichment is performed using Google's Gemini AI models. A fallback protocol using internal templates is activated if external AI services are unavailable.</p>
+    <p class="reveal-block">Relatch includes a smart analyzer that screens uploads before processing begins. Corrupted files, unsupported formats, and documents that do not pass the analyzer's checks are discarded automatically and never transmitted to any external service.</p>
+    <p class="reveal-block">Relatch makes no guarantee that outputs generated by the AI enrichment pipeline are accurate, complete, or suitable for any particular purpose. You are responsible for reviewing all outputs before use.</p>
+
+    <h2 class="reveal-block">6. Intellectual Property</h2>
+    <h3 class="reveal-block">6.1 Your Content</h3>
+    <p class="reveal-block">You retain full ownership of any documents you upload to Relatch. By uploading a document, you grant Relatch a limited, temporary licence to process that document solely for the purpose of generating your requested output. This licence ends when your session ends.</p>
+
+    <h3 class="reveal-block">6.2 Generated Outputs</h3>
+    <p class="reveal-block">The structured skill files and outputs generated by Relatch from your documents are yours to use. Relatch does not claim ownership over outputs derived from your content.</p>
+
+    <h3 class="reveal-block">6.3 Relatch's Property</h3>
+    <p class="reveal-block">The Relatch name, logo, interface design, processing logic, internal templates, domain knowledge rules, and all related intellectual property remain the exclusive property of the Relatch team. Nothing in these terms grants you any rights to these assets.</p>
+
+    <h2 class="reveal-block">7. Third-Party Services</h2>
+    <p class="reveal-block">Relatch integrates with third-party services including Clerk (authentication), Google OAuth and GitHub OAuth (sign-in), Google Gemini, Mistral OCR, OCR Cloud Space, Formspree, Google Analytics, Google Tag Manager, PostHog, and Vercel (hosting). Your use of Relatch is subject to the terms and privacy policies of these services where applicable. Relatch is not responsible for the availability, accuracy, or conduct of any third-party service.</p>
+
+    <h2 class="reveal-block">8. Disclaimers</h2>
+    <p class="reveal-block">Relatch is provided on an "as is" and "as available" basis without warranties of any kind, express or implied. We do not warrant that Relatch will be uninterrupted, error-free, or that outputs will meet your requirements or expectations.</p>
+    <p class="reveal-block">AI-generated outputs can be incomplete, incorrect, or contextually inappropriate. You bear full responsibility for how you use any output produced by Relatch.</p>
+
+    <h2 class="reveal-block">9. Limitation of Liability</h2>
+    <p class="reveal-block">To the fullest extent permitted by applicable law, Relatch and its developers shall not be liable for any direct, indirect, incidental, consequential, or special damages arising from your use of the service, including but not limited to loss of data, loss of business, or damages resulting from reliance on AI-generated outputs.</p>
+
+    <h2 class="reveal-block">10. Availability and Changes</h2>
+    <p class="reveal-block">Relatch is under active development. We may modify, suspend, or discontinue any part of the service at any time without notice. We are not liable to you or any third party for any modification, suspension, or discontinuation of the service.</p>
+
+    <h2 class="reveal-block">11. Waitlist and Communications</h2>
+    <p class="reveal-block">If you submit your email address through the Relatch waitlist form, you consent to receiving a notification when Relatch launches at full scale. You will not receive unsolicited marketing. You can request removal from the waitlist at any time by emailing <a href="mailto:relatchh@gmail.com">relatchh@gmail.com</a>.</p>
+
+    <h2 class="reveal-block">12. Governing Law and Jurisdiction</h2>
+    <p class="reveal-block">These Terms of Service are governed by the laws of India. Any disputes arising from or in connection with these terms shall be subject to the exclusive jurisdiction of the competent courts in India.</p>
+
+    <h2 class="reveal-block">13. Changes to These Terms</h2>
+    <p class="reveal-block">We may update these Terms of Service as Relatch evolves. When we do, we will update the date at the top of this page. Your continued use of Relatch after any update constitutes acceptance of the revised terms.</p>
+
+    <h2 class="reveal-block">14. Contact</h2>
+    <p class="reveal-block">For any questions regarding these terms, contact us at <a href="mailto:relatchh@gmail.com">relatchh@gmail.com</a>.</p>
+
+    <hr class="policy-divider">
+    <div class="policy-footer-links">
+      <a class="pfl-primary" href="/privacy">Privacy Policy</a>
+      <a class="pfl-primary" href="/legal">Legal Notices</a>
+      <a class="pfl-secondary" href="/">Back to Relatch</a>
+    </div>
+  </main>
+  <script>
+    (function() {
+      var blocks = document.querySelectorAll('.reveal-block');
+      if (!blocks.length) return;
+      if (!('IntersectionObserver' in window)) {
+        blocks.forEach(function(el) { el.classList.add('reveal-visible'); });
+        return;
+      }
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      blocks.forEach(function(el) { obs.observe(el); });
+    })();
+  </script>
+</body>
+</html>

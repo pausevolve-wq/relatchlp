@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <title>Legal Notices — Relatch</title>
+  <meta name="description" content="Legal notices for Relatch, including operator information, AI-output disclaimers, and intellectual property notices." />
+  <link rel="canonical" href="https://relatch.online/legal" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #0B1120;
+      color: #F8FAFC;
+      font-family: 'DM Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    :root {
+      --navy:   #0B1120;
+      --blue:   #2563EB;
+      --accent: #60A5FA;
+      --white:  #F8FAFC;
+      --muted:  #94A3B8;
+    }
+
+    /* ══════════════════════════════════════════════
+       POLICY PAGE
+    ══════════════════════════════════════════════ */
+    .policy-nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      height: 64px;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(11,17,32,0.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .policy-nav-logo {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 1.35rem;
+      letter-spacing: -0.04em;
+      color: #F8FAFC;
+      text-decoration: none;
+    }
+    .policy-nav-logo span { color: #60A5FA; }
+    .policy-nav-back {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      color: #94A3B8;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s;
+      padding: 0;
+      text-decoration: none;
+    }
+    .policy-nav-back:hover { color: #F8FAFC; }
+    .policy-main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 6rem;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .policy-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #2563EB;
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+    .policy-h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #F8FAFC;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .policy-updated { color: #94A3B8; font-size: 0.9rem; }
+    .policy-divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 2rem 0; }
+    .policy-main h2 {
+      color: #F8FAFC; font-size: 1.2rem; font-weight: 700;
+      margin-top: 2.5rem; margin-bottom: 0.75rem; letter-spacing: -0.015em;
+    }
+    .policy-main h3 {
+      color: #60A5FA; font-size: 1rem; font-weight: 700;
+      margin-top: 1.5rem; margin-bottom: 0.5rem;
+    }
+    .policy-main p { color: #94A3B8; font-size: 0.9375rem; line-height: 1.8; margin-bottom: 1rem; }
+    .policy-main ul { color: #94A3B8; font-size: 0.9375rem; line-height: 1.8; margin-bottom: 1rem; padding-left: 1.5rem; list-style: disc; }
+    .policy-main ul li { margin-bottom: 0.35rem; }
+    .policy-main a { color: #60A5FA; text-decoration: none; }
+    .policy-main a:hover { text-decoration: underline; }
+    .policy-main strong { color: #F8FAFC; }
+    .policy-footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 2rem; }
+    .policy-footer-links a { font-size: 0.875rem; text-decoration: none; cursor: pointer; }
+    .pfl-primary { color: #60A5FA; }
+    .pfl-secondary { color: #94A3B8; }
+
+    /* Heading reveal (on page load) */
+    @keyframes policyHeadingReveal {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .policy-eyebrow, .policy-h1, .policy-updated {
+      animation: policyHeadingReveal 0.6s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    .policy-h1      { animation-delay: 0.06s; }
+    .policy-updated { animation-delay: 0.14s; }
+
+    /* Scroll reveal for body content */
+    .reveal-block {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1),
+                  transform 0.6s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal-block.reveal-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .policy-eyebrow, .policy-h1, .policy-updated { animation: none; }
+      .reveal-block { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="policy-nav">
+    <a href="/" class="policy-nav-logo">re<span>latch</span></a>
+    <a href="/" class="policy-nav-back">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Back to Relatch
+    </a>
+  </nav>
+  <main class="policy-main">
+    <div style="margin-bottom:3rem;">
+      <span class="policy-eyebrow">Legal</span>
+      <h1 class="policy-h1">Legal Notices</h1>
+      <p class="policy-updated">Last updated: July 2026</p>
+    </div>
+    <hr class="policy-divider">
+
+    <h2 class="reveal-block">1. About This Page</h2>
+    <p class="reveal-block">This page contains supplementary legal notices for Relatch that are not already covered in our <a href="/privacy">Privacy Policy</a> or <a href="/terms">Terms of Service</a>. It should be read together with those two documents, not in place of them.</p>
+
+    <h2 class="reveal-block">2. Operator Information</h2>
+    <p class="reveal-block">Relatch is operated by its founding team, based in India. For all legal, privacy, and support correspondence, contact us at <a href="mailto:relatchh@gmail.com">relatchh@gmail.com</a>.</p>
+
+    <h2 class="reveal-block">3. AI-Generated Output Disclaimer</h2>
+    <p class="reveal-block">Relatch turns uploaded documents — including domain-specific content such as legal and medical documents — into structured AI context files. Outputs produced by Relatch's AI enrichment pipeline are generated automatically and are provided for informational and productivity purposes only.</p>
+    <p class="reveal-block">They are <strong>not</strong> legal, medical, financial, tax, or other professional advice. Using Relatch does not create an attorney-client, doctor-patient, or any other professional-advisory relationship between you and Relatch. AI-generated outputs may be incomplete, outdated, or inaccurate. Always have a qualified professional review any AI-generated output before relying on it for a legal, medical, financial, or other regulated purpose.</p>
+
+    <h2 class="reveal-block">4. Intellectual Property &amp; Trademarks</h2>
+    <p class="reveal-block">The Relatch name, logo, and visual identity are the property of the Relatch team. You may not use them without our prior written permission. This is separate from ownership of your own uploaded content and generated outputs, which is addressed in our <a href="/terms">Terms of Service</a> (Section 6).</p>
+
+    <h2 class="reveal-block">5. Third-Party Content &amp; Copyright Notices</h2>
+    <p class="reveal-block">Relatch does not review uploaded documents for copyright ownership before processing. If you believe a document processed through Relatch infringes your copyright or other intellectual property rights, contact us at <a href="mailto:relatchh@gmail.com">relatchh@gmail.com</a> with:</p>
+    <ul class="reveal-block">
+      <li>A description of the copyrighted work or right you believe has been infringed.</li>
+      <li>The basis for your belief that infringement has occurred.</li>
+      <li>Your contact details.</li>
+    </ul>
+    <p class="reveal-block">We will review reports in good faith and take appropriate action, which may include removing associated data.</p>
+
+    <h2 class="reveal-block">6. Third-Party Services</h2>
+    <p class="reveal-block">Relatch relies on third-party infrastructure and AI providers, listed in full in our <a href="/privacy">Privacy Policy</a>. We do not control, and are not responsible for, the legal terms, availability, or conduct of those third parties.</p>
+
+    <h2 class="reveal-block">7. Governing Law</h2>
+    <p class="reveal-block">These Legal Notices are governed by the laws of India, consistent with our Privacy Policy and Terms of Service. Any disputes arising in connection with this page are subject to the exclusive jurisdiction of the competent courts in India.</p>
+
+    <h2 class="reveal-block">8. Changes to This Page</h2>
+    <p class="reveal-block">We may update these Legal Notices as Relatch evolves. The date at the top of this page reflects the most recent update.</p>
+
+    <h2 class="reveal-block">9. Contact</h2>
+    <p class="reveal-block">For any legal questions or notices, contact us at <a href="mailto:relatchh@gmail.com">relatchh@gmail.com</a>.</p>
+
+    <hr class="policy-divider">
+    <div class="policy-footer-links">
+      <a class="pfl-primary" href="/privacy">Privacy Policy</a>
+      <a class="pfl-primary" href="/terms">Terms of Service</a>
+      <a class="pfl-secondary" href="/">Back to Relatch</a>
+    </div>
+  </main>
+  <script>
+    (function() {
+      var blocks = document.querySelectorAll('.reveal-block');
+      if (!blocks.length) return;
+      if (!('IntersectionObserver' in window)) {
+        blocks.forEach(function(el) { el.classList.add('reveal-visible'); });
+        return;
+      }
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      blocks.forEach(function(el) { obs.observe(el); });
+    })();
+  </script>
+</body>
+</html>
