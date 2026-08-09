@@ -153,7 +153,7 @@
     <div style="margin-bottom:3rem;">
       <span class="policy-eyebrow">Legal</span>
       <h1 class="policy-h1">Privacy Policy</h1>
-      <p class="policy-updated">Last updated: April 2026</p>
+      <p class="policy-updated">Last updated: August 2026</p>
     </div>
     <hr class="policy-divider">
 
@@ -176,27 +176,27 @@
     <p class="reveal-block">We use this account information solely to authenticate you, scope your uploads and outputs to your account, and provide essential account-related communication. We do not sell or rent account data.</p>
 
     <h3 class="reveal-block">2.3 Waitlist and Contact Submissions</h3>
-    <p class="reveal-block">Relatch uses <strong>Formspree</strong> for some contact and waitlist flows on the landing page. If you choose to submit your email address or a message through one of these forms, that submission is delivered via Formspree and used solely to follow up with you about Relatch. We will not send marketing emails unrelated to Relatch. You can request removal of your email at any time by contacting us.</p>
+    <p class="reveal-block">Relatch uses <strong>SplitForms</strong> to handle waitlist and contact submissions on the landing page and in-app waitlist prompts. If you choose to submit your email address or a message through one of these forms, that submission is delivered via SplitForms and used solely to follow up with you about Relatch. We will not send marketing emails unrelated to Relatch. You can request removal of your email at any time by contacting us.</p>
 
     <h3 class="reveal-block">2.4 Uploaded Documents</h3>
-    <p class="reveal-block">Documents you upload (PDF, CSV, XML, DOCX, scanned images, and similar formats) are processed client-side where possible. When server-side processing is required, your content is transmitted to third-party AI models solely for extraction and enrichment. We do not retain your uploaded files on our servers beyond what is reasonably needed to deliver the resulting output. Where a third-party processor offers a setting to exclude your content from being used to train their models, we configure that setting on your behalf. You are responsible for the content you upload, and we encourage you to review the individual privacy policies of the third-party services listed in Section 5.</p>
+    <p class="reveal-block">Documents you upload (PDF, CSV, XML, DOCX, scanned images, and similar formats) are processed client-side where possible. When server-side processing is required, your content is transmitted to third-party AI and OCR providers solely for extraction and enrichment. We do not retain your uploaded files on our servers beyond what is reasonably needed to deliver the resulting output.</p>
+    <p class="reveal-block"><strong>We have opted out, wherever a provider makes such a setting available, of allowing your uploaded content to be used to train or improve their AI models.</strong> For example, we have explicitly disabled the training-data option on our Mistral OCR account. For the other AI providers in our pipeline, including Google's Gemini API, we apply the same opt-out posture within the account-level controls those platforms make available to us — but because your content is ultimately processed on each provider's own infrastructure, it remains subject to that provider's own terms of service, technical safeguards, and any changes they make to them, which are outside our direct control. You are responsible for the content you upload, and we encourage you to review the individual privacy policies of the third-party services listed in Section 5.</p>
 
     <h2 class="reveal-block">3. How Your Documents Are Processed</h2>
     <p class="reveal-block">Relatch uses a multi-stage processing pipeline to extract and enrich content from your documents.</p>
     <h3 class="reveal-block">3.1 Text Extraction</h3>
     <ul class="reveal-block">
-      <li>For standard digital PDFs and documents, Relatch uses a built-in PDF.js parser with Engine 3 capability to extract text directly in the browser.</li>
-      <li>For scanned or image-based content that requires optical character recognition, Relatch calls <strong>Mistral OCR</strong> for intelligent character recognition extraction. If Mistral OCR is unavailable, Relatch falls back to <strong>OCR Cloud Space</strong>, which first applies an OCR layer to your content and then performs extraction.</li>
+      <li>For standard digital PDFs and documents, Relatch uses a built-in PDF.js parser to extract text directly in your browser — no server call is made for these documents.</li>
+      <li>For scanned or image-based content that requires optical character recognition, Relatch calls <strong>Mistral OCR</strong> first. If Mistral OCR is unavailable or does not return usable text, Relatch escalates to <strong>Datalab</strong> (used sparingly and capped per user per day) as a second OCR pass, and finally to <strong>OCR.space</strong> as a last-resort fallback if neither of the above succeeds.</li>
     </ul>
 
     <h3 class="reveal-block">3.2 AI Enrichment</h3>
     <p class="reveal-block">After extraction, the text is sent to an AI model for enrichment and skill file generation:</p>
     <ul class="reveal-block">
-      <li>For most documents, Relatch uses <strong>Gemini 2.0 Flash Lite</strong> (approximately 80% of requests). If this model fails or does not meet the internal quality threshold score, Relatch escalates to <strong>Gemini 2.5 Flash</strong> for heavier enrichment.</li>
-      <li>Relatch includes a document profiler. If your uploaded document is detected as complex or data-heavy, the profiler automatically selects Gemini 2.5 Flash from the start, skipping the lighter model to save time.</li>
-      <li>If both AI models are unavailable, Relatch activates a fallback protocol that uses strict internal templates and domain knowledge rules to produce a best-effort output without any external AI call.</li>
+      <li>For most documents, Relatch uses <strong>Google's Gemini API</strong> as the primary enrichment model. If this model fails, times out, or does not meet our internal quality threshold, Relatch automatically retries the request through a second, independent AI provider — <strong>OpenRouter</strong>, routed specifically to <strong>Groq's</strong> infrastructure — so a single provider outage does not block your generation.</li>
+      <li>If both AI providers are unavailable, Relatch activates a fallback protocol that uses strict internal templates and domain knowledge rules to produce a best-effort output without any external AI call.</li>
     </ul>
-    <p class="reveal-block">Your document content is transmitted to Google's AI services for enrichment. Please review <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's Privacy Policy</a> for details.</p>
+    <p class="reveal-block">Your document content may be transmitted to Google (Gemini API) and, on fallback, to OpenRouter and Groq, for enrichment. Please review <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's Privacy Policy</a>, <a href="https://openrouter.ai/privacy" target="_blank" rel="noopener noreferrer">OpenRouter's Privacy Policy</a>, and <a href="https://groq.com/privacy-policy" target="_blank" rel="noopener noreferrer">Groq's Privacy Policy</a> for details.</p>
 
     <h3 class="reveal-block">3.3 Smart Analyzer</h3>
     <p class="reveal-block">Before any extraction or enrichment begins, Relatch's smart analyzer scans your upload for corrupted files, unsupported formats, and irrelevant document types. Files that do not pass this check are discarded immediately and never transmitted to any external service.</p>
@@ -213,16 +213,18 @@
       <li>Google Analytics</li>
       <li>Google Tag Manager</li>
       <li>PostHog</li>
-      <li>Gemini AI (Google DeepMind)</li>
-      <li>Mistral OCR</li>
-      <li>OCR Cloud Space</li>
-      <li>Formspree (contact and waitlist flows)</li>
+      <li>Gemini API (Google) — AI enrichment</li>
+      <li>Mistral OCR — primary OCR</li>
+      <li>Datalab — secondary OCR fallback</li>
+      <li>OCR.space — final OCR fallback</li>
+      <li>OpenRouter / Groq — AI enrichment fallback</li>
+      <li>SplitForms (contact and waitlist flows)</li>
       <li>Vercel (hosting and edge delivery)</li>
     </ul>
     <p class="reveal-block">Each of these services operates under its own privacy policy. We encourage you to review them independently.</p>
 
     <h2 class="reveal-block">6. Data Retention</h2>
-    <p class="reveal-block">We retain account information for as long as your account is active. Uploaded documents are not kept beyond what is reasonably needed to deliver the resulting output. Analytics data is retained by Google Analytics and PostHog under their respective retention policies. Waitlist and contact-form submissions are retained by Formspree until you request removal.</p>
+    <p class="reveal-block">We retain account information for as long as your account is active. Uploaded documents are not kept beyond what is reasonably needed to deliver the resulting output. Analytics data is retained by Google Analytics and PostHog under their respective retention policies. Waitlist and contact-form submissions are retained by SplitForms for up to 30 days, or until you request removal, whichever is sooner.</p>
 
     <h2 class="reveal-block">7. Your Rights</h2>
     <p class="reveal-block">You can request deletion of your account, your waitlist email, or any contact submission at any time by emailing us at <a href="mailto:relatchh@gmail.com">relatchh@gmail.com</a>. We will action reasonable requests within a reasonable timeframe.</p>
