@@ -1883,16 +1883,6 @@
       color: #93C5FD;
       border-color: rgba(37,99,235,0.28);
     }
-    .at-mode-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      flex-shrink: 0;
-      opacity: 0;
-      transition: opacity 0.22s ease;
-    }
-    .at-mode-btn.at-active .at-mode-dot { opacity: 1; }
-    .at-dot-claude { background: #60A5FA; }
-    .at-dot-codex  { background: #60A5FA; }
     .at-diagram-wrap {
       width: 100%;
       display: flex;
@@ -2546,10 +2536,10 @@
     <p class="at-sub fiv fiv-d2">Relatch detects what your document actually contains and automatically builds the correct skill structure. <strong>No guessing. No manual selection.</strong></p>
     <div class="at-mode-toggle" role="group" aria-label="Select AI mode">
       <button class="at-mode-btn at-active" data-mode="claude" aria-pressed="true">
-        <span class="at-mode-dot at-dot-claude"></span>Claude
+        Claude
       </button>
       <button class="at-mode-btn" data-mode="codex" aria-pressed="false">
-        <span class="at-mode-dot at-dot-codex"></span>Codex
+        Codex
       </button>
     </div>
 
