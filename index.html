@@ -7,6 +7,7 @@
   <title>Relatch — Turn Your Documents into AI Skill Files</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://us-assets.i.posthog.com" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     /* ══════════════════════════════════════════════
@@ -322,7 +323,7 @@
       font-size: clamp(3.1rem, 8vw, 5.2rem);
       font-weight: 800; line-height: 1.03; letter-spacing: -0.04em;
       color: #F8FAFC; margin-bottom: 1.8rem;
-      animation: heroHeadlineReveal 1.8s cubic-bezier(0.22,1,0.36,1) both;
+      animation: heroHeadlineReveal 1.0s cubic-bezier(0.22,1,0.36,1) both;
       will-change: transform, opacity;
     }
     .cursive-keyword {
@@ -362,7 +363,7 @@
       font-size: clamp(1rem, 2.2vw, 1.15rem);
       color: rgba(148,163,184,0.85); line-height: 1.8; max-width: 580px;
       margin: 0 auto 3rem;
-      animation: heroSubFadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 2.8s both;
+      animation: heroSubFadeUp 0.6s cubic-bezier(0.22,1,0.36,1) 0.5s both;
       text-align: center;
     }
     #typeTarget {
@@ -384,7 +385,7 @@
     .hero-cta-group {
       display: flex; align-items: center; justify-content: center;
       gap: 1rem; flex-wrap: wrap;
-      animation: heroSubFadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 2.95s both;
+      animation: heroSubFadeUp 0.6s cubic-bezier(0.22,1,0.36,1) 0.8s both;
     }
     .btn-primary {
       background: #2563EB; color: #fff;
@@ -399,6 +400,13 @@
       box-shadow: 0 0 0 1px rgba(96,165,250,0.2), 0 8px 28px rgba(37,99,235,0.45);
     }
     .btn-primary:active { transform: scale(0.97); transition-duration: 80ms; }
+    .hero-cta-group .btn-primary {
+      animation: ctaPulse 2.4s ease-in-out 1.0s 3;
+    }
+    @keyframes ctaPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(37,99,235,0); }
+      50% { box-shadow: 0 0 0 4px rgba(37,99,235,0.25); }
+    }
     .btn-ghost {
       background: transparent; color: #94A3B8;
       padding: 0.9rem 2rem; border-radius: 10px;
@@ -2250,7 +2258,12 @@
       person_profiles: 'identified_only',
       cross_subdomain_cookie: true,
       persistence: 'localStorage+cookie',
-      autocapture: true,
+      autocapture: {
+        capture_elments: true,
+        capture_performance: false,
+        dom_events: ['click', 'change', 'submit'],
+        element_attributes: ['data-provider', 'data-testid', 'id', 'class', 'href', 'aria-label', 'name', 'type', 'placeholder', 'role', 'title']
+      },
       capture_pageview: true,
       capture_pageleave: true,
       session_recording: {
@@ -2276,7 +2289,7 @@
     <div class="nav-desktop" id="navDesktop">
       <a href="#features" class="nav-d-link">Features</a>
       <a href="#how-it-works" class="nav-d-link">How It Works</a>
-      <a href="https://app.relatch.online/" target="_blank" rel="noopener" class="nav-d-primary">Get Started</a>
+      <a href="https://app.relatch.online/" class="nav-d-primary">Get Started</a>
     </div>
     <button class="nav-hamburger-btn" id="navHamburger" aria-label="Open menu">
       <svg class="nav-ham-icon" id="hamIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
@@ -2293,7 +2306,7 @@
     <a href="#how-it-works" class="nav-m-link" onclick="closeMobileMenu()">How It Works</a>
   </div>
   <div class="nav-mobile-ctas">
-    <a href="https://app.relatch.online/" target="_blank" rel="noopener" class="nav-m-primary" onclick="closeMobileMenu()">Get Started</a>
+    <a href="https://app.relatch.online/" class="nav-m-primary" onclick="closeMobileMenu()">Get Started</a>
   </div>
 </div>
 
@@ -2314,7 +2327,7 @@
       Relatch reads your <span id="typeTarget">Markdown docs</span><span class="type-cursor"></span> and builds structured skill files that Claude and OpenAI Codex can actually reason from. Not raw pasted text. Persistent, typed intelligence.
     </p>
     <div class="hero-cta-group">
-      <a href="https://app.relatch.online/" target="_blank" rel="noopener" class="btn-primary">
+      <a href="https://app.relatch.online/" class="btn-primary">
         Start for Free
         <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </a>
@@ -2814,7 +2827,7 @@
     <!-- Adaptive CTA -->
     <div class="output-cta fiv fiv-d3">
       <p class="output-cta-text">Relatch understands your data. Builds skill files that make your AI think like <em>you</em> — not a random text generator.</p>
-      <a href="https://app.relatch.online/" target="_blank" rel="noopener" class="btn-primary">
+      <a href="https://app.relatch.online/" class="btn-primary">
         Try Relatch Free
         <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </a>
@@ -2904,7 +2917,7 @@
           <div class="bf-feat"><div class="bf-feat-dot"></div>YAML frontmatter + decision logic + guardrail rules</div>
           <div class="bf-feat"><div class="bf-feat-dot"></div>Quality-gated before delivery, automatically</div>
         </div>
-        <a href="https://app.relatch.online/goal" target="_blank" rel="noopener" class="bf-tag">
+        <a href="https://app.relatch.online/?ref=goal&target=claude" class="bf-tag">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
           Try with Claude
         </a>
@@ -2921,7 +2934,7 @@
           <div class="bf-feat"><div class="bf-feat-dot"></div>Structured for Codex CLI's skill-loading protocol</div>
           <div class="bf-feat"><div class="bf-feat-dot"></div>Code-specific extraction preserving function signatures</div>
         </div>
-        <a href="https://app.relatch.online/goal" target="_blank" rel="noopener" class="bf-tag">
+        <a href="https://app.relatch.online/?ref=goal&target=codex" class="bf-tag">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
           Try with Codex
         </a>
@@ -3096,7 +3109,7 @@
     <div class="footer-center">
       <h2 class="footer-headline footer-reveal footer-reveal-d1">Your knowledge,<br>ready for <em class="footer-headline-em">your AI.</em></h2>
 
-      <a href="https://app.relatch.online/" target="_blank" rel="noopener" class="footer-cta-primary footer-magnetic footer-reveal footer-reveal-d2">
+      <a href="https://app.relatch.online/" class="footer-cta-primary footer-magnetic footer-reveal footer-reveal-d2">
         Try Relatch Free
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M17 8l4 4m0 0l-4 4m4-4H3"/>
