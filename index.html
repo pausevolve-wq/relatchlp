@@ -389,11 +389,12 @@
     }
     .btn-primary {
       background: #2563EB; color: #fff;
-      padding: 0.9rem 2.25rem; border-radius: 10px;
+      padding: 1rem 2.25rem; border-radius: 10px;
       font-size: 1rem; font-weight: 600; border: none; cursor: pointer;
       text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;
       transition: background 0.18s var(--ease-out), box-shadow 0.18s var(--ease-out), transform 120ms ease-out;
       font-family: 'DM Sans', sans-serif;
+      min-height: 48px; /* Ensure 48x48px tap target */
     }
     .btn-primary:hover {
       background: #1d4ed8;
@@ -2327,12 +2328,26 @@
       Relatch reads your <span id="typeTarget">Markdown docs</span><span class="type-cursor"></span> and builds structured skill files that Claude and OpenAI Codex can actually reason from. Not raw pasted text. Persistent, typed intelligence.
     </p>
     <div class="hero-cta-group">
-      <a href="https://app.relatch.online/" class="btn-primary">
-        Start for Free
+      <a href="https://app.relatch.online/" class="btn-primary" id="heroCtaPrimary" data-variant="A">
+        Start your free goal
         <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </a>
       <a href="#how-it-works" class="btn-ghost">See How It Works</a>
     </div>
+  <script>
+  (function() {
+    var cta = document.getElementById('heroCtaPrimary');
+    if (!cta) return;
+    var params = new URLSearchParams(window.location.search);
+    var utmParams = ['ref', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+    var hasUtm = utmParams.some(function(p) { return params.has(p); });
+    if (hasUtm) {
+      var baseUrl = 'https://app.relatch.online/';
+      var newUrl = baseUrl + '?' + params.toString();
+      cta.setAttribute('href', newUrl);
+    }
+  })();
+  </script>
   </div>
 
 </section>
@@ -3725,8 +3740,27 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
 })();
 </script>
 
+<!-- Hero CTA Click Tracking (Variant A) -->
+<script>
+(function() {
+  var cta = document.getElementById('heroCtaPrimary');
+  if (!cta) return;
+  function getUtmRef() {
+    var params = new URLSearchParams(window.location.search);
+    return params.get('ref') || params.get('utm_source') || 'direct';
+  }
+  cta.addEventListener('click', function() {
+    if (window.posthog && window.posthog.capture) {
+      window.posthog.capture('landing_cta_click', {
+        variant: cta.getAttribute('data-variant') || 'A',
+        ref: getUtmRef()
+      });
+    }
+  });
+})();
+</script>
 
-<!-- ══════════════════════════════════════════════
+<!-- ═══════════════════════════════════════════════════════════════════════════════════════════════════
      PRIVACY POLICY OVERLAY
 ══════════════════════════════════════════════ -->
 <!-- Privacy Policy content relocated to /privacy.html as a standalone page -->
