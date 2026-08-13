@@ -2329,7 +2329,7 @@
     </p>
     <div class="hero-cta-group">
       <a href="https://app.relatch.online/" class="btn-primary" id="heroCtaPrimary" data-variant="A">
-        Start your free goal
+        Start your free AI resume
         <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </a>
       <a href="#how-it-works" class="btn-ghost">See How It Works</a>
@@ -2341,11 +2341,18 @@
     var params = new URLSearchParams(window.location.search);
     var utmParams = ['ref', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
     var hasUtm = utmParams.some(function(p) { return params.has(p); });
+    var utmRef = params.get('ref') || '';
     if (hasUtm) {
       var baseUrl = 'https://app.relatch.online/';
       var newUrl = baseUrl + '?' + params.toString();
       cta.setAttribute('href', newUrl);
     }
+    // PostHog event capture
+    cta.addEventListener('click', function() {
+      if (window.posthog) {
+        window.posthog.capture('landing_cta_click', { variant: 'A', ref: utmRef });
+      }
+    });
   })();
   </script>
   </div>
