@@ -1393,17 +1393,13 @@
     .badges-mask::after  { right: 0; background: linear-gradient(270deg,#0B1120,transparent); }
     .badges-track {
       display: flex;
+      align-items: center;
       width: max-content;
+      gap: 2.75rem;
       animation: slideLeft 36s linear infinite;
-      padding: 0.5rem 0;
+      padding: 0.5rem 2.75rem;
     }
     .badges-track:hover { animation-play-state: paused; }
-    .badges-group {
-      display: flex;
-      align-items: center;
-      gap: 2.75rem;
-      padding: 0 2.75rem;
-    }
     .badge-item {
       display: inline-flex;
       align-items: center;
@@ -3106,36 +3102,7 @@
   </div>
 
   <div class="badges-mask fiv fiv-d2">
-    <div class="badges-track">
-      <div class="badges-group">
-        <a href="https://www.sideprojectors.com/project/88578/relatch-turn-your-documents-into-ai-skill-files" target="_blank" rel="noopener noreferrer" class="badge-item" aria-label="Check out Relatch on SideProjectors">
-          <img src="https://www.sideprojectors.com/img/badges/badge_show_black.png" alt="Check out Relatch -- Turn Your Documents into AI Skill Files at SideProjectors">
-        </a>
-        <span class="badges-dot" aria-hidden="true">&#9679;</span>
-        <a href="https://fazier.com" target="_blank" rel="noopener noreferrer" class="badge-item" aria-label="Relatch featured on Fazier">
-          <img src="https://fazier.com/api/v1//public/badges/launch_badges.svg?badge_type=featured&amp;theme=light" width="250" alt="Fazier badge">
-        </a>
-        <span class="badges-dot" aria-hidden="true">&#9679;</span>
-        <a href="https://www.producthunt.com/products/relatch?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-relatch" target="_blank" rel="noopener noreferrer" class="badge-item" aria-label="Relatch on Product Hunt">
-          <img alt="Relatch - Turn your docs into custom Claude &amp; Codex skills. | Product Hunt" width="250" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1177811&amp;theme=light&amp;t=1786913443130">
-        </a>
-        <span class="badges-dot" aria-hidden="true">&#9679;</span>
-      </div>
-      <div class="badges-group" aria-hidden="true">
-        <a href="https://www.sideprojectors.com/project/88578/relatch-turn-your-documents-into-ai-skill-files" target="_blank" rel="noopener noreferrer" class="badge-item" tabindex="-1">
-          <img src="https://www.sideprojectors.com/img/badges/badge_show_black.png" alt="">
-        </a>
-        <span class="badges-dot" aria-hidden="true">&#9679;</span>
-        <a href="https://fazier.com" target="_blank" rel="noopener noreferrer" class="badge-item" tabindex="-1">
-          <img src="https://fazier.com/api/v1//public/badges/launch_badges.svg?badge_type=featured&amp;theme=light" width="250" alt="">
-        </a>
-        <span class="badges-dot" aria-hidden="true">&#9679;</span>
-        <a href="https://www.producthunt.com/products/relatch?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-relatch" target="_blank" rel="noopener noreferrer" class="badge-item" tabindex="-1">
-          <img alt="" width="250" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1177811&amp;theme=light&amp;t=1786913443130">
-        </a>
-        <span class="badges-dot" aria-hidden="true">&#9679;</span>
-      </div>
-    </div>
+    <div class="badges-track" id="badgesTrack"></div>
   </div>
 </section>
 
@@ -3277,6 +3244,73 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
     chip.innerHTML = `<span class="country-flag">${flagSvg(c.name)}</span><span class="country-name">${c.name}</span>`;
     track.appendChild(chip);
   });
+})();
+
+/* ─── AS SEEN ON BADGES TICKER ─── */
+(function() {
+  // add future platform badges here (Peerlist, SaaS Hub, etc.) — the
+  // repetition and loop math below adapt automatically
+  const badges = [
+    {
+      href: 'https://www.sideprojectors.com/project/88578/relatch-turn-your-documents-into-ai-skill-files',
+      img: 'https://www.sideprojectors.com/img/badges/badge_show_black.png',
+      alt: 'Check out Relatch -- Turn Your Documents into AI Skill Files at SideProjectors',
+      label: 'Check out Relatch on SideProjectors'
+    },
+    {
+      href: 'https://fazier.com',
+      img: 'https://fazier.com/api/v1//public/badges/launch_badges.svg?badge_type=featured&theme=light',
+      width: 250,
+      alt: 'Fazier badge',
+      label: 'Relatch featured on Fazier'
+    },
+    {
+      href: 'https://www.producthunt.com/products/relatch?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-relatch',
+      img: 'https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1177811&theme=light&t=1786913443130',
+      width: 250,
+      height: 54,
+      alt: 'Relatch - Turn your docs into custom Claude & Codex skills. | Product Hunt',
+      label: 'Relatch on Product Hunt'
+    },
+  ];
+  const badgesTrack = document.getElementById('badgesTrack');
+  if (!badgesTrack) return;
+
+  function appendBadge(b, accessible) {
+    const a = document.createElement('a');
+    a.href = b.href;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.className = 'badge-item';
+    if (accessible) {
+      a.setAttribute('aria-label', b.label);
+    } else {
+      a.tabIndex = -1;
+      a.setAttribute('aria-hidden', 'true');
+    }
+    const img = document.createElement('img');
+    img.src = b.img;
+    img.alt = accessible ? b.alt : '';
+    if (b.width) img.width = b.width;
+    if (b.height) img.height = b.height;
+    a.appendChild(img);
+    badgesTrack.appendChild(a);
+
+    const dot = document.createElement('span');
+    dot.className = 'badges-dot';
+    dot.setAttribute('aria-hidden', 'true');
+    dot.innerHTML = '&#9679;';
+    badgesTrack.appendChild(dot);
+  }
+
+  // repeat for a seamless infinite loop — same -50% technique as the
+  // countries slider above, just repeated further since each badge is much
+  // wider than a country chip. Rep count is sized so the strip stays wider
+  // than 2x any realistic viewport, so the loop point (and the fact there
+  // are only a few badges today) never becomes visible as a gap.
+  for (let rep = 0; rep < 8; rep++) {
+    badges.forEach(b => appendBadge(b, rep === 0));
+  }
 })();
 
 /* ─── TRUST COUNT SCRAMBLE ─── */
