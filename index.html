@@ -1373,6 +1373,44 @@
       margin: 0;
     }
 
+    /* AS SEEN ON -- launch platform badges */
+    .badges-section {
+      background: #0B1120;
+      padding: 2rem 1.5rem 6rem;
+      text-align: center;
+    }
+    .badges-mask {
+      overflow: hidden;
+      position: relative;
+      margin: 3rem -1.5rem 0;
+    }
+    .badges-mask::before,
+    .badges-mask::after {
+      content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 10;
+      pointer-events: none;
+    }
+    .badges-mask::before { left: 0; background: linear-gradient(90deg,#0B1120,transparent); }
+    .badges-mask::after  { right: 0; background: linear-gradient(270deg,#0B1120,transparent); }
+    .badges-track {
+      display: flex;
+      align-items: center;
+      width: max-content;
+      gap: 2.75rem;
+      animation: slideLeft 36s linear infinite;
+      padding: 0.5rem 2.75rem;
+    }
+    .badges-track:hover { animation-play-state: paused; }
+    .badge-item {
+      display: inline-flex;
+      align-items: center;
+      height: 46px;
+      opacity: 0.85;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .badge-item:hover { opacity: 1; transform: translateY(-2px); }
+    .badge-item img { height: 46px; width: auto; display: block; }
+    .badges-dot { color: #2563EB; font-size: 0.55rem; }
+
     /* ══════════════════════════════════════════════
        CTA SECTION
     ══════════════════════════════════════════════ */
@@ -1755,6 +1793,8 @@
         .built-for-section { padding: 4rem 1rem; }
         .global-section { padding: 4rem 1rem; }
         .faq-section { padding: 5rem 1rem 6rem; }
+        .badges-section { padding: 1.5rem 1rem 5rem; }
+        .badge-item, .badge-item img { height: 38px; }
         .cta-section { padding: 5rem 1rem 2rem; }
       }
 
@@ -3054,6 +3094,18 @@
 <!-- ══════════════════════════════════════════════
      FOOTER
 ══════════════════════════════════════════════ -->
+<!-- AS SEEN ON -- launch platform badges -->
+<section class="badges-section" id="as-seen-on">
+  <div class="section-inner">
+    <span class="section-label fiv">As Seen On</span>
+    <h2 class="section-title fiv fiv-d1">Live on the <em class="accent-italic">launch platforms.</em></h2>
+  </div>
+
+  <div class="badges-mask fiv fiv-d2">
+    <div class="badges-track" id="badgesTrack"></div>
+  </div>
+</section>
+
 <div class="footer-curtain">
   <footer class="cinematic-footer">
 
@@ -3192,6 +3244,73 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
     chip.innerHTML = `<span class="country-flag">${flagSvg(c.name)}</span><span class="country-name">${c.name}</span>`;
     track.appendChild(chip);
   });
+})();
+
+/* ─── AS SEEN ON BADGES TICKER ─── */
+(function() {
+  // add future platform badges here (Peerlist, SaaS Hub, etc.) — the
+  // repetition and loop math below adapt automatically
+  const badges = [
+    {
+      href: 'https://www.sideprojectors.com/project/88578/relatch-turn-your-documents-into-ai-skill-files',
+      img: 'https://www.sideprojectors.com/img/badges/badge_show_black.png',
+      alt: 'Check out Relatch -- Turn Your Documents into AI Skill Files at SideProjectors',
+      label: 'Check out Relatch on SideProjectors'
+    },
+    {
+      href: 'https://fazier.com',
+      img: 'https://fazier.com/api/v1//public/badges/launch_badges.svg?badge_type=featured&theme=light',
+      width: 250,
+      alt: 'Fazier badge',
+      label: 'Relatch featured on Fazier'
+    },
+    {
+      href: 'https://www.producthunt.com/products/relatch?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-relatch',
+      img: 'https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1177811&theme=light&t=1786913443130',
+      width: 250,
+      height: 54,
+      alt: 'Relatch - Turn your docs into custom Claude & Codex skills. | Product Hunt',
+      label: 'Relatch on Product Hunt'
+    },
+  ];
+  const badgesTrack = document.getElementById('badgesTrack');
+  if (!badgesTrack) return;
+
+  function appendBadge(b, accessible) {
+    const a = document.createElement('a');
+    a.href = b.href;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.className = 'badge-item';
+    if (accessible) {
+      a.setAttribute('aria-label', b.label);
+    } else {
+      a.tabIndex = -1;
+      a.setAttribute('aria-hidden', 'true');
+    }
+    const img = document.createElement('img');
+    img.src = b.img;
+    img.alt = accessible ? b.alt : '';
+    if (b.width) img.width = b.width;
+    if (b.height) img.height = b.height;
+    a.appendChild(img);
+    badgesTrack.appendChild(a);
+
+    const dot = document.createElement('span');
+    dot.className = 'badges-dot';
+    dot.setAttribute('aria-hidden', 'true');
+    dot.innerHTML = '&#9679;';
+    badgesTrack.appendChild(dot);
+  }
+
+  // repeat for a seamless infinite loop — same -50% technique as the
+  // countries slider above, just repeated further since each badge is much
+  // wider than a country chip. Rep count is sized so the strip stays wider
+  // than 2x any realistic viewport, so the loop point (and the fact there
+  // are only a few badges today) never becomes visible as a gap.
+  for (let rep = 0; rep < 8; rep++) {
+    badges.forEach(b => appendBadge(b, rep === 0));
+  }
 })();
 
 /* ─── TRUST COUNT SCRAMBLE ─── */
