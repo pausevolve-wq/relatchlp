@@ -1373,6 +1373,48 @@
       margin: 0;
     }
 
+    /* AS SEEN ON -- launch platform badges */
+    .badges-section {
+      background: #0B1120;
+      padding: 2rem 1.5rem 6rem;
+      text-align: center;
+    }
+    .badges-mask {
+      overflow: hidden;
+      position: relative;
+      margin: 3rem -1.5rem 0;
+    }
+    .badges-mask::before,
+    .badges-mask::after {
+      content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 10;
+      pointer-events: none;
+    }
+    .badges-mask::before { left: 0; background: linear-gradient(90deg,#0B1120,transparent); }
+    .badges-mask::after  { right: 0; background: linear-gradient(270deg,#0B1120,transparent); }
+    .badges-track {
+      display: flex;
+      width: max-content;
+      animation: slideLeft 36s linear infinite;
+      padding: 0.5rem 0;
+    }
+    .badges-track:hover { animation-play-state: paused; }
+    .badges-group {
+      display: flex;
+      align-items: center;
+      gap: 2.75rem;
+      padding: 0 2.75rem;
+    }
+    .badge-item {
+      display: inline-flex;
+      align-items: center;
+      height: 46px;
+      opacity: 0.85;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .badge-item:hover { opacity: 1; transform: translateY(-2px); }
+    .badge-item img { height: 46px; width: auto; display: block; }
+    .badges-dot { color: #2563EB; font-size: 0.55rem; }
+
     /* ══════════════════════════════════════════════
        CTA SECTION
     ══════════════════════════════════════════════ */
@@ -1755,6 +1797,8 @@
         .built-for-section { padding: 4rem 1rem; }
         .global-section { padding: 4rem 1rem; }
         .faq-section { padding: 5rem 1rem 6rem; }
+        .badges-section { padding: 1.5rem 1rem 5rem; }
+        .badge-item, .badge-item img { height: 38px; }
         .cta-section { padding: 5rem 1rem 2rem; }
       }
 
@@ -3054,6 +3098,47 @@
 <!-- ══════════════════════════════════════════════
      FOOTER
 ══════════════════════════════════════════════ -->
+<!-- AS SEEN ON -- launch platform badges -->
+<section class="badges-section" id="as-seen-on">
+  <div class="section-inner">
+    <span class="section-label fiv">As Seen On</span>
+    <h2 class="section-title fiv fiv-d1">Live on the <em class="accent-italic">launch platforms.</em></h2>
+  </div>
+
+  <div class="badges-mask fiv fiv-d2">
+    <div class="badges-track">
+      <div class="badges-group">
+        <a href="https://www.sideprojectors.com/project/88578/relatch-turn-your-documents-into-ai-skill-files" target="_blank" rel="noopener noreferrer" class="badge-item" aria-label="Check out Relatch on SideProjectors">
+          <img src="https://www.sideprojectors.com/img/badges/badge_show_black.png" alt="Check out Relatch -- Turn Your Documents into AI Skill Files at SideProjectors">
+        </a>
+        <span class="badges-dot" aria-hidden="true">&#9679;</span>
+        <a href="https://fazier.com" target="_blank" rel="noopener noreferrer" class="badge-item" aria-label="Relatch featured on Fazier">
+          <img src="https://fazier.com/api/v1//public/badges/launch_badges.svg?badge_type=featured&amp;theme=light" width="250" alt="Fazier badge">
+        </a>
+        <span class="badges-dot" aria-hidden="true">&#9679;</span>
+        <a href="https://www.producthunt.com/products/relatch?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-relatch" target="_blank" rel="noopener noreferrer" class="badge-item" aria-label="Relatch on Product Hunt">
+          <img alt="Relatch - Turn your docs into custom Claude &amp; Codex skills. | Product Hunt" width="250" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1177811&amp;theme=light&amp;t=1786913443130">
+        </a>
+        <span class="badges-dot" aria-hidden="true">&#9679;</span>
+      </div>
+      <div class="badges-group" aria-hidden="true">
+        <a href="https://www.sideprojectors.com/project/88578/relatch-turn-your-documents-into-ai-skill-files" target="_blank" rel="noopener noreferrer" class="badge-item" tabindex="-1">
+          <img src="https://www.sideprojectors.com/img/badges/badge_show_black.png" alt="">
+        </a>
+        <span class="badges-dot" aria-hidden="true">&#9679;</span>
+        <a href="https://fazier.com" target="_blank" rel="noopener noreferrer" class="badge-item" tabindex="-1">
+          <img src="https://fazier.com/api/v1//public/badges/launch_badges.svg?badge_type=featured&amp;theme=light" width="250" alt="">
+        </a>
+        <span class="badges-dot" aria-hidden="true">&#9679;</span>
+        <a href="https://www.producthunt.com/products/relatch?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-relatch" target="_blank" rel="noopener noreferrer" class="badge-item" tabindex="-1">
+          <img alt="" width="250" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1177811&amp;theme=light&amp;t=1786913443130">
+        </a>
+        <span class="badges-dot" aria-hidden="true">&#9679;</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="footer-curtain">
   <footer class="cinematic-footer">
 
