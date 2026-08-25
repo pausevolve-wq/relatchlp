@@ -2311,6 +2311,56 @@
   </script>
   <!-- End tiun -->
 
+  <!-- Session ID tracking for funnel analytics -->
+  <script>
+    (function() {
+      // UUID v4 generator
+      function generateSessionId() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+          const r = Math.random() * 16 | 0;
+          const v = c === 'x' ? r : (r & 0x3 | 0x8);
+          return v.toString(16);
+        });
+      }
+
+      // Get or create session_id
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlSid = urlParams.get('sid');
+      const storedSid = localStorage.getItem('rl_session_id');
+      const sessionId = urlSid || storedSid || generateSessionId();
+
+      // Store in localStorage (URL param takes precedence)
+      if (!urlSid) {
+        localStorage.setItem('rl_session_id', sessionId);
+      }
+
+      // Append session_id to all external CTA links
+      const ctaSelectors = [
+        '.nav-d-primary',
+        '.nav-m-primary',
+        '.btn-primary',
+        '.get-started-btn',
+        '.footer-cta-primary',
+        '.bf-tag'
+      ];
+
+      ctaSelectors.forEach(selector => {
+        document.querySelectorAll(selector).forEach(link => {
+          const href = link.getAttribute('href');
+          if (href && (href.startsWith('https://app.relatch.online') || href.startsWith('https://app.relatch.online/goal'))) {
+            const separator = href.includes('?') ? '&' : '?';
+            link.setAttribute('href', href + separator + 'sid=' + encodeURIComponent(sessionId));
+          }
+        });
+      });
+
+      // Track landing_view event with session_id
+      if (window.posthog && typeof window.posthog.capture === 'function') {
+        window.posthog.capture('landing_view', { session_id: sessionId });
+      }
+    })();
+  </script>
+
 </head>
 <body>
 
