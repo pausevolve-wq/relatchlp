@@ -420,10 +420,56 @@
     .btn-ghost:hover { color: #F8FAFC; border-color: rgba(255,255,255,0.32); }
     .btn-ghost:active { transform: scale(0.97); transition-duration: 80ms; }
 
+    /* ════════════════════════════════════════════════════════════════════════════════════════════════════
+       STICKY CTA BAR — Variant B (mobile only)
+    ══════════════════════════════════════════════════════════════════════════════════════════════════════ */
+    .sticky-cta-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 300;
+      padding: 0.75rem 1rem;
+      background: linear-gradient(180deg, rgba(11,17,32,0) 0%, rgba(11,17,32,0.95) 40%, #0B1120 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .sticky-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      max-width: 100%;
+      background: #2563EB;
+      color: #fff;
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      text-decoration: none;
+      border: none;
+      box-shadow: 0 4px 20px rgba(37,99,235,0.4);
+      min-height: 52px; /* 48px minimum + comfortable padding */
+      transition: background 0.18s var(--ease-out), box-shadow 0.18s var(--ease-out), transform 120ms ease-out;
+    }
+    .sticky-cta-btn:hover {
+      background: #1d4ed8;
+      box-shadow: 0 6px 28px rgba(37,99,235,0.5);
+    }
+    .sticky-cta-btn:active {
+      transform: scale(0.97);
+      transition-duration: 80ms;
+    }
+    @media (min-width: 768px) {
+      .sticky-cta-bar { display: none !important; }
+    }
 
-        /* ══════════════════════════════════════════════
+        /* ═════════════════════════════════════════════════════════════════════════════════════════════════
        THE TRANSFORMATION — Cinematic Card System
-    ══════════════════════════════════════════════ */
+    ═══════════════════════════════════════════════════════════════════════════════════════════════════════ */
     .transform-section {
       background: var(--tx-bg, #0B1120);
       position: relative;
@@ -2290,7 +2336,7 @@
     <div class="nav-desktop" id="navDesktop">
       <a href="#features" class="nav-d-link">Features</a>
       <a href="#how-it-works" class="nav-d-link">How It Works</a>
-      <a href="https://app.relatch.online/" class="nav-d-primary">Get Started</a>
+      <a href="https://app.relatch.online/" class="nav-d-primary">Turn docs into AI skills</a>
     </div>
     <button class="nav-hamburger-btn" id="navHamburger" aria-label="Open menu">
       <svg class="nav-ham-icon" id="hamIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
@@ -2307,7 +2353,7 @@
     <a href="#how-it-works" class="nav-m-link" onclick="closeMobileMenu()">How It Works</a>
   </div>
   <div class="nav-mobile-ctas">
-    <a href="https://app.relatch.online/" class="nav-m-primary" onclick="closeMobileMenu()">Get Started</a>
+    <a href="https://app.relatch.online/" class="nav-m-primary" onclick="closeMobileMenu()">Turn docs into AI skills</a>
   </div>
 </div>
 
@@ -2329,7 +2375,7 @@
     </p>
     <div class="hero-cta-group">
       <a href="https://app.relatch.online/" class="btn-primary" id="heroCtaPrimary" data-variant="A">
-        Start your free AI resume
+        Turn your docs into AI skills
         <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </a>
       <a href="#how-it-works" class="btn-ghost">See How It Works</a>
@@ -2357,6 +2403,45 @@
   </script>
   </div>
 
+  <!-- Variant B: Sticky bottom-bar CTA (mobile only) — for A/B test toggle -->
+  <div class="sticky-cta-bar" id="stickyCtaBar" data-variant="B" style="display: none;">
+    <a href="https://app.relatch.online/" class="sticky-cta-btn" id="stickyCtaBtn">
+      Turn your docs into AI skills
+      <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </a>
+  </div>
+  <script>
+  (function() {
+    // Mobile-only sticky CTA (Variant B) — toggle via data-attr or URL param ?variant=B
+    var stickyBar = document.getElementById('stickyCtaBar');
+    var stickyBtn = document.getElementById('stickyCtaBtn');
+    var heroCta = document.getElementById('heroCtaPrimary');
+    if (!stickyBar || !stickyBtn) return;
+    var params = new URLSearchParams(window.location.search);
+    var forceVariant = params.get('variant');
+    var isMobile = window.matchMedia('(max-width: 767px)').matches;
+    var showVariantB = forceVariant === 'B' || (isMobile && localStorage.getItem('ctaVariant') === 'B');
+    if (showVariantB) {
+      stickyBar.style.display = 'block';
+      if (heroCta) heroCta.style.display = 'none';
+    }
+    // UTM preservation for sticky CTA
+    var utmParams = ['ref', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+    var hasUtm = utmParams.some(function(p) { return params.has(p); });
+    var utmRef = params.get('ref') || '';
+    if (hasUtm) {
+      var baseUrl = 'https://app.relatch.online/';
+      var newUrl = baseUrl + '?' + params.toString();
+      stickyBtn.setAttribute('href', newUrl);
+    }
+    // PostHog event capture for Variant B
+    stickyBtn.addEventListener('click', function() {
+      if (window.posthog) {
+        window.posthog.capture('landing_cta_click', { variant: 'B', ref: utmRef });
+      }
+    });
+  })();
+  </script>
 </section>
 
 <!-- ══════════════════════════════════════════════
@@ -2850,7 +2935,7 @@
     <div class="output-cta fiv fiv-d3">
       <p class="output-cta-text">Relatch understands your data. Builds skill files that make your AI think like <em>you</em> — not a random text generator.</p>
       <a href="https://app.relatch.online/" class="btn-primary">
-        Try Relatch Free
+        Turn your docs into AI skills
         <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </a>
     </div>
@@ -3132,7 +3217,7 @@
       <h2 class="footer-headline footer-reveal footer-reveal-d1">Your knowledge,<br>ready for <em class="footer-headline-em">your AI.</em></h2>
 
       <a href="https://app.relatch.online/" class="footer-cta-primary footer-magnetic footer-reveal footer-reveal-d2">
-        Try Relatch Free
+        Turn your docs into AI skills
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M17 8l4 4m0 0l-4 4m4-4H3"/>
         </svg>
