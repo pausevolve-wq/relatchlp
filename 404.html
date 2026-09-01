@@ -113,13 +113,21 @@
       font-family: 'Playfair Display', Georgia, serif;
       font-style: italic; font-weight: 700;
       font-size: clamp(7rem, 22vw, 13rem);
-      line-height: 0.95;
+      line-height: 1.04;
       letter-spacing: -0.02em;
       background: linear-gradient(130deg, #93c5fd 0%, #60A5FA 45%, #3b82f6 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       display: inline-block;
+      /* background-clip:text paints the gradient only inside this element's
+         background box. The italic numerals overhang that box on the left and
+         sit taller than a 0.95 line-height, so without this padding the first
+         glyph's diagonal gets no paint and looks sliced off. Padding is in em
+         so it tracks the clamped font-size. The negative margin cancels the
+         horizontal padding so surrounding spacing is unchanged. */
+      padding: 0.06em 0.14em;
+      margin: 0 -0.14em;
       animation: nf-rise 1s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
     .nf-title {
