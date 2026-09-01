@@ -5,6 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
   <title>Relatch — Turn Your Documents into AI Skill Files</title>
+
+  <!-- ══════════════════════════════════════════════
+       SEO / DISCOVERY META
+  ══════════════════════════════════════════════ -->
+  <meta name="description" content="Relatch is the context compiler — it turns the documents you already have into verified, portable skills for any AI agent." />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <link rel="canonical" href="https://relatch.online/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Relatch" />
+  <meta property="og:url" content="https://relatch.online/" />
+  <meta property="og:title" content="Relatch — Turn Your Documents into AI Skill Files" />
+  <meta property="og:description" content="Relatch is the context compiler — it turns the documents you already have into verified, portable skills for any AI agent." />
+  <meta property="og:image" content="https://relatch.online/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Relatch — the context compiler. Documents in, verified agent skills out." />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Relatch — Turn Your Documents into AI Skill Files" />
+  <meta name="twitter:description" content="Relatch is the context compiler — it turns the documents you already have into verified, portable skills for any AI agent." />
+  <meta name="twitter:image" content="https://relatch.online/assets/og-image.png" />
+  <meta name="twitter:image:alt" content="Relatch — the context compiler. Documents in, verified agent skills out." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -1761,6 +1787,21 @@
     .footer-reveal-d3 { transition-delay: 0.34s; }
     .footer-reveal-d4 { transition-delay: 0.46s; }
 
+    /* Positioning statement — canonical one-line description of the product */
+    .footer-positioning {
+      max-width: 46rem;
+      margin: 1.25rem auto 0;
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0.005em;
+      text-align: center;
+    }
+    @media (max-width: 640px) {
+      .footer-positioning { font-size: 0.9375rem; margin-top: 1rem; }
+    }
+
     /* Magnetic buttons — transform handled by JS, transition for smooth return */
     .footer-magnetic {
       display: inline-flex;
@@ -3207,6 +3248,7 @@
     <!-- Center content -->
     <div class="footer-center">
       <h2 class="footer-headline footer-reveal footer-reveal-d1">Your knowledge,<br>ready for <em class="footer-headline-em">your AI.</em></h2>
+      <p class="footer-positioning footer-reveal footer-reveal-d2">Relatch is the context compiler — it turns the documents you already have into verified, portable skills for any AI agent.</p>
 
       <a href="https://app.relatch.online/" target="_blank" rel="noopener" class="footer-cta-primary footer-magnetic footer-reveal footer-reveal-d2">
         Try Relatch Free
@@ -3908,6 +3950,138 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
 ══════════════════════════════════════════════ -->
 <!-- Terms of Service content relocated to /terms.html as a standalone page -->
 
+
+<!-- ══════════════════════════════════════════════
+     STRUCTURED DATA (JSON-LD)
+     Organization + SoftwareApplication + FAQPage.
+     Keep in sync with visible copy — only shipped
+     features/exporters may be listed here.
+══════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://relatch.online/#organization",
+      "name": "Relatch",
+      "url": "https://relatch.online/",
+      "logo": "https://relatch.online/assets/favicon.svg",
+      "image": "https://relatch.online/assets/og-image.png",
+      "email": "relatchh@gmail.com",
+      "description": "Relatch is the context compiler — it turns the documents you already have into verified, portable skills for any AI agent."
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://relatch.online/#website",
+      "url": "https://relatch.online/",
+      "name": "Relatch",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://relatch.online/#organization" }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://relatch.online/#software",
+      "name": "Relatch",
+      "url": "https://relatch.online/",
+      "applicationCategory": "DeveloperApplication",
+      "applicationSubCategory": "AI agent tooling",
+      "operatingSystem": "Web browser",
+      "browserRequirements": "Requires a modern web browser with JavaScript enabled.",
+      "softwareHelp": "https://relatch.online/#faq",
+      "description": "Relatch reads a document you upload, identifies what kind of knowledge it contains, and automatically selects the right template and structure to produce a clean, agent-ready skill file.",
+      "featureList": [
+        "Export to Claude Skills as a structured SKILL.md file, packaged as a ZIP",
+        "Export to OpenAI Codex CLI as a structured skill file",
+        "Adaptive templating: automatically detects the knowledge type and selects the matching template, structure, and export format",
+        "Supports PDFs, DOCX, Markdown, notes, code files, spreadsheets, and mixed knowledge files",
+        "No backend storage of user files — the session restarts on browser refresh",
+        "Session protection via Clerk"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "description": "Free during the product validation phase, with daily and weekly usage limits that refresh automatically."
+      },
+      "publisher": { "@id": "https://relatch.online/#organization" },
+      "isPartOf": { "@id": "https://relatch.online/#website" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://relatch.online/#faq-schema",
+      "isPartOf": { "@id": "https://relatch.online/#website" },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Relatch?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Relatch is a smart adaptive engine that reads your document, understands what kind of knowledge it contains, and turns it into a structured skill file. It removes the friction of figuring out format, structure, and export logic from scratch."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why do I need Relatch if Claude and Codex can already build skill files?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because the hard part is not writing the file. The hard part is shaping messy real world information into the right structure in the first place. Relatch does that thinking for you, so you start with a clean, agent ready output instead of a blank page."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What kinds of documents does Relatch support and can it choose the right output automatically?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Relatch works with PDFs, docs, notes, markdown, code files, spreadsheets, and mixed knowledge files. It analyzes the content, identifies the type of knowledge it contains, and automatically selects the right template, structure, and export format for the output."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need any coding experience to use Relatch?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not at all. Relatch is designed for non technical users, researchers, writers, analysts, and developers alike. Upload your files, choose your goal, and Relatch handles the heavy lifting. The generated outputs are ready to use with minimal setup."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens to my files after upload?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Your file is used to generate the structured output you need. The experience is designed to feel simple. Upload the source, Relatch extracts the useful structure, and you receive a skill ready result without manually rebuilding everything yourself."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need Claude & Codex Pro or a special setup to use Relatch?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Relatch is designed to remove setup friction, not add it. You do not need Claude and Codex Pro or any complicated configuration to use the product and generate a structured result."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my data safe when I upload a file to Relatch?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Relatch is designed with file safety as a core principle. It does not have a backend for storing user files — the moment you refresh your browser your session restarts again. Your session is protected through Clerk so your IP and session access remain protected throughout the process."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Relatch free to use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Relatch is currently free during the product validation phase. To keep the service sustainable, each user has daily and weekly usage limits that automatically refresh over time."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </body>
 </html>
 
