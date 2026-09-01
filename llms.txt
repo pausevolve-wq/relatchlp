@@ -1,6 +1,6 @@
 # Relatch
 
-> Relatch is the context compiler — it turns the documents you already have into verified, portable skills for any AI agent.
+> Relatch is the context compiler. It turns the documents you already have into verified, portable skills for any AI agent.
 
 Relatch reads a document you upload (PDF, DOCX, Markdown, notes, code files,
 spreadsheets, or mixed knowledge files), identifies what kind of knowledge it
@@ -13,7 +13,7 @@ Relatch is free during its product validation phase, with daily and weekly usage
 limits that refresh automatically. No coding experience is required. You can run
 one full generation anonymously, without creating an account; signing in (via
 Clerk) is only needed for continued use beyond that first run. Relatch has no
-backend store for user files — refreshing the browser restarts the session.
+backend store for user files, and refreshing the browser restarts the session.
 
 ## Export targets (shipped and available today)
 
