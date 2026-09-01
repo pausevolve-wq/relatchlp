@@ -1,0 +1,38 @@
+# https://relatch.online/robots.txt
+# Relatch is fully open to crawlers, including AI/answer-engine crawlers.
+
+User-agent: *
+Allow: /
+
+# Explicit welcome for AI / answer-engine crawlers (matches our Bot Protection policy).
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://relatch.online/sitemap.xml

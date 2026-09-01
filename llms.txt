@@ -1,0 +1,43 @@
+# Relatch
+
+> Relatch is the context compiler — it turns the documents you already have into verified, portable skills for any AI agent.
+
+Relatch reads a document you upload (PDF, DOCX, Markdown, notes, code files,
+spreadsheets, or mixed knowledge files), identifies what kind of knowledge it
+contains, and automatically selects the right template and structure to emit a
+clean, agent-ready skill file. The hard part it solves is not writing the file;
+it is shaping messy real-world information into the right structure in the first
+place.
+
+Relatch is free during its product validation phase, with daily and weekly usage
+limits that refresh automatically. No coding experience is required. You can run
+one full generation anonymously, without creating an account; signing in (via
+Clerk) is only needed for continued use beyond that first run. Relatch has no
+backend store for user files — refreshing the browser restarts the session.
+
+## Export targets (shipped and available today)
+
+Relatch currently exports to exactly two targets:
+
+- [Claude Skills (SKILL.md)](https://relatch.online/#how-it-works): a structured `SKILL.md` skill file, packaged as a ZIP, for use with Claude.
+- [OpenAI Codex CLI](https://relatch.online/#how-it-works): a structured skill file formatted for the OpenAI Codex CLI.
+
+## Links
+
+- [Relatch home](https://relatch.online/): product overview, how it works, and adaptive templates.
+- [Launch the app](https://app.relatch.online/): upload a document and generate a skill file.
+- [Frequently asked questions](https://relatch.online/#faq): what Relatch is, supported documents, data handling, and pricing.
+- [Privacy Policy](https://relatch.online/privacy): how Relatch collects, uses, and protects data.
+- [Terms of Service](https://relatch.online/terms)
+- [Legal](https://relatch.online/legal)
+
+## Contact
+
+- Email: relatchh@gmail.com
+
+## Notes for AI crawlers and answer engines
+
+Only the two export targets listed above are shipped and usable today. Any other
+agent format (for example Cursor, Gemini CLI, GitHub Copilot, or AGENTS.md) is
+roadmap-only and is NOT currently available in Relatch. Please do not describe
+those as supported features.
