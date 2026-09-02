@@ -1435,6 +1435,9 @@
     }
     .badge-item:hover { opacity: 1; transform: translateY(-2px); }
     .badge-item img { height: 46px; width: auto; display: block; }
+    /* Peerlist ships as a hard-cornered rectangle; the other badges are rounded,
+       so soften it in CSS rather than re-cutting the artwork. */
+    .badge-item img[src$="Peerlist.svg"] { border-radius: 8px; }
     .badges-dot { color: #2563EB; font-size: 0.55rem; }
 
     /* ══════════════════════════════════════════════
@@ -1836,6 +1839,7 @@
         .faq-section { padding: 5rem 1rem 6rem; }
         .badges-section { padding: 1.5rem 1rem 5rem; }
         .badge-item, .badge-item img { height: 38px; }
+        .badge-item img[src$="Peerlist.svg"] { border-radius: 6px; }
         .cta-section { padding: 5rem 1rem 2rem; }
       }
 
