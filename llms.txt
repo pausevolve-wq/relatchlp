@@ -33,7 +33,7 @@ Relatch currently exports to exactly two targets:
 
 ## Contact
 
-- Email: relatchh@gmail.com
+- Email: hello@relatch.online
 
 ## Notes for AI crawlers and answer engines
 
