@@ -3381,6 +3381,15 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
       alt: 'Relatch.online - Approved on SaaSHub',
       label: 'Relatch.online approved on SaaSHub'
     },
+    {
+      href: 'https://kittylaunch.com/p/relatch-ai-skill-builder?utm_source=badge',
+      img: 'https://kittylaunch.com/api/public/badges/launch_badge.svg?style=pill&theme=light',
+      width: 296,
+      height: 76,
+      alt: 'Relatch AI Skill Builder -- Verified by KittyLaunch',
+      label: 'Relatch verified on KittyLaunch',
+      data: { 'data-kittylaunch-badge': '1' }
+    },
   ];
   const badgesTrack = document.getElementById('badgesTrack');
   if (!badgesTrack) return;
@@ -3402,6 +3411,7 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
     img.alt = accessible ? b.alt : '';
     if (b.width) img.width = b.width;
     if (b.height) img.height = b.height;
+    if (b.data) { for (const k in b.data) img.setAttribute(k, b.data[k]); }
     a.appendChild(img);
     badgesTrack.appendChild(a);
 
