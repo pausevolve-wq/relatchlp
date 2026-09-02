@@ -3219,6 +3219,8 @@
       <span class="badges-dot" aria-hidden="true">&#9679;</span>
       <a href="https://kittylaunch.com/p/relatch-ai-skill-builder?utm_source=badge" target="_blank" rel="noopener noreferrer" class="badge-item" aria-label="Relatch verified on KittyLaunch"><img src="https://kittylaunch.com/api/public/badges/launch_badge.svg?style=pill&amp;theme=light" alt="Relatch AI Skill Builder -- Verified by KittyLaunch" width="296" height="76" data-kittylaunch-badge="1"></a>
       <span class="badges-dot" aria-hidden="true">&#9679;</span>
+      <a href="https://peerlist.io/manasharit/project/relatch--turn-docs-into-ai-skills" target="_blank" rel="noopener noreferrer" class="badge-item" aria-label="Relatch on Peerlist"><img src="/assets/Peerlist.svg" alt="Relatch -- Turn docs into AI skills, on Peerlist" width="250" height="54"></a>
+      <span class="badges-dot" aria-hidden="true">&#9679;</span>
     </div>
   </div>
 </section>
@@ -3367,8 +3369,10 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
 
 /* ─── AS SEEN ON BADGES TICKER ─── */
 (function() {
-  // add future platform badges here (Peerlist, SaaS Hub, etc.) — the
-  // repetition and loop math below adapt automatically
+  // Adding a badge? It must go in TWO places: the static markup inside
+  // #badgesTrack above (repetition 0, what verification bots read) AND this
+  // array (repetitions 1..7). Array-only means the badge is invisible to bots.
+  // The repetition and loop math adapt automatically.
   const badges = [
     {
       href: 'https://www.sideprojectors.com/project/88578/relatch-turn-your-documents-into-ai-skill-files',
@@ -3405,6 +3409,14 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
       alt: 'Relatch AI Skill Builder -- Verified by KittyLaunch',
       label: 'Relatch verified on KittyLaunch',
       data: { 'data-kittylaunch-badge': '1' }
+    },
+    {
+      href: 'https://peerlist.io/manasharit/project/relatch--turn-docs-into-ai-skills',
+      img: '/assets/Peerlist.svg',
+      width: 250,
+      height: 54,
+      alt: 'Relatch -- Turn docs into AI skills, on Peerlist',
+      label: 'Relatch on Peerlist'
     },
   ];
   const badgesTrack = document.getElementById('badgesTrack');
