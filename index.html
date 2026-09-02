@@ -3203,7 +3203,23 @@
   </div>
 
   <div class="badges-mask fiv fiv-d2">
-    <div class="badges-track" id="badgesTrack"></div>
+    <!-- First repetition is STATIC so the badges exist in the served HTML.
+         Launch-platform verification bots (KittyLaunch, Product Hunt, Fazier,
+         SaaSHub) fetch the raw page without running JS, so a JS-only ticker is
+         invisible to them. The script below appends repetitions 1..7 for the
+         seamless loop; this block is repetition 0 and is the accessible one. -->
+    <div class="badges-track" id="badgesTrack">
+      <a href="https://www.sideprojectors.com/project/88578/relatch-turn-your-documents-into-ai-skill-files" target="_blank" rel="noopener noreferrer" class="badge-item" aria-label="Check out Relatch on SideProjectors"><img src="https://www.sideprojectors.com/img/badges/badge_show_black.png" alt="Check out Relatch -- Turn Your Documents into AI Skill Files at SideProjectors"></a>
+      <span class="badges-dot" aria-hidden="true">&#9679;</span>
+      <a href="https://fazier.com" target="_blank" rel="noopener noreferrer" class="badge-item" aria-label="Relatch featured on Fazier"><img src="https://fazier.com/api/v1//public/badges/launch_badges.svg?badge_type=featured&amp;theme=light" alt="Fazier badge" width="250"></a>
+      <span class="badges-dot" aria-hidden="true">&#9679;</span>
+      <a href="https://www.producthunt.com/products/relatch?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-relatch" target="_blank" rel="noopener noreferrer" class="badge-item" aria-label="Relatch on Product Hunt"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1177811&amp;theme=light&amp;t=1786913443130" alt="Relatch - Turn your docs into custom Claude &amp; Codex skills. | Product Hunt" width="250" height="54"></a>
+      <span class="badges-dot" aria-hidden="true">&#9679;</span>
+      <a href="https://www.saashub.com/relatch-online?utm_source=badge&amp;utm_campaign=badge&amp;utm_content=relatch-online&amp;badge_variant=color&amp;badge_kind=approved" target="_blank" rel="noopener noreferrer" class="badge-item" aria-label="Relatch.online approved on SaaSHub"><img src="https://cdn-b.saashub.com/img/badges/approved-color.png?v=1" alt="Relatch.online - Approved on SaaSHub"></a>
+      <span class="badges-dot" aria-hidden="true">&#9679;</span>
+      <a href="https://kittylaunch.com/p/relatch-ai-skill-builder?utm_source=badge" target="_blank" rel="noopener noreferrer" class="badge-item" aria-label="Relatch verified on KittyLaunch"><img src="https://kittylaunch.com/api/public/badges/launch_badge.svg?style=pill&amp;theme=light" alt="Relatch AI Skill Builder -- Verified by KittyLaunch" width="296" height="76" data-kittylaunch-badge="1"></a>
+      <span class="badges-dot" aria-hidden="true">&#9679;</span>
+    </div>
   </div>
 </section>
 
@@ -3427,8 +3443,12 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
   // wider than a country chip. Rep count is sized so the strip stays wider
   // than 2x any realistic viewport, so the loop point (and the fact there
   // are only a few badges today) never becomes visible as a gap.
-  for (let rep = 0; rep < 8; rep++) {
-    badges.forEach(b => appendBadge(b, rep === 0));
+  // repetition 0 is static markup in the HTML above (so verification bots that
+  // don't execute JS can still see the badges); start at 1 here to avoid a
+  // duplicate visible set. Total repetitions stay at 8, so the -50% loop math
+  // is unchanged.
+  for (let rep = 1; rep < 8; rep++) {
+    badges.forEach(b => appendBadge(b, false));
   }
 })();
 
