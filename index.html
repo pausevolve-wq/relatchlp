@@ -1435,9 +1435,6 @@
     }
     .badge-item:hover { opacity: 1; transform: translateY(-2px); }
     .badge-item img { height: 46px; width: auto; display: block; }
-    /* Peerlist ships as a hard-cornered rectangle; the other badges are rounded,
-       so soften it in CSS rather than re-cutting the artwork. */
-    .badge-item img[src$="Peerlist.svg"] { border-radius: 8px; }
     .badges-dot { color: #2563EB; font-size: 0.55rem; }
 
     /* ══════════════════════════════════════════════
@@ -1839,7 +1836,6 @@
         .faq-section { padding: 5rem 1rem 6rem; }
         .badges-section { padding: 1.5rem 1rem 5rem; }
         .badge-item, .badge-item img { height: 38px; }
-        .badge-item img[src$="Peerlist.svg"] { border-radius: 6px; }
         .cta-section { padding: 5rem 1rem 2rem; }
       }
 
@@ -3223,7 +3219,7 @@
       <span class="badges-dot" aria-hidden="true">&#9679;</span>
       <a href="https://kittylaunch.com/p/relatch-ai-skill-builder?utm_source=badge" target="_blank" rel="noopener noreferrer" class="badge-item" aria-label="Relatch verified on KittyLaunch"><img src="https://kittylaunch.com/api/public/badges/launch_badge.svg?style=pill&amp;theme=light" alt="Relatch AI Skill Builder -- Verified by KittyLaunch" width="296" height="76" data-kittylaunch-badge="1"></a>
       <span class="badges-dot" aria-hidden="true">&#9679;</span>
-      <a href="https://peerlist.io/manasharit/project/relatch--turn-docs-into-ai-skills" target="_blank" rel="noopener noreferrer" class="badge-item" aria-label="Relatch on Peerlist"><img src="/assets/Peerlist.svg" alt="Relatch -- Turn docs into AI skills, on Peerlist" width="250" height="54"></a>
+      <a href="https://peerlist.io/manasharit/project/relatch--turn-docs-into-ai-skills" target="_blank" rel="noopener noreferrer" class="badge-item" aria-label="Relatch on Peerlist"><img src="https://peerlist.io/api/v1/projects/embed/PRJHJKNO6AK6KQOL6HMELA7AG677QR?showUpvote=false&amp;theme=light" alt="Relatch -- Turn docs into AI skills, on Peerlist" width="245" height="72"></a>
       <span class="badges-dot" aria-hidden="true">&#9679;</span>
     </div>
   </div>
@@ -3416,9 +3412,9 @@ function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // quad ease in-out
     },
     {
       href: 'https://peerlist.io/manasharit/project/relatch--turn-docs-into-ai-skills',
-      img: '/assets/Peerlist.svg',
-      width: 250,
-      height: 54,
+      img: 'https://peerlist.io/api/v1/projects/embed/PRJHJKNO6AK6KQOL6HMELA7AG677QR?showUpvote=false&theme=light',
+      width: 245,
+      height: 72,
       alt: 'Relatch -- Turn docs into AI skills, on Peerlist',
       label: 'Relatch on Peerlist'
     },
