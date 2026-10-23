@@ -194,14 +194,14 @@
 
     <h3 class="reveal-block">2.4 Uploaded Documents</h3>
     <p class="reveal-block">Documents you upload (PDF, CSV, XML, DOCX, scanned images, and similar formats) are processed client-side where possible. When server-side processing is required, your content is transmitted to third-party AI and OCR providers solely for extraction and enrichment. We do not retain your uploaded files on our servers beyond what is reasonably needed to deliver the resulting output.</p>
-    <p class="reveal-block"><strong>We have opted out, wherever a provider makes such a setting available, of allowing your uploaded content to be used to train or improve their AI models.</strong> For example, we have explicitly disabled the training-data option on our Mistral OCR account. For the other AI providers in our pipeline, including Google's Gemini API, we apply the same opt-out posture within the account-level controls those platforms make available to us — but because your content is ultimately processed on each provider's own infrastructure, it remains subject to that provider's own terms of service, technical safeguards, and any changes they make to them, which are outside our direct control. You are responsible for the content you upload, and we encourage you to review the individual privacy policies of the third-party services listed in Section 5.</p>
+    <p class="reveal-block"><strong>We have opted out, wherever a provider makes such a setting available, of allowing your uploaded content to be used to train or improve their AI models.</strong> For the AI providers in our pipeline, including Google's Gemini API, we apply the same opt-out posture within the account-level controls those platforms make available to us — but because your content is ultimately processed on each provider's own infrastructure, it remains subject to that provider's own terms of service, technical safeguards, and any changes they make to them, which are outside our direct control. You are responsible for the content you upload, and we encourage you to review the individual privacy policies of the third-party services listed in Section 5.</p>
 
     <h2 class="reveal-block">3. How Your Documents Are Processed</h2>
     <p class="reveal-block">Relatch uses a multi-stage processing pipeline to extract and enrich content from your documents.</p>
     <h3 class="reveal-block">3.1 Text Extraction</h3>
     <ul class="reveal-block">
       <li>For standard digital PDFs and documents, Relatch uses a built-in PDF.js parser to extract text directly in your browser — no server call is made for these documents.</li>
-      <li>For scanned or image-based content that requires optical character recognition, Relatch calls <strong>LlamaParse</strong> (by LlamaIndex) first. If LlamaParse is unavailable or does not return usable text, Relatch tries <strong>Mistral OCR</strong>, and for signed-in users finally <strong>Datalab</strong> (used sparingly and capped per user per day). LlamaIndex states that it does not use customer data for model training by default and that files uploaded for parsing are deleted after at most 48 hours.</li>
+      <li>For scanned or image-based content that requires optical character recognition, Relatch calls <strong>LlamaParse</strong> (by LlamaIndex) first. If LlamaParse is unavailable, or its text looks incomplete for the document, the document is also sent to <strong>Datalab</strong> (capped per signed-in user per day, and by a site-wide daily limit for use without an account). LlamaIndex states that it does not use customer data for model training by default and that files uploaded for parsing are deleted after at most 48 hours.</li>
     </ul>
 
     <h3 class="reveal-block">3.2 AI Enrichment</h3>
@@ -231,8 +231,7 @@
       <li>PostHog</li>
       <li>Gemini API (Google) — AI enrichment</li>
       <li>LlamaParse (LlamaIndex) — primary OCR</li>
-      <li>Mistral OCR — secondary OCR fallback</li>
-      <li>Datalab — final OCR fallback (signed-in users only)</li>
+      <li>Datalab — secondary OCR fallback</li>
       <li>OpenRouter / Groq — AI enrichment fallback</li>
       <li>TypeSafe Jev (via OpenRouter) &mdash; document classification and main-content detection before enrichment</li>
       <li>DeepSeek and GLM (Z.ai) models (via OpenRouter, zero-data-retention hosts only) &mdash; enrichment for complex documents</li>
