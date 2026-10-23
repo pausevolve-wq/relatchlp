@@ -201,7 +201,7 @@
     <h3 class="reveal-block">3.1 Text Extraction</h3>
     <ul class="reveal-block">
       <li>For standard digital PDFs and documents, Relatch uses a built-in PDF.js parser to extract text directly in your browser — no server call is made for these documents.</li>
-      <li>For scanned or image-based content that requires optical character recognition, Relatch calls <strong>Mistral OCR</strong> first. If Mistral OCR is unavailable or does not return usable text, Relatch escalates to <strong>Datalab</strong> (used sparingly and capped per user per day) as a second OCR pass, and finally to <strong>OCR.space</strong> as a last-resort fallback if neither of the above succeeds.</li>
+      <li>For scanned or image-based content that requires optical character recognition, Relatch calls <strong>LlamaParse</strong> (by LlamaIndex) first. If LlamaParse is unavailable or does not return usable text, Relatch tries <strong>Mistral OCR</strong>, and for signed-in users finally <strong>Datalab</strong> (used sparingly and capped per user per day). LlamaIndex states that it does not use customer data for model training by default and that files uploaded for parsing are deleted after at most 48 hours.</li>
     </ul>
 
     <h3 class="reveal-block">3.2 AI Enrichment</h3>
@@ -230,9 +230,9 @@
       <li>Google Tag Manager</li>
       <li>PostHog</li>
       <li>Gemini API (Google) — AI enrichment</li>
-      <li>Mistral OCR — primary OCR</li>
-      <li>Datalab — secondary OCR fallback</li>
-      <li>OCR.space — final OCR fallback</li>
+      <li>LlamaParse (LlamaIndex) — primary OCR</li>
+      <li>Mistral OCR — secondary OCR fallback</li>
+      <li>Datalab — final OCR fallback (signed-in users only)</li>
       <li>OpenRouter / Groq — AI enrichment fallback</li>
       <li>TypeSafe Jev (via OpenRouter) &mdash; document classification and main-content detection before enrichment</li>
       <li>DeepSeek and GLM (Z.ai) models (via OpenRouter, zero-data-retention hosts only) &mdash; enrichment for complex documents</li>
