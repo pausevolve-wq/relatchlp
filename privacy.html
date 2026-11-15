@@ -167,7 +167,7 @@
     <div style="margin-bottom:3rem;">
       <span class="policy-eyebrow">Legal</span>
       <h1 class="policy-h1">Privacy Policy</h1>
-      <p class="policy-updated">Last updated: October 2026</p>
+      <p class="policy-updated">Last updated: November 2026</p>
     </div>
     <hr class="policy-divider">
 
@@ -186,7 +186,7 @@
     <p class="reveal-block">You can opt out of Google Analytics by installing the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google Analytics Opt-out Browser Add-on</a>. You can opt out of PostHog by disabling cookies in your browser settings.</p>
 
     <h3 class="reveal-block">2.2 Account Information</h3>
-    <p class="reveal-block">To upload and process documents, you need an account. Authentication and session management are handled by <strong>Clerk</strong>. You can sign in using <strong>Google OAuth</strong> or <strong>GitHub OAuth</strong>. When you sign in through one of these providers, Relatch receives a basic identity profile (such as your name, email address, and provider user ID) so that we can associate your session with your account. We do not receive your OAuth password.</p>
+    <p class="reveal-block">You can try Relatch once without an account (see 2.5). For regular use you need an account. Authentication and session management are handled by <strong>Clerk</strong>. You can sign in using <strong>Google OAuth</strong> or <strong>GitHub OAuth</strong>. When you sign in through one of these providers, Relatch receives a basic identity profile (such as your name, email address, and provider user ID) so that we can associate your session with your account. We do not receive your OAuth password.</p>
     <p class="reveal-block">We use this account information solely to authenticate you, scope your uploads and outputs to your account, and provide essential account-related communication. We do not sell or rent account data.</p>
 
     <h3 class="reveal-block">2.3 Waitlist and Contact Submissions</h3>
@@ -195,6 +195,15 @@
     <h3 class="reveal-block">2.4 Uploaded Documents</h3>
     <p class="reveal-block">Documents you upload (PDF, CSV, XML, DOCX, scanned images, and similar formats) are processed client-side where possible. When server-side processing is required, your content is transmitted to third-party AI and OCR providers solely for extraction and enrichment. We do not retain your uploaded files on our servers beyond what is reasonably needed to deliver the resulting output.</p>
     <p class="reveal-block"><strong>We have opted out, wherever a provider makes such a setting available, of allowing your uploaded content to be used to train or improve their AI models.</strong> For the AI providers in our pipeline, including Google's Gemini API, we apply the same opt-out posture within the account-level controls those platforms make available to us — but because your content is ultimately processed on each provider's own infrastructure, it remains subject to that provider's own terms of service, technical safeguards, and any changes they make to them, which are outside our direct control. You are responsible for the content you upload, and we encourage you to review the individual privacy policies of the third-party services listed in Section 5.</p>
+
+    <h3 class="reveal-block">2.5 Trying Relatch Without an Account, and Abuse Prevention</h3>
+    <p class="reveal-block">If you try Relatch without signing in, we issue a short-lived trial token that expires after 10 minutes. To stop automated abuse, we count how many trial tokens each IP address requests; that count is kept for one hour. For signed-in users we keep daily and weekly usage counters tied to your account ID, which expire within 8 days. These short-lived records are stored with <strong>Upstash</strong> (Redis, AWS us-east-1, USA).</p>
+    <p class="reveal-block">We also keep security logs with <strong>Axiom</strong>: for requests to our service they record the time, the outcome, your IP address and, if you are signed in, your account ID. They never contain your documents, their text or their file names. Security logs are kept for 30 days and are used only to detect abuse and keep the service running.</p>
+
+    <h3 class="reveal-block">2.6 Your Skill History</h3>
+    <p class="reveal-block">If you are signed in, Relatch saves the skills you generate so that you can open, download and reuse them later. For each skill we store the generated skill files, the skill&rsquo;s name (which you choose, and which by default is based on your document&rsquo;s file name), the target agent (Claude or Codex), when it was created, how long it took, and its size. We keep your 30 most recent skills.</p>
+    <p class="reveal-block"><strong>We never store the documents you upload, the text extracted from them, or their file names.</strong> Skills you generate without an account are not saved on our servers.</p>
+    <p class="reveal-block">Skill history is stored in a database run by <strong>Neon</strong> (a Databricks company) in AWS us-east-1, USA. It stays there until you delete a skill, clear your history, or delete your account. To protect against data loss we keep encrypted nightly backups for 30 days, so a deleted skill can remain in a backup for up to 30 days before it is gone completely. A copy of your recent history is also kept in your browser&rsquo;s local storage so the history list loads quickly; clearing your browser data removes it.</p>
 
     <h2 class="reveal-block">3. How Your Documents Are Processed</h2>
     <p class="reveal-block">Relatch uses a multi-stage processing pipeline to extract and enrich content from your documents.</p>
@@ -218,7 +227,7 @@
     <p class="reveal-block">Before any extraction or enrichment begins, Relatch's smart analyzer scans your upload for corrupted files, unsupported formats, and irrelevant document types. Files that do not pass this check are discarded immediately and never transmitted to any external service.</p>
 
     <h2 class="reveal-block">4. Cookies and Session Storage</h2>
-    <p class="reveal-block">Relatch uses cookies and similar browser storage for two purposes: (a) analytics, placed by Google Analytics and PostHog as described above; and (b) authentication, where Clerk uses cookies and session storage to keep you signed in and to maintain your session securely. Authentication storage is essential to keeping accounts functional. Analytics cookies are non-essential and you can manage or disable them through your browser settings.</p>
+    <p class="reveal-block">Relatch uses cookies and similar browser storage for two purposes: (a) analytics, placed by Google Analytics and PostHog as described above; and (b) authentication, where Clerk uses cookies and session storage to keep you signed in and to maintain your session securely. If you are signed in, Relatch also keeps a copy of your recent skill history in your browser&rsquo;s local storage (see 2.6). Authentication storage is essential to keeping accounts functional. Analytics cookies are non-essential and you can manage or disable them through your browser settings.</p>
 
     <h2 class="reveal-block">5. Third-Party Services</h2>
     <p class="reveal-block">The following third-party services may process your data as part of using Relatch:</p>
@@ -237,14 +246,17 @@
       <li>DeepSeek and GLM (Z.ai) models (via OpenRouter, zero-data-retention hosts only) &mdash; enrichment for complex documents</li>
       <li>SplitForms (contact and waitlist flows)</li>
       <li>Vercel (hosting and edge delivery)</li>
+      <li>Neon (a Databricks company) &mdash; skill history database for signed-in users</li>
+      <li>Upstash &mdash; trial tokens, abuse prevention and usage limits</li>
+      <li>Axiom &mdash; security logs</li>
     </ul>
     <p class="reveal-block">Each of these services operates under its own privacy policy. We encourage you to review them independently.</p>
 
     <h2 class="reveal-block">6. Data Retention</h2>
-    <p class="reveal-block">We retain account information for as long as your account is active. Uploaded documents are not kept beyond what is reasonably needed to deliver the resulting output. Analytics data is retained by Google Analytics and PostHog under their respective retention policies. Waitlist and contact-form submissions are retained by SplitForms for up to 30 days, or until you request removal, whichever is sooner.</p>
+    <p class="reveal-block">We retain account information for as long as your account is active. Uploaded documents are not kept beyond what is reasonably needed to deliver the resulting output. Your skill history is kept until you delete it or your account, and deleted skills can remain in our encrypted backups for up to 30 days (see 2.6). Trial tokens expire after 10 minutes, IP-based abuse counters after one hour, usage counters within 8 days, and security logs after 30 days (see 2.5). Analytics data is retained by Google Analytics and PostHog under their respective retention policies. Waitlist and contact-form submissions are retained by SplitForms for up to 30 days, or until you request removal, whichever is sooner.</p>
 
     <h2 class="reveal-block">7. Your Rights</h2>
-    <p class="reveal-block">You can request deletion of your account, your waitlist email, or any contact submission at any time by emailing us at <a href="mailto:hello@relatch.online">hello@relatch.online</a>. We will action reasonable requests within a reasonable timeframe.</p>
+    <p class="reveal-block">You can delete any saved skill, or clear your whole skill history, directly in the app at any time. Deleting your account also deletes your skill history. You can also request deletion of your account, your waitlist email, or any contact submission at any time by emailing us at <a href="mailto:hello@relatch.online">hello@relatch.online</a>. We will action reasonable requests within a reasonable timeframe.</p>
 
     <h2 class="reveal-block">8. Children</h2>
     <p class="reveal-block">Relatch does not target children and does not knowingly collect personal information from minors. If you believe a minor has submitted their email address via the waitlist form, contact us and we will remove it promptly.</p>
