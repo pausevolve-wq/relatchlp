@@ -10,9 +10,9 @@ it is shaping messy real-world information into the right structure in the first
 place.
 
 Relatch is free during its product validation phase, with daily and weekly usage
-limits that refresh automatically. No coding experience is required. You can run
-one full generation anonymously, without creating an account; signing in (via
-Clerk) is only needed for continued use beyond that first run. Relatch has no
+limits that refresh automatically. No coding experience is required. You can try
+it once without creating an account and see a preview of the generated skill; a
+free account (via Clerk) unlocks the full file and gives 3 skills a day. Relatch has no
 backend store for user files, and refreshing the browser restarts the session.
 
 ## Export targets (shipped and available today)
