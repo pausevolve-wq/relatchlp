@@ -2334,9 +2334,9 @@
       autocapture: true,
       capture_pageview: true,
       capture_pageleave: true,
+      // 2026-11-19: inputs masked in replays (the waitlist email), as the privacy policy says
       session_recording: {
-        maskAllInputs: false,
-        maskInputOptions: { password: true }
+        maskAllInputs: true
       }
     })
   </script>
