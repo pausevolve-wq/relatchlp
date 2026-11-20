@@ -1,0 +1,74 @@
+Relatch Proprietary Licence
+
+Copyright (c) 2026 Manas Harit. All rights reserved.
+
+This repository contains proprietary source code, designs, documentation and
+other material (together, "the Material") owned by Manas Harit ("the Owner").
+The Material is part of Relatch, a hosted software service available at
+https://relatch.online and https://app.relatch.online.
+
+1. Viewing only
+
+   The Material is publicly visible for transparency and reference only.
+   Being able to see it does not give you any licence or right to use it.
+   Relatch is not open source, and no part of this repository is licensed
+   to you except as stated in section 5.
+
+2. What is not permitted
+
+   Apart from viewing and forking the repository on GitHub to the extent the
+   GitHub Terms of Service require, you may not, in whole or in part, for
+   any purpose, commercial or not:
+
+   a. copy, reproduce, download for reuse, or redistribute the Material;
+   b. modify, adapt or translate the Material, or create derivative works
+      from it;
+   c. run, install, build, deploy, host or self-host the Material, locally
+      or on any computer, server or cloud service, or offer the Material, or
+      anything based on it, as a product or service;
+   d. reverse engineer, decompile, disassemble or otherwise try to extract
+      the logic, prompts, templates, routing, quality checks or other
+      internal workings of the Material or of the Relatch service;
+   e. use the Material to build, train or improve a competing product or
+      service, or any machine-learning model;
+   f. sell, rent, lease, sublicense or otherwise transfer the Material; or
+   g. remove or alter this notice or any copyright notice in the Material.
+
+3. How Relatch may be used
+
+   The only permitted way to use Relatch is through the hosted service at
+   https://app.relatch.online, under the Relatch Terms of Service at
+   https://relatch.online/terms.
+
+4. Names and marks
+
+   "Relatch", the Relatch logo and the Relatch mark are trademarks of the
+   Owner. They may not be used, including in a modified form, without the
+   Owner's prior written permission.
+
+5. Third-party components
+
+   Some parts of this repository are third-party software distributed under
+   their own licences (for example, the MIT License). Those parts remain
+   under their own licences, and their notices are kept where they appear.
+   Nothing in this licence limits the rights those licences grant for those
+   parts.
+
+6. Contributions
+
+   If you submit an issue, pull request or other contribution, you agree
+   that the Owner may use it for any purpose, without restriction or
+   payment.
+
+7. No warranty
+
+   The Material is provided "as is", without warranty of any kind.
+
+8. Governing law
+
+   This licence is governed by the laws of India. The courts of India have
+   exclusive jurisdiction over any dispute arising from it.
+
+Any right not expressly granted by this licence is reserved by the Owner.
+
+For permission requests, contact hello@relatch.online.
